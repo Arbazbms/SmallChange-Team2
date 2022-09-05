@@ -1,4 +1,4 @@
-import { Client } from '../models/client';
+import { Client } from './client';
 
 export const Clients : Client[] = [
     {   "clientId" : "234",
@@ -15,7 +15,7 @@ export const Clients : Client[] = [
         "postalCode": "570345",
         "identification":["Passport","ert654"]
     },
-        {"clientId" : "236",
+    {   "clientId" : "236",
         "email": "hij@gmail.com",
         "DOB" : "19990127",
         "country": "UK",
