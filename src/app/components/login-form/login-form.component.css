@@ -1,0 +1,23 @@
+.form-container{
+    margin: 0 auto 0 auto;
+    padding: 2rem 3rem 2rem 3rem;
+    border: solid 1px #ccc;
+    max-width: 28rem;
+    margin-bottom: 1.5rem;
+}
+
+.submit-btn{
+ 
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    border:none;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-family: 'Fidelity Sans', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-align: center;
+    color:white;
+    background-color: #568200;
+    margin: 1rem 0 1rem 0;
+}
