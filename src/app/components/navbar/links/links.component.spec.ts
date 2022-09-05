@@ -22,4 +22,9 @@ describe('LinksComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should show TEST INPUT', () => {
+    component.navlinks = 'test input';
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('a').innerText).toEqual('test input');
+  });
 });
