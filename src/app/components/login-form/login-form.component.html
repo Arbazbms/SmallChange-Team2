@@ -1,15 +1,40 @@
-<form class="form-container">
-    <div class="mb-3">
-      <label for="Username" class="form-label">Username</label>
-      <input type="email" class="form-control" id="username" aria-describedby="emailHelp">
-      
+<form [formGroup]="loginForm" class="form-container" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="Username" class="form-label">Username</label>
+    <input
+      type="email"
+      class="form-control"
+      aria-describedby="emailHelp"
+      formControlName="username"
+      id="username"
+    />
+
+    <div *ngIf="username?.touched || username?.dirty">
+      <div *ngIf="username?.hasError('required') || username?.hasError('minlength') || username?.hasError('maxlength') || username?.hasError('pattern')">
+        <div id="errorText">{{ usernameErrorTextmsg }}</div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password">
+    
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      formControlName="password"
+    />
+
+    <div *ngIf="password?.touched || password?.dirty">
+      <div *ngIf="password?.hasError('required') || password?.hasError('minlength') || password?.hasError('maxlength') || password?.hasError('pattern')">
+        <div id="errorText">{{ passwordErrorTextmsg }}</div>
+      </div>
     </div>
 
-    <button type="submit" class="btn btn-light submit-btn">Submit</button>
+  </div>
 
-    <a href="#">Forgot your password ?</a>
+  <button type="submit" class="btn btn-light submit-btn">Submit</button>
+
+  <a href="#">Forgot your password ?</a>
 </form>
