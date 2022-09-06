@@ -12,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LinksComponent } from './components/navbar/links/links.component';
 import { CommonModule } from '@angular/common';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
-    LinksComponent
+    LinksComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
