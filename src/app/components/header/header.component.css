@@ -1,0 +1,25 @@
+body{
+    margin: 0em;
+    font-family: "Fidelity Sans",arial, sans-serif;
+}
+#header_bar{
+    margin: 0em auto;
+    padding-right:  1.0em;
+    padding-left: 1.0em;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    /* max-width: 62.5em; */
+    background-color: #568200;
+  }
+#logo{
+    box-sizing: content-box;
+    margin: 0em;
+    padding: 0em;
+    font-size: 32px;
+    line-height: 1.5em;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #568200;
+    font-family: "Fidelity Sans",arial, sans-serif;
+    
+  }
