@@ -9,6 +9,7 @@ import { CustomValidators } from './confirmed.validator';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  passworderror=false
   usernameErrorTextmsg: string =
   'Invalid Username- Must contain between 3 and 18 letters, numbers, underscores or hyphens ';
 passwordErrorTextmsg: string =
@@ -90,6 +91,8 @@ get passwordMatchError() {
 }
 
 onSubmit() {
+  if(this.registerForm.value.password1!=this.registerForm.value.password2)
+    this.passworderror=true
   console.log(this.registerForm.value);
 }
 
