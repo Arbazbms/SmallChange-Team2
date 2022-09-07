@@ -11,11 +11,28 @@ export class RegisterComponent implements OnInit {
   'Invalid Username- Must contain between 3 and 18 letters, numbers, underscores or hyphens ';
 passwordErrorTextmsg: string =
   'Invalid Password- Must contain between 6 and 24 letters, numbers, underscores or hyphens ';
-loginForm: FormGroup;
+registerForm: FormGroup;
 
 constructor(private formBuilder: FormBuilder, ) {
 
-  this.loginForm = this.formBuilder.group({
+  this.registerForm = this.formBuilder.group({
+    emailid:['',
+    [Validators.required]
+    ],
+    username:['',
+    [Validators.required]
+    ],
+    country:['',
+    [Validators.required]
+    ],
+    postal:['',
+    [Validators.required]
+    ],
+    dob:['',
+    [Validators.required]
+    ],
+    identification:['',[Validators.required]],
+    idval:['',[Validators.required]],
     password1: [
       '',
       [
@@ -29,26 +46,44 @@ constructor(private formBuilder: FormBuilder, ) {
       '',
       [
         Validators.required,
-        confirmpassword
+        this.confirmpassword()
       ],
     ],
   });
 }
-function confirmpassword(params:type) {
-  
-}
 
 ngOnInit(): void {}
 
+get emailid() {
+  return this.registerForm.get('emailid');
+}
 get username() {
-  return this.loginForm.get('username');
+  return this.registerForm.get('username');
+}
+get country() {
+  return this.registerForm.get('country');
+}
+get postal() {
+  return this.registerForm.get('postal');
+}
+get dob() {
+  return this.registerForm.get('dob');
 }
 
-get password(){
-  return this.loginForm.get('password')
+get password1(){
+  return this.registerForm.get('password1')
+}
+
+get password2(){
+  return this.registerForm.get('password2')
 }
 
 onSubmit() {
-  console.log(this.loginForm.value);
+  console.log(this.registerForm.value);
+}
+
+ confirmpassword(): boolean {
+ return( this.registerForm.value.password1==this.registerForm.value.password2)
+  
 }
 }
