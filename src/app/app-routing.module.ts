@@ -5,12 +5,14 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LandingComponent } from './post-login/landing/landing.component';
+import { PreferenceComponent } from './post-login/preference/preference.component';
 
 const routes: Routes = [
   {path:'', component:LandingPageComponent},
   {path: 'login', component: LoginFormComponent},
   {path: 'register', component: RegisterComponent},
-  {path:'pl', component: LandingComponent}
+  {path:'pl', component: LandingComponent},
+  {path:'preference', component:PreferenceComponent}
   ];
 
 @NgModule({
