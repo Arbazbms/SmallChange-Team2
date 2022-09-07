@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './components/register/register.component';
 import {HttpClientModule} from '@angular/common/http'
 import { BasicModule } from './basic/basic.module';
+import { PostLoginModule } from './post-login/post-login.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BasicModule } from './basic/basic.module';
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    BasicModule
+    BasicModule,
+    PostLoginModule
 
   ],
   providers: [],
