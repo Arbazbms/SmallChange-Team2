@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from './confirmed.validator';
+
 
 @Component({
   selector: 'app-register',
@@ -46,10 +48,10 @@ constructor(private formBuilder: FormBuilder, ) {
       '',
       [
         Validators.required,
-        this.confirmpassword()
+        // this.confirmpassword
       ],
     ],
-  });
+  },[CustomValidators.MatchValidator('password1', 'Password2')]);
 }
 
 ngOnInit(): void {}
@@ -78,12 +80,23 @@ get password2(){
   return this.registerForm.get('password2')
 }
 
+get passwordMatchError() {
+  return (
+    this.registerForm.getError('mismatch')&&
+    this.registerForm.get('password2')?.touched &&
+    this.registerForm.get('password2')?.dirty
+  
+  );
+}
+
 onSubmit() {
   console.log(this.registerForm.value);
 }
 
- confirmpassword(): boolean {
- return( this.registerForm.value.password1==this.registerForm.value.password2)
-  
+ confirmpassword(control: AbstractControl): {[key: string]: any} | null  {
+ return{
+  "confirmed":this.registerForm.get('password1')
+ }
+
 }
 }

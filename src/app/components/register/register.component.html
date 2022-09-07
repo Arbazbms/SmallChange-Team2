@@ -1,9 +1,8 @@
 
-<div class="container form-container">
+<form [formGroup]="registerForm" class="container form-container" (ngSubmit)="onSubmit()" role="form">
     <div class="headline">
         SIGN UP!!
     </div>
-    <form [formGroup]="registerForm" class="form-container" (ngSubmit)="onSubmit()" role="form">
     <div class="row justify-content-center">
            <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
                         <label for="emailid">Email address</label>
@@ -26,7 +25,7 @@
                     <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
                         <label for="idtype">Select your identification type</label>
                         <br>
-                        <select id="idtype" name="identification">
+                        <select id="idtype" class="form-control" name="identification">
                             <option value="Adhaar">Adhaar</option>
                             <option value="PAN">PAN</option>
                             <option value="Passport">Passport</option>
@@ -56,10 +55,10 @@
                     <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
                         <label for="pass2">Confirm Password</label>
                         <input type="password" class="form-control" id="pass2" placeholder="Confirm Password" formControlName="password2">
-                        <div *ngIf="password2?.touched || password2?.dirty">
-                            <div *ngIf="password2?.hasError('required') || password2?.hasError('confirmpassword')" >
+                        <div *ngIf="passwordMatchError">
+                            <!-- <div *ngIf="password2?.hasError('required') || password2?.hasError('confirmed')" > -->
                                 <div id="errorText">{{ passwordErrorTextmsg }}</div>
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -70,4 +69,4 @@
                     </div>
                 </div>
                 </form>
-</div>
+<!-- </div> -->
