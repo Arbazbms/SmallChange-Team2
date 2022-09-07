@@ -7,23 +7,18 @@ import { AppComponent } from './app.component';
 
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { LinksComponent } from './components/navbar/links/links.component';
+
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './components/register/register.component';
 import {HttpClientModule} from '@angular/common/http'
+import { BasicModule } from './basic/basic.module';
+import { PostLoginModule } from './post-login/post-login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     LoginFormComponent,
-    HeaderComponent,
-    FooterComponent,
-    NavbarComponent,
-    LinksComponent,
     RegisterComponent
   ],
   imports: [
@@ -32,7 +27,9 @@ import {HttpClientModule} from '@angular/common/http'
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    BasicModule,
+    PostLoginModule
 
   ],
   providers: [],

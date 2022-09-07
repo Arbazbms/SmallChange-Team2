@@ -7,6 +7,7 @@ import { TradeComponent } from './trade/trade.component';
 import { PreferenceComponent } from './preference/preference.component';
 import { RoboAdvisorComponent } from './robo-advisor/robo-advisor.component';
 import { ReportComponent } from './report/report.component';
+import { BasicModule } from '../basic/basic.module';
 
 
 
@@ -21,7 +22,8 @@ import { ReportComponent } from './report/report.component';
     ReportComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BasicModule
   ],
 
   exports: [
