@@ -8,4 +8,17 @@ a{
     text-decoration: none;
     color: #356F95;
   }
-  
+
+
+
+  a:visited{
+    color: purple;
+  }
+  a:focus{
+    border: #cccccc;
+    border-style: dotted;
+    border-width: 1px;
+  }
+  a:hover{
+    color: #000000;
+  }

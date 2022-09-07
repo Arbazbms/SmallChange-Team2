@@ -1,1 +1,66 @@
-<p>register works!</p>
+
+<div class="container form-container">
+    <div class="headline">
+        SIGN UP!!
+    </div>
+    <form role="form">
+    <div class="row justify-content-center">
+           <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="emailid">Email address</label>
+                        <input type="email" class="form-control" id="emailid" placeholder="Enter email">
+                    </div>
+                    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="username">Name</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter Name">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" id="country" placeholder="Enter your country">
+                    </div>
+                    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="postal">Postal</label>
+                        <input type="text" class="form-control" id="postal" placeholder="Enter your postal code" required="true">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="idtype">Select your identification type</label>
+                        <br>
+                        <select id="idtype" name="identification">
+                            <option value="Adhaar">Adhaar</option>
+                            <option value="PAN">PAN</option>
+                            <option value="Passport">Passport</option>
+                            <option value="SSN">SSN</option>
+                          </select>
+                    </div>
+                    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="idval">id</label>
+                        <input type="text" class="form-control" id="idval" placeholder="Enter your identification">
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="pass1">Password</label>
+                        <input type="password" class="form-control" id="pass1" placeholder="Password" formControlName="password1">
+                        <div *ngIf="password?.touched || password?.dirty">
+                            <div *ngIf="password?.hasError('required') || password?.hasError('minlength') || password?.hasError('maxlength') || password?.hasError('pattern')">
+                              <div id="errorText">{{ passwordErrorTextmsg }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+                        <label for="pass2">Confirm Password</label>
+                        <input type="password" class="form-control" id="pass2" placeholder="Confirm Password" formControlName="password2">
+                        <div *ngIf="password2?.touched || password2?.dirty">
+                            <div *ngIf="password2?.hasError('required') || password?.hasError('minlength') || password?.hasError('maxlength') || password?.hasError('pattern')">
+                              <div id="errorText">{{ passwordErrorTextmsg }}</div>
+                        </div>
+                    <div class="clearfix">
+                </div>
+                </div>
+                <button type="submit" class="btn btn-light submit-btn">Submit</button>
+                <div class="go_back">
+                    <!-- <app-links navlinks="GO back!?" class="go_back"></app-links> -->
+                    <a href="#">GO Back!!</a>
+                </div>
+            </form>
+        </div>
