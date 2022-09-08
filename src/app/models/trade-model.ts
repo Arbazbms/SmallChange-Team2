@@ -1,9 +1,9 @@
 export class TradeModel {
   constructor(
-    instrumentId: string,
-    description: string,
-    minQuantity: number,
-    maxQuantity: number,
-    targetPrice: number
+    public instrumentId: string,
+    public description: string,
+    public minQuantity: number,
+    public maxQuantity: number,
+    public targetPrice: number
   ) {}
 }

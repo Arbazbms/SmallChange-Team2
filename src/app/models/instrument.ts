@@ -1,11 +1,11 @@
 export class Instrument {
   constructor(
-    instrumentId: string,
-    description: string,
-    externalIdType: string,
-    externalId: string,
-    categoryId: string,
-    minQuantity: number,
-    maxQuantity: number
+    public instrumentId: string,
+    public description: string,
+    public externalIdType: string,
+    public externalId: string,
+    public categoryId: string,
+    public minQuantity: number,
+    public maxQuantity: number
   ) {}
 }

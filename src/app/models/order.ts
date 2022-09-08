@@ -1,10 +1,10 @@
 export class Order {
   constructor(
-    instrumentId: string,
-    quantity: number,
-    targetPrice: number,
-    direction: string,
-    clientId: string,
-    orderId: string
+    public instrumentId: string,
+    public quantity: number,
+    public targetPrice: number,
+    public direction: string,
+    public clientId: string,
+    public orderId: string
   ) {}
 }
