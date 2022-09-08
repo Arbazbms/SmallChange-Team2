@@ -34,11 +34,14 @@ body{
 
 #errorText {
     /* visibility: hidden; */
+    width: 100%;
+    /* margin: 0%; */
+    /* padding: 0%; */
     color: red;
     font-family: 'Fidelity Sans', Arial, sans-serif;
-    font-size: 0.8em;
+    text-align: left;
+    font-size: 1em;
     font-weight: bold;
-    text-align: center;
 }
 .go_back{
     text-align: center;
@@ -58,7 +61,7 @@ a{
     box-sizing: content-box;
     margin: 0em;
     padding: 0.5em 1.0em;
-    font-size: 18px;
+    font-size: 1em;
     line-height: 1.5em;
     text-decoration: none;
     color: #568200;
@@ -67,17 +70,21 @@ a{
 
 
   a:visited{
-    color: darkcyan;
+    color: #568200;
   }
   a:focus{
-    border: #cccccc;
+    border: #568200;
     border-style: dotted;
     border-width: 1px;
   }
   a:hover{
-    color: lightgreen;
+    color: darkgreen;
   }
 
 select{
   -webkit-appearance: listbox;
+}
+.disabled-btn{
+  cursor: no-drop;
+  background-color: #ccc;
 }

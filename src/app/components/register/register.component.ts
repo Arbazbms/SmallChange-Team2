@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomValidators } from './confirmed.validator';
+
+import { Client } from 'src/app/models/client.model';
+import { Identification } from 'src/app/models/identification.model';
+import { ClientService } from 'src/app/services/client.service';
+import { passwordMustMatch } from './confirmed.validator';
 
 
 @Component({
@@ -16,26 +20,28 @@ passwordErrorTextmsg: string =
   'Invalid Password- Must contain between 6 and 24 letters, numbers, underscores or hyphens ';
 registerForm: FormGroup;
 
-constructor(private formBuilder: FormBuilder, ) {
+constructor(private formBuilder: FormBuilder, private clientservice:ClientService) {
 
   this.registerForm = this.formBuilder.group({
-    emailid:['',
-    [Validators.required]
+    emailid:['',[
+    Validators.required,
+    Validators.pattern( /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)
+  ]
     ],
     username:['',
-    [Validators.required]
+    Validators.required
     ],
     country:['',
-    [Validators.required]
+    Validators.required
     ],
     postal:['',
-    [Validators.required]
+    Validators.required
     ],
     dob:['',
-    [Validators.required]
+    Validators.required
     ],
-    identification:['',[Validators.required]],
-    idval:['',[Validators.required]],
+    idtype:['',Validators.required],
+    idval:['',Validators.required],
     password1: [
       '',
       [
@@ -47,12 +53,11 @@ constructor(private formBuilder: FormBuilder, ) {
     ],
     password2: [
       '',
-      [
         Validators.required,
         // this.confirmpassword
-      ],
+      
     ],
-  },[CustomValidators.MatchValidator('password1', 'Password2')]);
+  },{validators: passwordMustMatch});
 }
 
 ngOnInit(): void {}
@@ -72,7 +77,12 @@ get postal() {
 get dob() {
   return this.registerForm.get('dob');
 }
-
+get idtype(){
+  return this.registerForm.get('idtype')
+}
+get idval(){
+  return this.registerForm.get('idval')
+}
 get password1(){
   return this.registerForm.get('password1')
 }
@@ -81,25 +91,29 @@ get password2(){
   return this.registerForm.get('password2')
 }
 
-get passwordMatchError() {
-  return (
-    this.registerForm.getError('mismatch')&&
-    this.registerForm.get('password2')?.touched &&
-    this.registerForm.get('password2')?.dirty
+// get passwordMatchError() {
+//   return (
+//     this.registerForm.getError('mismatch')&&
+//     this.registerForm.get('password2')?.touched &&
+//     this.registerForm.get('password2')?.dirty
   
-  );
-}
+//   );
+// }
 
 onSubmit() {
-  if(this.registerForm.value.password1!=this.registerForm.value.password2)
-    this.passworderror=true
-  console.log(this.registerForm.value);
+var formvalues=this.registerForm.value
+var id=Math.floor(Math.random() * 10);
+var identity= new Identification(formvalues.idtype,formvalues.idval)
+var client_to_be_added=new Client(
+  id,"h31",
+  formvalues.emailid,
+  formvalues.DOB,
+  formvalues.country,
+  formvalues.postal,
+  formvalues.password1,
+  identity
+)
+this.clientservice.addClient(client_to_be_added)
 }
 
- confirmpassword(control: AbstractControl): {[key: string]: any} | null  {
- return{
-  "confirmed":this.registerForm.get('password1')
- }
-
-}
 }
