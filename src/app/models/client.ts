@@ -1,8 +1,10 @@
-export interface Client {
-    clientId : string,
-        email:string,
-        DOB : string,
-        country: string,
-        postalCode:string,
-        identification:[string,string]
-  }
+export class Client {
+    constructor(
+        public clientId : string,
+        public email:string,
+        public DOB : string,
+        public country: string,
+        public postalCode:string,
+        public identification:[string,string]
+    ){}
+}
