@@ -8,6 +8,8 @@ import { PreferenceComponent } from './preference/preference.component';
 import { RoboAdvisorComponent } from './robo-advisor/robo-advisor.component';
 import { ReportComponent } from './report/report.component';
 import { BasicModule } from '../basic/basic.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -23,7 +25,10 @@ import { BasicModule } from '../basic/basic.module';
   ],
   imports: [
     CommonModule,
-    BasicModule
+    BasicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
 
   exports: [

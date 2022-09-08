@@ -8,9 +8,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ClientService {
-
+  id:number = Math.random()
   company : any= {
-    "id" : 90,
+    "id" : this.id,
     "Name" : "JP Morgan"
   }
   constructor(private http: HttpClient) { }
