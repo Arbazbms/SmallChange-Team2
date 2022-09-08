@@ -1,0 +1,90 @@
+ .form-container {
+    /* margin: 0 auto 0 auto; */
+    display: block;
+    align-items: center;
+    align-content: center;
+    margin: 15px auto;
+    padding: 2rem 3rem 2rem 3rem;
+    border: solid 1px #ccc;
+    width: 60%;
+    /* max-width: 28rem; */
+    /* margin-bottom: 1.5rem; */
+    size: 40%;
+    font-family: 'Fidelity Sans', Arial, sans-serif;
+} 
+body{
+    font-family: 'Fidelity Sans', Arial, sans-serif ;
+}
+
+.submit-btn {
+
+    width: 30%;
+    display: block;
+    box-sizing: border-box;
+    border: none;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-family: 'Fidelity Sans', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-align: center;
+    color: white;
+    background-color: #568200;
+    margin: 1rem auto;
+}
+
+#errorText {
+    /* visibility: hidden; */
+    width: 100%;
+    /* margin: 0%; */
+    /* padding: 0%; */
+    color: red;
+    font-family: 'Fidelity Sans', Arial, sans-serif;
+    text-align: left;
+    font-size: 1em;
+    font-weight: bold;
+}
+.go_back{
+    text-align: center;
+    color: #568200;
+}
+.headline{
+    font-size: xx-large;
+    text-align: center;
+    width: 100%;
+    padding: 0%;
+    margin: 1.5rem;
+    color: #568200;
+}
+
+a{
+    font-family: "Fidelity Sans", arial, sans-serif;
+    box-sizing: content-box;
+    margin: 0em;
+    padding: 0.5em 1.0em;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-decoration: none;
+    color: #568200;
+  }
+
+
+
+  a:visited{
+    color: #568200;
+  }
+  a:focus{
+    border: #568200;
+    border-style: dotted;
+    border-width: 1px;
+  }
+  a:hover{
+    color: darkgreen;
+  }
+
+select{
+  -webkit-appearance: listbox;
+}
+.disabled-btn{
+  cursor: no-drop;
+  background-color: #ccc;
+}

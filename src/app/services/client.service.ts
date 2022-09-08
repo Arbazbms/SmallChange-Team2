@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Clients } from 'src/app/models/mockAcctData';
-import { Client } from '../models/client';
+import { Client } from '../models/client.model';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -16,9 +15,13 @@ export class ClientService {
   }
   constructor(private http: HttpClient) { }
 
-  getClients(): Observable<Client[]>{
-    const clients = of(Clients);
-    return clients;
+
+  addClient(client:Client){
+    const headers = new HttpHeaders({
+      'Content-type' : 'application/json'
+    })
+     this.http.post('http://localhost:3000/clients', JSON.stringify(client), {headers: headers})
+     .subscribe(res => console.log("POST SUCESS", res))
   }
 
   //demo

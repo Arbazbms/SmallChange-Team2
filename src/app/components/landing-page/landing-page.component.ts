@@ -12,12 +12,9 @@ export class LandingPageComponent implements OnInit {
   constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
-      this.getClients();
+  
 
   }
-  getClients(): void {
-    this.clientService.getClients()
-        .subscribe(clients => this.clients = clients);
-  }
+
 
 }
