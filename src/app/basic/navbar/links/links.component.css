@@ -11,9 +11,9 @@ a{
 
 
 
-  a:visited{
+  /* a:visited{
     color: purple;
-  }
+  } */
   a:focus{
     border: #cccccc;
     border-style: dotted;
@@ -21,4 +21,12 @@ a{
   }
   a:hover{
     color: #000000;
+  }
+
+  .activelink{
+
+    /* background-color: #568200; */
+    color:rgba(104, 104, 231, 0.849);
+
+
   }

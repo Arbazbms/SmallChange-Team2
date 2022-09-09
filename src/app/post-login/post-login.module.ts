@@ -10,6 +10,8 @@ import { ReportComponent } from './report/report.component';
 import { BasicModule } from '../basic/basic.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PostLoginRoutingModule } from './post-login-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -28,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
     BasicModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PostLoginRoutingModule,
+    RouterModule
   ],
 
   exports: [
