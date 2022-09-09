@@ -4,6 +4,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LinksComponent } from './navbar/links/links.component';
+import { PostLoginRoutingModule } from '../post-login/post-login-routing.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { LinksComponent } from './navbar/links/links.component';
     LinksComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PostLoginRoutingModule
   ],
   exports:[
     FooterComponent,
