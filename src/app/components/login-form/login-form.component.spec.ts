@@ -1,14 +1,23 @@
+import { NgModule } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginFormComponent } from './login-form.component';
-
+// @NgModule({
+//   imports: [
+//       FormsModule, ReactiveFormsModule
+//   ]
+// });
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
 
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginFormComponent ]
+      declarations: [ LoginFormComponent ],
+      imports:
+      [FormsModule,ReactiveFormsModule]
     })
     .compileComponents();
   });

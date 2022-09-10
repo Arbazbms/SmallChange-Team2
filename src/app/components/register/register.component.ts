@@ -14,6 +14,7 @@ import { passwordMustMatch } from './confirmed.validator';
 })
 export class RegisterComponent implements OnInit {
   passworderror=false
+  public client_to_be_added:Client=new Client(-1,'','','','','','','',new Identification('',''))
 passwordErrorTextmsg: string =
   'Invalid Password- Must contain between 6 and 24 letters, numbers, underscores or hyphens ';
 registerForm: FormGroup;
@@ -41,7 +42,7 @@ constructor(private formBuilder: FormBuilder, private clientservice:ClientServic
     [Validators.pattern('^[0-9]{6}$'), Validators.required]
     ],
     dob:['',
-    Validators.required
+    // Validators.required
     ],
     idtype:['',Validators.required],
     idval:['',this.idValidators],
@@ -111,16 +112,17 @@ onSubmit() {
 var formvalues=this.registerForm.value
 var id=Math.floor(Math.random() * 10);
 var identity= new Identification(formvalues.idtype,formvalues.idval)
-var client_to_be_added=new Client(
-  id,"h31",
-  formvalues.emailid,
-  formvalues.DOB,
-  formvalues.country,
-  formvalues.postal,
-  formvalues.password1,
-  identity
-)
-this.clientservice.addClient(client_to_be_added)
+  this.client_to_be_added.id=id,
+  this.client_to_be_added.clientId="h31",
+  this.client_to_be_added.email=formvalues.emailid,
+  this.client_to_be_added.username=formvalues.username,
+  this.client_to_be_added.DOB=formvalues.dob,
+  this.client_to_be_added.country=formvalues.country,
+  this.client_to_be_added.postalCode=formvalues.postal,
+  this.client_to_be_added.password=formvalues.password1,
+  this.client_to_be_added.identity=identity
+console.log(this.client_to_be_added)
+this.clientservice.addClient(this.client_to_be_added)
 }
 updateValueAndValidity(){
 

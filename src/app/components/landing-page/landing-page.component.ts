@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from 'src/app/services/client.service';
+
 import { Client } from 'src/app/models/client';
 
 @Component({
@@ -9,7 +9,7 @@ import { Client } from 'src/app/models/client';
 })
 export class LandingPageComponent implements OnInit {
   clients : Client[]=[];
-  constructor(private clientService: ClientService) { }
+  constructor() { }
 
   ngOnInit(): void {
   

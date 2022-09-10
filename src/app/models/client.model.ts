@@ -5,6 +5,7 @@ export class Client {
     public id:number,
     public    clientId : string,
     public    email:string,
+    public    username:string,
     public    DOB : string,
     public    country: string,
     public    postalCode:string,
