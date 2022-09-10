@@ -8,12 +8,11 @@ import { ClientService } from './services/client.service';
 })
 export class AppComponent implements OnInit{
 
-  constructor(private api: ClientService){}
+  constructor(){}
   title = 'SmallChange-Team2';
 
   ngOnInit(){
-    this.api.getUsers().subscribe(data => console.log("FETCHED FROM FAKE SERVER", data))
-    this.api.postUser();
+
   }
 
 }

@@ -14,12 +14,16 @@ import { passwordMustMatch } from './confirmed.validator';
 })
 export class RegisterComponent implements OnInit {
   passworderror=false
-  usernameErrorTextmsg: string =
-  'Invalid Username- Must contain between 3 and 18 letters, numbers, underscores or hyphens ';
+  public client_to_be_added:Client=new Client(-1,'','','','','','','',new Identification('',''))
 passwordErrorTextmsg: string =
   'Invalid Password- Must contain between 6 and 24 letters, numbers, underscores or hyphens ';
 registerForm: FormGroup;
-
+private idValidators = [
+  Validators.maxLength(250),
+  Validators.minLength(5),
+  Validators.required
+  
+];
 constructor(private formBuilder: FormBuilder, private clientservice:ClientService) {
 
   this.registerForm = this.formBuilder.group({
@@ -35,13 +39,13 @@ constructor(private formBuilder: FormBuilder, private clientservice:ClientServic
     Validators.required
     ],
     postal:['',
-    Validators.required
+    [Validators.pattern('^[0-9]{6}$'), Validators.required]
     ],
     dob:['',
-    Validators.required
+    // Validators.required
     ],
     idtype:['',Validators.required],
-    idval:['',Validators.required],
+    idval:['',this.idValidators],
     password1: [
       '',
       [
@@ -50,6 +54,7 @@ constructor(private formBuilder: FormBuilder, private clientservice:ClientServic
         Validators.maxLength(18),
         Validators.pattern("^[a-zA-Z0-9_\-]{3,18}$")
       ],
+      // this.emailValidators
     ],
     password2: [
       '',
@@ -57,10 +62,13 @@ constructor(private formBuilder: FormBuilder, private clientservice:ClientServic
         // this.confirmpassword
       
     ],
-  },{validators: passwordMustMatch});
+  },{validators: [passwordMustMatch]});
 }
 
-ngOnInit(): void {}
+ngOnInit(): void {
+
+
+}
 
 get emailid() {
   return this.registerForm.get('emailid');
@@ -104,16 +112,36 @@ onSubmit() {
 var formvalues=this.registerForm.value
 var id=Math.floor(Math.random() * 10);
 var identity= new Identification(formvalues.idtype,formvalues.idval)
-var client_to_be_added=new Client(
-  id,"h31",
-  formvalues.emailid,
-  formvalues.DOB,
-  formvalues.country,
-  formvalues.postal,
-  formvalues.password1,
-  identity
-)
-this.clientservice.addClient(client_to_be_added)
+  this.client_to_be_added.id=id,
+  this.client_to_be_added.clientId="h31",
+  this.client_to_be_added.email=formvalues.emailid,
+  this.client_to_be_added.username=formvalues.username,
+  this.client_to_be_added.DOB=formvalues.dob,
+  this.client_to_be_added.country=formvalues.country,
+  this.client_to_be_added.postalCode=formvalues.postal,
+  this.client_to_be_added.password=formvalues.password1,
+  this.client_to_be_added.identity=identity
+console.log(this.client_to_be_added)
+this.clientservice.addClient(this.client_to_be_added)
 }
+updateValueAndValidity(){
 
+    if(String(this.registerForm.get('idtype')?.value)=='Adhaar') {
+      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern('^[0-9]{12}$')))
+    }
+    else if(String(this.registerForm.get('idtype')?.value)=='PAN') {
+      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern('^[0-9]{11}$')))
+    }
+    else if(String(this.registerForm.get('idtype')?.value)=='Passport') {
+      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern('^(?!0{3,20})[a-zA-Z0-9]{3,20}$')))
+    }
+    else if(String(this.registerForm.get('idtype')?.value)=='SSN') {
+      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern(/.+@.+\..+/)))
+    }
+    else {
+      this.registerForm.get('idval')?.setValidators(this.idValidators);
+    }
+
+  
+}
 }
