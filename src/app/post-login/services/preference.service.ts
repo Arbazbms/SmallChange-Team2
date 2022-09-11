@@ -42,5 +42,9 @@ export class PreferenceService {
   getPreferenceById(id:string) {
     return this.http.get(this.url+ '/' +id).pipe(catchError(this.handleError))
   } 
+
+  updatePreference(id:any, data:any):Observable<Preference>{
+    return this.http.put<Preference>(this.url+ '/' +id, JSON.stringify(data), {headers:this.headers})
+  }
 }
 

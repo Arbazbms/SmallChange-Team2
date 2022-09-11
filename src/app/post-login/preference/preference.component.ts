@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Preference } from 'src/app/models/preference';
 import { PreferenceService } from '../services/preference.service';
 
 @Component({
@@ -14,26 +15,26 @@ export class PreferenceComponent implements OnInit {
   lengthOfIvestmentsArray:any = ['0-5 years', '5-7 years', '7-10 years', '10-15 years'];
   preferanceForm!: FormGroup;
   preferenceExistingData:any = {};
+  showAdd:Boolean = false;
+  showUpdate: Boolean = false;
+
 
   constructor(private formBuilder: FormBuilder, private prefService: PreferenceService) { }
 
 
 
    ngOnInit():void {
-  
+
     this.getPreferenceById();
-    setTimeout(() => {
-      console.log("ng pref: ", this.preferenceExistingData.investmentPurpose)
-      
-    }, 1000);
-    
+
     this.preferanceForm = this.formBuilder.group({
-      investmentPurpose : [this.preferenceExistingData.investmentPurpose, Validators.required],
+      investmentPurpose : ['', Validators.required],
       riskTolerance : ['', Validators.required],
       incomeCategory : ['', Validators.required],
       lengthOfInvestment : ['', Validators.required]
 
     })
+
   }
 
   
@@ -50,29 +51,58 @@ export class PreferenceComponent implements OnInit {
     return this.preferanceForm.get('lengthOfInvestment')
   }
 
-
-  async getPreferenceById(){
+  getPreferenceById(){
     this.prefService.getPreferenceById('A685').subscribe((data) => {
       this.preferenceExistingData = data
-      console.log("EXISTING PREFERENCE DATA: ", data)
+      console.log("EXISTING PREFERENCE DATA LISTT: ", data)
     })
   }
 
+  closeModelWhenSucess(){
+    let ref = document.getElementById('cancel')
+    ref?.click();
+  }
+  updatePreference(){
+    let prefObj:Preference = new Preference('A685', this.preferanceForm.value.investmentPurpose, this.preferanceForm.value.riskTolerance, this.preferanceForm.value.incomeCategory, this.preferanceForm.value.lengthOfInvestment)
+    console.log("update button clicked clicked")
+    this.prefService.updatePreference('A685', prefObj).subscribe((data) => {
+      console.log("UPDATE SUCCESS : ", data)
+      this.getPreferenceById();
+      this.closeModelWhenSucess()
+    })
+  }
+  editMyPreference(preference: Preference){
+    this.preferanceForm.controls['investmentPurpose'].setValue(preference.investmentPurpose)
+    this.preferanceForm.controls['riskTolerance'].setValue(preference.riskTolerance)
+    console.log('Output send values: ', preference.lengthOfInvestment)
+    this.preferanceForm.controls['incomeCategory'].setValue(preference.incomeCategory)
+    this.preferanceForm.controls['lengthOfInvestment'].setValue(preference.lengthOfInvestment)
+    // this.updatePreference()
+    this.showUpdate = true
+    
+
+  }
+
   // to be used later
-  getPrefObj(obj:any){
+  getPrefObj(){
     return {
-      "id": "A" + Math.floor(Math.random()*1000),
-      "investmentPurpose": this.preferanceForm.controls['investmentPurpose'].value,
-      "riskTolerance": this.preferanceForm.controls['riskTolerance'].value,
-      "incomeCategory":this.preferanceForm.controls['incomeCategory'].value,
-      "lengthOfInvestment":this.preferanceForm.controls['lengthOfInvestment'].value
+      "investmentPurpose": "updated",
+      "riskTolerance": "qq1",
+      "incomeCategory": "11",
+      "lengthOfInvestment": "12-888"
     }
   }
 
+  clickAdd(){
+    this.showAdd = true
+    this.showUpdate = false
+  }
    onSubmit(){
-    alert("submit")
     console.log("pref control value::-> ",this.preferanceForm.controls['investmentPurpose'].value)
-    this.prefService.savePreferences(this.preferanceForm.value).subscribe(data => console.log('Pref saved data:', data))
+    this.prefService.savePreferences(this.preferanceForm.value).subscribe(data => {
+      console.log('Pref saved data:', data)
+      this.closeModelWhenSucess()
+    })
     this.preferanceForm.reset()
   }
 

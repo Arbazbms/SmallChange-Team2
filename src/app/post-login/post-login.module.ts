@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PostLoginRoutingModule } from './post-login-routing.module';
 import { RouterModule } from '@angular/router';
+import { PreferenceListComponent } from './preference-list/preference-list.component';
 
 
 
@@ -23,7 +24,8 @@ import { RouterModule } from '@angular/router';
     TradeComponent,
     PreferenceComponent,
     RoboAdvisorComponent,
-    ReportComponent
+    ReportComponent,
+    PreferenceListComponent
   ],
   imports: [
     CommonModule,

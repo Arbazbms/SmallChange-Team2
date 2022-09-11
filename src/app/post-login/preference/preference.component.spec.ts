@@ -1,19 +1,26 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreferenceService } from '../services/preference.service';
 
 import { PreferenceComponent } from './preference.component';
 
+@Component({selector: 'app-preference-list',template: 'mock Preference list'})
+class MockPreferenceListComponent{}
+
+@Component({selector:'app-navbar', template:'mock nav bar'})
+class MockNavbarComponent{}
+
 describe('PreferenceComponent', () => {
   let component: PreferenceComponent;
   let fixture: ComponentFixture<PreferenceComponent>;
 
   beforeEach(async () => {
-    let mockprefService: any= jasmine.createSpyObj('mockprefService',['savePreferences','addBook']);
+    let mockprefService: any= jasmine.createSpyObj('mockprefService',['savePreferences','getPreferenceById', 'updatePreference']);
     // mockprefService.savePreferences.and.returnValue( of(testBooks));
     mockprefService.savePreferences('test')
     await TestBed.configureTestingModule({
-      declarations: [ PreferenceComponent ],
+      declarations: [ PreferenceComponent, MockPreferenceListComponent, MockNavbarComponent ],
       providers: [{ provide: PreferenceService, useValue: mockprefService }],
       imports:[ReactiveFormsModule,FormsModule]
     })
