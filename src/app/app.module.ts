@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http'
 import { BasicModule } from './basic/basic.module';
 import { PostLoginModule } from './post-login/post-login.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +30,8 @@ import { PostLoginModule } from './post-login/post-login.module';
     CommonModule,
     HttpClientModule,
     BasicModule,
-    PostLoginModule
-
-  ],
+    PostLoginModule,
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -10,7 +10,7 @@ import { ReportComponent } from './report/report.component';
 import { BasicModule } from '../basic/basic.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import {DataTablesModule} from 'angular-datatables';
 
 
 @NgModule({
@@ -28,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     BasicModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
 
   exports: [

@@ -1,1 +1,48 @@
-<p>activity works!</p>
+<div class="container">
+  <p class="h2">Trade History</p>
+<div class="shadow p-3 mb-5 bg-body rounded" style="overflow-x:auto;padding:40px">
+<table datatable 
+[dtOptions]="dtOptions" class="row-border hover"   >
+  <thead>
+    <tr>
+      <!-- <th>InstrumentId</th>
+      <th>Quantity</th>
+      <th>ExecutionPrice</th>
+      <th>Direction</th>
+      <th>ClientId</th>
+      <th>Order</th>
+      <th>TradeId</th>
+      <th>CashValue</th> -->
+      <!-- <th>Asset Class</th>
+      <th>Side</th>
+      <th>Security</th>
+      <th>Account</th>
+      <th>Qty</th>
+      <th>Cash Value</th>
+      <th>Date</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trade of tradeHist">
+      <!-- <td>{{trade.instrumentId}}</td>
+      <td>{{trade.quantity}}</td>
+      <td>{{trade.executionPrice}}</td>
+      <td>{{trade.direction}}</td>
+      <td>{{trade.clientId}}</td>
+      <td>{{trade.order}}</td>
+      <td>{{trade.tradeId}}</td>
+      <td>{{trade.cashValue}}</td> -->
+      <td>{{trade.asset}}</td>
+      <td>{{trade.side}}</td>
+      <td>{{trade.security}}</td>
+      <td>{{trade.account}}</td>
+      <td>{{trade.qty}}</td>
+      <td>{{trade.cash}}</td>
+      <td>{{trade.date}}</td>
+    </tr>
+    </tbody> 
+    <tfoot></tfoot>
+</table>
+</div>
+</div>
+
