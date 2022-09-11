@@ -13,21 +13,29 @@ export class PreferenceComponent implements OnInit {
   incomeCategotyArray:any = ['0 - 20,000', '20,001 - 40,000', '40,001 - 60,000', '60,001 - 80,000', '80,001 - 100,000', '100,001 - 150,000', '150,000+'];
   lengthOfIvestmentsArray:any = ['0-5 years', '5-7 years', '7-10 years', '10-15 years'];
   preferanceForm!: FormGroup;
+  preferenceExistingData:any = {};
 
   constructor(private formBuilder: FormBuilder, private prefService: PreferenceService) { }
 
 
 
-  ngOnInit(): void {
-
+   ngOnInit():void {
+  
+    this.getPreferenceById();
+    setTimeout(() => {
+      console.log("ng pref: ", this.preferenceExistingData.investmentPurpose)
+      
+    }, 1000);
+    
     this.preferanceForm = this.formBuilder.group({
-      investmentPurpose : ['', Validators.required],
+      investmentPurpose : [this.preferenceExistingData.investmentPurpose, Validators.required],
       riskTolerance : ['', Validators.required],
       incomeCategory : ['', Validators.required],
       lengthOfInvestment : ['', Validators.required]
 
     })
   }
+
   
   get investmentPurpose() {
     return this.preferanceForm.get('investmentPurpose');
@@ -40,6 +48,14 @@ export class PreferenceComponent implements OnInit {
   }
   get lengthOfInvestment(){
     return this.preferanceForm.get('lengthOfInvestment')
+  }
+
+
+  async getPreferenceById(){
+    this.prefService.getPreferenceById('A685').subscribe((data) => {
+      this.preferenceExistingData = data
+      console.log("EXISTING PREFERENCE DATA: ", data)
+    })
   }
 
   // to be used later
@@ -56,7 +72,7 @@ export class PreferenceComponent implements OnInit {
    onSubmit(){
     alert("submit")
     console.log("pref control value::-> ",this.preferanceForm.controls['investmentPurpose'].value)
-    this.prefService.savePreferences(this.preferanceForm.value)
+    this.prefService.savePreferences(this.preferanceForm.value).subscribe(data => console.log('Pref saved data:', data))
     this.preferanceForm.reset()
   }
 

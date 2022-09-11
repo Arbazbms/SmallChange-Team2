@@ -29,4 +29,29 @@ describe('PreferenceComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should validate Forms Fields', ()=>{
+    const investmentPurposeContorl = component.preferanceForm.get('investmentPurpose')
+    const riskToleranceControl = component.preferanceForm.get('riskTolerance')
+    const incomeCategoryControl = component.preferanceForm.get('incomeCategory')
+    const lengthOfInvestmentControl = component.preferanceForm.get('lengthOfInvestment')
+
+    expect(component.preferanceForm.valid).toBeFalsy();
+
+    expect(investmentPurposeContorl?.hasError('required')).toBeTruthy();
+    expect(riskToleranceControl?.hasError('required')).toBeTruthy();
+    expect(incomeCategoryControl?.hasError('required')).toBeTruthy();
+    expect(lengthOfInvestmentControl?.hasError('required')).toBeTruthy();
+
+
+    investmentPurposeContorl?.setValue('my Purpose')
+    riskToleranceControl?.setValue('Aggressive')
+    incomeCategoryControl?.setValue('0-1000');
+    lengthOfInvestmentControl?.setValue('0-5 years')
+
+    expect(component.preferanceForm.valid).toBeTruthy();
+
+  })
+
+  
 });
