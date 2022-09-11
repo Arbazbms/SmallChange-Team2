@@ -72,4 +72,52 @@ describe('RegisterComponent', () => {
     expect(component.client_to_be_added.email).toBe('ashr@gmail.com');
     expect(addclientSpy).toHaveBeenCalled();
 });
+it('username field validity', () => {
+  const name = component.registerForm.get('username')
+  expect(name?.valid).toBeFalsy();
+
+  name?.setValue('');
+  expect(name?.hasError('required')).toBeTruthy();  
+
+  name?.setValue('usertest');
+  expect(name?.valid).toBeTruthy();
+
+
+});
+it('email field validity', () => {
+  const field = component.registerForm.get('emailid')
+  expect(field?.valid).toBeFalsy();
+
+  field?.setValue('');
+  expect(field?.hasError('required')).toBeTruthy();
+  field?.setValue('eamail');
+  expect(field?.hasError('pattern')).toBeTruthy();
+  field?.setValue('eamail@g.com');
+  expect(field?.valid).toBeTruthy();
+
+});
+it('password field validity', () => {
+  const field = component.registerForm.get('password1')
+  expect(field?.valid).toBeFalsy();
+
+  field?.setValue('');
+  expect(field?.hasError('required')).toBeTruthy();
+  field?.setValue('ea');
+  expect(field?.hasError('pattern')).toBeTruthy();
+  field?.setValue('eamail');
+  expect(field?.valid).toBeTruthy();
+
+});
+it('password  field  match validity', () => {
+  const field1 = component.registerForm.get('password1')
+  const field2 = component.registerForm.get('password2')
+  expect(field1?.valid).toBeFalsy();
+  expect(field2?.valid).toBeFalsy();
+  field1?.setValue('testing')
+  field2?.setValue('debugging')
+  expect(component.registerForm.valid).toBeFalsy
+  field1?.setValue('testing')
+  field2?.setValue('testing')
+  expect(component.registerForm.valid).toBeTruthy
+});
 })

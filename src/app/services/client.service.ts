@@ -22,17 +22,20 @@ export class ClientService {
     })
      this.http.post('http://localhost:3000/clients', JSON.stringify(client), {headers: headers})
      .subscribe(res => console.log("POST SUCESS", res))
+    }
+    getClients():Observable<any>{
+      return (this.http.get('http://localhost:3000/clients'))
+    }
   }
-
   //demo
-  getUsers = () => {
-    return this.http.get('http://localhost:3000/companies')
-  }
+//   getUsers = () => {
+//     return this.http.get('http://localhost:3000/companies')
+//   }
 
-  postUser = () => {
-    const headers = new HttpHeaders({
-      'Content-type' : 'application/json'
-    })
-    this.http.post('http://localhost:3000/companies', JSON.stringify(this.company), {headers: headers}).subscribe(res => console.log("POST SUCESS", res))
-  }
-}
+//   postUser = () => {
+//     const headers = new HttpHeaders({
+//       'Content-type' : 'application/json'
+//     })
+//     this.http.post('http://localhost:3000/companies', JSON.stringify(this.company), {headers: headers}).subscribe(res => console.log("POST SUCESS", res))
+//   }
+// 
