@@ -1,0 +1,26 @@
+
+<div *ngIf="preferenceExistingData">
+  <table class="table table-striped mt-5">
+    <thead>
+        <tr>
+            <th>Investment Purpose</th>
+            <th>Risk Tolerance</th>
+            <th>Income Category</th>
+            <th>Investment Purpose</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{preferenceExistingData.investmentPurpose}}</td>
+            <td>{{preferenceExistingData.riskTolerance}}</td>
+            <td>{{preferenceExistingData.incomeCategory}}</td>
+            <td>{{preferenceExistingData.lengthOfInvestment}}</td>
+            <td><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="add(preferenceExistingData)">Edit</button></td>
+        </tr>
+
+    </tbody>
+  </table>
+</div>
+<ng-template #loading>Loading...</ng-template>
