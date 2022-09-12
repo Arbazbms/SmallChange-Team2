@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <input type="submit" *ngIf="showAdd" value="submit" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid"/>
-                <input type="submit" *ngIf="showUpdate" value="update" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid" (click)="updatePreference()"/>
+                <input *ngIf="showUpdate" value="update" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid" (click)="updatePreference()"/>
             
             </form>
         </div>
