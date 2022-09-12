@@ -9,12 +9,14 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
+import { TradeTransactionComponent } from './trade-transaction/trade-transaction.component';
 
 
 @NgModule({
   declarations: [
     TradePageComponent,
-    TradeTableComponent
+    TradeTableComponent,
+    TradeTransactionComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     SliderModule,
     ToastModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    //TableModule
   ],
   exports: [
     TradePageComponent

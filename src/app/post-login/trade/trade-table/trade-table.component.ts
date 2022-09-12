@@ -20,8 +20,6 @@ export class TradeTableComponent implements OnInit {
   instruments: Price[] = [];
   order: Order = new Order('',-1,-1,'','','')
   //order!: Order;
-  showBuy: boolean = false;
-  showSell: boolean = false;
   priceDetails: Price[] = [];
   instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
   showModal: boolean = false;
@@ -39,7 +37,7 @@ export class TradeTableComponent implements OnInit {
 
   generateOrder() {
     if (this.isCapable()) {
-      this.order.direction = 'B';
+      this.order.direction = 'S';
       this.order.targetPrice = this.instrument.bidPrice * this.order.quantity;
       this.order.instrumentId = this.instrument.instrumentId;
       this.order.clientId = 'SGAK';
@@ -54,11 +52,15 @@ export class TradeTableComponent implements OnInit {
   }
   displayModal(instrument: Price) {
     this.order.quantity = instrument.instrument.minQuantity;
+    this.order.direction = 'B'
     this.showModal = true;
     console.log('in display', instrument);
 
     this.instrument = instrument;
-    console.log(this.instrument);
+  }
+
+  hideDialog(show : boolean){
+    this.showModal = show
   }
 
   showToast() {

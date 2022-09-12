@@ -1,5 +1,15 @@
-#symbol{
+#symbol {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     color: rgb(9, 9, 196);
+}
+
+table{
+    width: 50%;
+    align-content: center;
+    justify-content: center;
+}
+
+tr:hover {
+    background-color: #bbbdb7;
 }
