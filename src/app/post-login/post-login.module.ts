@@ -10,6 +10,9 @@ import { BasicModule } from '../basic/basic.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TradeModule } from './trade/trade.module';
+import { PostLoginRoutingModule } from './post-login-routing.module';
+import { RouterModule } from '@angular/router';
+import { PreferenceListComponent } from './preference-list/preference-list.component';
 
 
 
@@ -20,7 +23,8 @@ import { TradeModule } from './trade/trade.module';
     ActivityComponent,
     PreferenceComponent,
     RoboAdvisorComponent,
-    ReportComponent
+    ReportComponent,
+    PreferenceListComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +32,8 @@ import { TradeModule } from './trade/trade.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    PostLoginRoutingModule,
+    RouterModule,
     TradeModule
   ],
 

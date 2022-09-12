@@ -1,53 +1,80 @@
 <app-navbar></app-navbar>
-<form class="form-container" [formGroup]="preferanceForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-        <label for="purpose" class="form-label">Investment Purpose</label>
-        <input type="text" class="form-control" formControlName="investmentPurpose" id="purpose" [class.err-input] = "investmentPurpose?.touched && investmentPurpose?.hasError('required')"/>
-        <div *ngIf="investmentPurpose?.touched || investmentPurpose?.dirty">
-            <div *ngIf="investmentPurpose?.hasError('required')">
-                <span class="err-msg">Required</span>
-            </div>
+
+
+<div *ngIf="!preferenceExistingData">
+    <!-- Button trigger modal -->
+    <button type="button" (click)="clickAdd()" class="btn btn-primary" id="addPref" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Preference
+    </button>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Your Preference</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    </div>
-    <div class="mb-3">
-        <label for="purpose" class="form-label">Risk Tolerance</label>
-
-        <select class="form-select" aria-label="Default select example" formControlName="riskTolerance" [class.err-input]="riskTolerance?.touched && riskTolerance?.hasError('required')">
-            <option *ngFor="let val of riskToleranceArray" [value]="val">{{val}}</option>
-
-        </select>
-        <div *ngIf="riskTolerance?.touched || riskTolerance?.dirty">
-            <div *ngIf="riskTolerance?.hasError('required')">
-                <span class="err-msg">Required</span>
-            </div>
+        <div class="modal-body">
+            <form class="form-container" [formGroup]="preferanceForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="purpose" class="form-label">Investment Purpose</label>
+                    <input type="text" class="form-control" formControlName="investmentPurpose" id="purpose" [class.err-input] = "investmentPurpose?.touched && investmentPurpose?.hasError('required')"/>
+                    <div *ngIf="investmentPurpose?.touched || investmentPurpose?.dirty">
+                        <div *ngIf="investmentPurpose?.hasError('required')">
+                            <span class="err-msg">Required</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="purpose" class="form-label">Risk Tolerance</label>
+            
+                    <select class="form-select" aria-label="Default select example" formControlName="riskTolerance" [class.err-input]="riskTolerance?.touched && riskTolerance?.hasError('required')">
+                        <option *ngFor="let val of riskToleranceArray" [value]="val">{{val}}</option>
+            
+                    </select>
+                    <div *ngIf="riskTolerance?.touched || riskTolerance?.dirty">
+                        <div *ngIf="riskTolerance?.hasError('required')">
+                            <span class="err-msg">Required</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="purpose" class="form-label">Income Category</label>
+            
+                    <select class="form-select" aria-label="Default select example" formControlName="incomeCategory" [class.err-input]="incomeCategory?.touched && incomeCategory?.hasError('required')">
+                        <option *ngFor="let val of incomeCategotyArray" [value]="val">{{val}}</option>
+            
+                    </select>
+                    <div *ngIf="incomeCategory?.touched || incomeCategory?.dirty">
+                        <div *ngIf="incomeCategory?.hasError('required')">
+                            <span class="err-msg">Required</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="purpose" class="form-label">Length of Investment</label>
+            
+                    <select class="form-select" aria-label="Default select example" formControlName="lengthOfInvestment" [class.err-input]="lengthOfInvestment?.touched && lengthOfInvestment?.hasError('required')">
+                        <option *ngFor="let val of lengthOfIvestmentsArray" [value]="val">{{val}}</option>
+            
+                    </select>
+                    <div *ngIf="lengthOfInvestment?.touched || lengthOfInvestment?.dirty">
+                        <div *ngIf="lengthOfInvestment?.hasError('required')">
+                            <span class="err-msg">Required</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" *ngIf="showAdd" value="submit" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid"/>
+                <input type="submit" *ngIf="showUpdate" value="update" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid" (click)="updatePreference()"/>
+            
+            </form>
         </div>
-    </div>
-    <div class="mb-3">
-        <label for="purpose" class="form-label">Income Category</label>
-
-        <select class="form-select" aria-label="Default select example" formControlName="incomeCategory" [class.err-input]="incomeCategory?.touched && incomeCategory?.hasError('required')">
-            <option *ngFor="let val of incomeCategotyArray" [value]="val">{{val}}</option>
-
-        </select>
-        <div *ngIf="incomeCategory?.touched || incomeCategory?.dirty">
-            <div *ngIf="incomeCategory?.hasError('required')">
-                <span class="err-msg">Required</span>
-            </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancel" data-bs-dismiss="modal">Close</button>
         </div>
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="purpose" class="form-label">Length of Investment</label>
-
-        <select class="form-select" aria-label="Default select example" formControlName="lengthOfInvestment" [class.err-input]="lengthOfInvestment?.touched && lengthOfInvestment?.hasError('required')">
-            <option *ngFor="let val of lengthOfIvestmentsArray" [value]="val">{{val}}</option>
-
-        </select>
-        <div *ngIf="lengthOfInvestment?.touched || lengthOfInvestment?.dirty">
-            <div *ngIf="lengthOfInvestment?.hasError('required')">
-                <span class="err-msg">Required</span>
-            </div>
-        </div>
-    </div>
-    <input type="submit" value="submit" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid"/>
-
-</form>
+  </div>
+  <app-preference-list [preferenceExistingData]="preferenceExistingData" (EditPreference)="editMyPreference($event)"></app-preference-list>
