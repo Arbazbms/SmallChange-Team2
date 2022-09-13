@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ActivityComponent } from './post-login/activity/activity.component';
 import { LandingComponent } from './post-login/landing/landing.component';
 import { PreferenceComponent } from './post-login/preference/preference.component';
+import { ReportComponent } from './post-login/report/report.component';
 
 const routes: Routes = [
   {path:'', component:LandingPageComponent},
@@ -14,7 +15,9 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path:'pl', component: LandingComponent},
   {path:'preference', component:PreferenceComponent},
-  {path:'activity', component:ActivityComponent}
+  {path:'activity', component:ActivityComponent},
+  {path:'report', component:ReportComponent}
+
   ];
 
 @NgModule({
