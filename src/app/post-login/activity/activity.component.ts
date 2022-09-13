@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TradeService } from '../services/trade.service';
-import { take } from 'rxjs';
+import { Subject, take } from 'rxjs';
 import { TradeHist } from '../models/trade-hist';
+import { TradeHistory } from '../services/tradeHistory.service';
 
 declare var $:any;
 @Component({
@@ -12,21 +13,30 @@ declare var $:any;
 
 
 
-export class ActivityComponent implements OnInit{
-  
+export class ActivityComponent implements OnInit, OnDestroy{
+  public tradeHist:TradeHist[]=[];
   @ViewChild('dataTable')table:any;
   dataTable:any;
   dtOptions:DataTables.Settings = {};
-  tradeHist:any[]=[];
-  constructor(private tradeService:TradeService) { }
+  dtTrigger:Subject<any>=new Subject<any>();
+  
+  constructor(private tradeService:TradeHistory) {
+    
+   }
+  
   
   
   ngOnInit(): void {
-    // this.tradeService.getTradeHist().pipe(take(1)).subscribe(list=>{
+        //this.tradeService.getTradeHist().pipe(take(1)).subscribe(list=>{
  
-         this.tradeHist =  this.tradeService.getTradeHist()
-      
-        this.dtOptions = {
+       //
+      this.getAlltrade()
+  }
+     getAlltrade(){
+      this.tradeService.getTradeHist().subscribe(data=>{
+        this.tradeHist=data
+        this.dtTrigger.next(this.table);
+  this.dtOptions = {
           data:this.tradeHist,
           paging:true,
           ordering:true,
@@ -43,14 +53,22 @@ export class ActivityComponent implements OnInit{
                     {title:'Qty',data:'qty'},
                     {title:'Cash Value',data:'cash'},
                     {title:'Date',data:'date'},
-                   {title:'CashValue',data:'date'}
+                   
                     ]
   
         };
              
        this.dataTable=$(this.table.nativeElement);
        this.dataTable.DataTable(this.dtOptions);
-       } 
+       }),
+       this.dtTrigger.next(1);
+      }
+       ngOnDestroy(): void {
+       this.dtTrigger.unsubscribe();
+      }
+      submit(){
+        this.getAlltrade;
+      }
   }  
          
       

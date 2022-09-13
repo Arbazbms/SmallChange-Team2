@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 //import { ResDataModal } from '../models/resDataModal';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { TradeHist } from '../models/trade-hist';
 
 const tradeHist:any[]=[
@@ -127,12 +127,12 @@ const tradeHist:any[]=[
   providedIn: 'root'
 })
 
-export class TradeService {
+export class TradeHistory {
   
   //private url="http://localhost:3000/history";
   constructor() { }
 
-  getTradeHist():any[]{
-    return tradeHist;
+  getTradeHist():Observable<TradeHist[]>{
+    return of(tradeHist);
   }
 }
