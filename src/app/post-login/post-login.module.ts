@@ -36,7 +36,8 @@ import { PreferenceListComponent } from './preference-list/preference-list.compo
     DataTablesModule,
     PostLoginRoutingModule,
     RouterModule,
-    TradeModule
+    TradeModule,
+    BasicModule
   ],
 
   exports: [

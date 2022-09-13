@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { data } from 'jquery';
 import { Subject } from 'rxjs';
+import { Instrument } from 'src/app/models/instrument';
+import { Order } from 'src/app/models/order';
 import { Portfolio } from 'src/app/models/portfolio.model';
+import { Price } from 'src/app/models/price';
 import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -17,12 +20,13 @@ export class PortfolioComponent implements OnInit, OnDestroy{
   dtOptions:DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   constructor(public ps: PortfolioService) { }
-
+  order: Order = new Order('',-1,-1,'','','')
+  
   ngOnInit(): void {
 
     this.getallportfolio()
     console.log(this.portfolio)
-
+    this.ps.getInstrument('DIS')
 
   }
   getallportfolio(){
@@ -59,6 +63,26 @@ export class PortfolioComponent implements OnInit, OnDestroy{
     }),
     this.dtTrigger.next(1);
   }
+
+  showModal: boolean = false;
+  instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
+  
+
+  displaySellTab(instrumentId : string){
+    console.log("HELOO");
+    
+    this.instrument = this.ps.getInstrument(instrumentId)
+    this.order.quantity = this.instrument.instrument.minQuantity;
+    this.order.direction = 'S'
+    this.showModal = true;
+    console.log('in display', this.instrument);
+
+  }
+
+  display(){
+    console.log("Hellp");
+    
+  }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -66,5 +90,9 @@ export class PortfolioComponent implements OnInit, OnDestroy{
     this.getallportfolio
   }
 
+  hideDialog(show : boolean){
+    this.showModal = show
+  }
+  
 }
 

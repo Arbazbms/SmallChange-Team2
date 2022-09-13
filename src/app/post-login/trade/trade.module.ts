@@ -32,7 +32,8 @@ import { BasicModule } from 'src/app/basic/basic.module';
     BasicModule
   ],
   exports: [
-    TradePageComponent
+    TradePageComponent,
+    TradeTransactionComponent
   ]
 })
 export class TradeModule { }
