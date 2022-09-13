@@ -1,17 +1,21 @@
-<form [formGroup]="loginForm" class="form-container" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" class="form-container mt-8" (ngSubmit)="onSubmit()">
+    <div *ngIf="loginErrorMsg" class="alert alert-danger" id="errtxt" role="alert">
+      {{loginErrorMsg}}
+    </div>
+
   <div class="mb-3">
-    <label for="Username" class="form-label">Username</label>
+    <label for="Username" class="form-label">Email</label>
     <input
       type="email"
       class="form-control"
       aria-describedby="emailHelp"
-      formControlName="username"
+      formControlName="email"
       id="username"
     />
 
-    <div *ngIf="username?.touched || username?.dirty">
-      <div *ngIf="username?.hasError('required') || username?.hasError('minlength') || username?.hasError('maxlength') || username?.hasError('pattern')">
-        <div id="errorText">{{ usernameErrorTextmsg }}</div>
+    <div *ngIf="email?.touched || email?.dirty">
+      <div *ngIf="email?.hasError('required')">
+        <div id="errorText">{{ EmailErrorTextmsg }}</div>
       </div>
     </div>
     
