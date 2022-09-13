@@ -13,6 +13,7 @@ declare var $:any;
 
 
 
+
 export class ActivityComponent implements OnInit, OnDestroy{
   public tradeHist:TradeHist[]=[];
   @ViewChild('dataTable')table:any;
@@ -24,6 +25,7 @@ export class ActivityComponent implements OnInit, OnDestroy{
     
    }
   
+
   
   
   ngOnInit(): void {
