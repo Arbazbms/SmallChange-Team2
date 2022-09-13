@@ -1,25 +1,30 @@
-
 <app-navbar></app-navbar>
 
-
-<div  class="container">
-    <p class="h2">Your portfolio</p>
-    <!-- <button (click)="submit()" >hello</button> -->
-  <div  class="shadow p-3 mb-5 bg-body rounded" style="overflow-x:auto;padding:40px">
-  <table datatable 
-  [dtOptions]="dtOptions" class="row-border hover"   >
-    <thead>
-      <tr>
-        <!-- <th>Account</th>
+<div class="container">
+  <p class="h2">Your portfolio</p>
+  <!-- <button (click)="submit()" >hello</button> -->
+  <div
+    class="shadow p-3 mb-5 bg-body rounded"
+    style="overflow-x: auto; padding: 40px"
+  >
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      class="row-border hover"
+      #tableData
+    >
+      <thead>
+        <tr>
+          <!-- <th>Account</th>
         <th>Qty</th>
         <th>Cash Value</th>
         <th>Date</th>
         <th>Sell</th> -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of portfolio" (click)="display()">
-        <!-- <td>{{item.instrumentId}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of portfolio">
+          <!-- <td>{{item.instrumentId}}</td>
         <td>{{item.quantity}}</td>
         <td>{{item.executionPrice}}</td>
         <td>{{item.direction}}</td>
@@ -27,25 +32,29 @@
         <td>{{item.order}}</td>
         <td>{{item.itemId}}</td>
         <td>{{item.cashValue}}</td> -->
-        <td>{{item.instrument}}</td>
-        <td>{{item.costprice}}</td>
-        <td>{{item.marketprice}}</td>
-        <td>{{item.gain}}</td>
-        <td class="mybutton" onclick="displaySellTab(item.instrumentid)"></td>
-        <!-- <td><button>hello</button></td> -->
-        <!-- <td>{{item.cash}}</td>
+          <!-- <td>
+          <a id="symbol" href="javascript:void(0);" (click)="display()"> {{ item.instrument }} </a>
+        
+        </td> -->
+          <td>{{ item.instrument }}</td>
+          <td>{{ item.costprice }}</td>
+          <td>{{ item.marketprice }}</td>
+          <td>{{ item.gain }}</td>
+          <td class="mybutton" onclick="displaySellTab(item.instrumentid)"></td>
+          <!-- <td><button>hello</button></td> -->
+          <!-- <td>{{item.cash}}</td>
         <td>{{item.date}}</td> -->
-      </tr>
-      </tbody> 
+        </tr>
+      </tbody>
       <tfoot></tfoot>
-  </table>
+    </table>
   </div>
-  </div>
+</div>
 
-  <div *ngIf="showModal">
-    <app-trade-transaction
-      (showModalEvent)="hideDialog($event)"
-      [instrument]="instrument"
-      [order]="order"
-    ></app-trade-transaction>
-  </div>
+<div *ngIf="showModal">
+  <app-trade-transaction
+    (showModalEvent)="hideDialog($event)"
+    [instrument]="instrument"
+    [order]="order"
+  ></app-trade-transaction>
+</div>
