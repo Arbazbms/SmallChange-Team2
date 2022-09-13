@@ -25,7 +25,8 @@ import { PreferenceListComponent } from './preference-list/preference-list.compo
     PreferenceComponent,
     RoboAdvisorComponent,
     ReportComponent,
-    PreferenceListComponent
+    PreferenceListComponent,
+    
   ],
   imports: [
     CommonModule,
