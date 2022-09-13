@@ -15,6 +15,7 @@ import { BasicModule } from './basic/basic.module';
 import { PostLoginModule } from './post-login/post-login.module';
 import { PostLoginRoutingModule } from './post-login/post-login-routing.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +33,8 @@ import { PostLoginRoutingModule } from './post-login/post-login-routing.module';
     CommonModule,
     HttpClientModule,
     BasicModule,
-    PostLoginModule
-
-  ],
+    PostLoginModule,
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })
