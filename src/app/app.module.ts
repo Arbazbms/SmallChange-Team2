@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import {HttpClientModule} from '@angular/common/http'
 import { BasicModule } from './basic/basic.module';
 import { PostLoginModule } from './post-login/post-login.module';
+import { PostLoginRoutingModule } from './post-login/post-login-routing.module';
 
 
 @NgModule({
@@ -25,6 +26,8 @@ import { PostLoginModule } from './post-login/post-login.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PostLoginModule,
+    PostLoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

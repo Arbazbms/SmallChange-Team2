@@ -1,138 +1,40 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-//import { ResDataModal } from '../models/resDataModal';
-import { Observable } from 'rxjs';
-import { TradeHist } from '../models/trade-hist';
-
-const tradeHist:any[]=[
-  {
-    "asset":"Equity",
-    "side":"Buy",
-    "security":"MSFT",
-    "account":"ICICI",
-    "qty":13,
-    "cash":100,
-    "date":"2022/5/3"
-  },
-  {
-    "asset":"Fixed Income",
-    "side":"Buy",
-    "security":"Tesla",
-    "account":"HDFC",
-    "qty":15,
-    "cash":200,
-    "date":"2022/6/4"
-  },{
-    "asset":"Real Estate",
-    "side":"Buy",
-    "security":"GooG",
-    "account":"ICICI",
-    "qty":19,
-    "cash":500,
-    "date":"2022/5/4"
-  },
-  {
-    "asset":"Commodities",
-    "side":"Buy",
-    "security":"Tata",
-    "account":"HDFC",
-    "qty":12,
-    "cash":800,
-    "date":"2022/2/4"
-  },
-  {
-    "asset":"Commodities",
-    "side":"Buy",
-    "security":"Tata",
-    "account":"HDFC",
-    "qty":10,
-    "cash":300,
-    "date":"2022/3/4"
-  },
-  {
-    "asset":"Real Estate",
-    "side":"Buy",
-    "security":"GooG",
-    "account":"HDFC",
-    "qty":6,
-    "cash":500,
-    "date":"2022/7/14"
-  },
-  {
-    "asset":"Equity",
-    "side":"Sell",
-    "security":"MSFT",
-    "account":"ICICI",
-    "qty":5,
-    "cash":700,
-    "date":"2022/9/4"
-  },
-  {
-    "asset":"Real Estate",
-    "side":"Buy",
-    "security":"MSFT",
-    "account":"HDFC",
-    "qty":12,
-    "cash":700,
-    "date":"2021/7/4"
-  },
-  {
-    "asset":"Equity",
-    "side":"Sell",
-    "security":"MD",
-    "account":"Kotak",
-    "qty":16,
-    "cash":700,
-    "date":"2017/11/4"
-  },
-  {
-    "asset":"Real Estate",
-    "side":"Sell",
-    "security":"NVDA",
-    "account":"Kotak",
-    "qty":1,
-    "cash":700,
-    "date":"2022/2/11"
-  },
-  {
-    "asset":"Fixed Income",
-    "side":"Buy",
-    "security":"Apple",
-    "account":"HDFC",
-    "qty":15,
-    "cash":4400,
-    "date":"2020/11/4"
-  },
-  {
-    "asset":"Fixed Income",
-    "side":"Sell",
-    "security":"Tesla",
-    "account":"HDFC",
-    "qty":15,
-    "cash":8700,
-    "date":"2012/1/4"
-  },
-  {
-    "asset":"Equity",
-    "side":"Sell",
-    "security":"PEP",
-    "account":"HDFC",
-    "qty":15,
-    "cash":2300,
-    "date":"2021/11/4"
-  }
-];
+import { Observable, of } from 'rxjs';
+import { Instrument } from 'src/app/models/instrument';
+import { Order } from 'src/app/models/order';
+import { Price } from 'src/app/models/price';
+import { TradeModel } from 'src/app/models/trade-model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class TradeService {
-  
-  //private url="http://localhost:3000/history";
-  constructor() { }
+  cashBalance: number = 1000000;
+  baseUrl: string = 'http://localhost:3000/';
+  tradeRef = 3463256445;
+  intrumentDetails: TradeModel[] = [];
+  price: Price = new Price('',-1, -1,new Date(),new Instrument('', '', '', '', '', -1, -1));
+  priceDetails: Price[] = [];
 
-  getTradeHist():any[]{
-    return tradeHist;
+  constructor(private http: HttpClient) {}
+
+  getAllInstruments() : Observable<Price[]>{
+    return this.http.get<Price[]>(this.baseUrl+'price')
+  }
+
+
+  placeOrder(order: Order): number {
+    if (this.checkCash()) {
+      this.http.post(this.baseUrl + 'order', order).subscribe();
+      this.cashBalance = this.cashBalance - order.targetPrice;
+      return this.tradeRef++;
+    }
+    return 0;
+  }
+
+  /* Define Function */
+  checkCash(): boolean {
+    return true;
   }
 }
