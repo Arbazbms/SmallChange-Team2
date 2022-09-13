@@ -4,12 +4,13 @@
     color: rgb(9, 9, 196);
 }
 
-table{
-    width: 50%;
-    align-content: center;
-    justify-content: center;
-}
 
 tr:hover {
     background-color: #bbbdb7;
+}
+
+.table{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
