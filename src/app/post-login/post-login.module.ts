@@ -9,6 +9,7 @@ import { ReportComponent } from './report/report.component';
 import { BasicModule } from '../basic/basic.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {DataTablesModule} from 'angular-datatables';
 import { TradeModule } from './trade/trade.module';
 import { PostLoginRoutingModule } from './post-login-routing.module';
 import { RouterModule } from '@angular/router';
@@ -32,6 +33,7 @@ import { PreferenceListComponent } from './preference-list/preference-list.compo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DataTablesModule,
     PostLoginRoutingModule,
     RouterModule,
     TradeModule

@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ActivityComponent } from './post-login/activity/activity.component';
 import { LandingComponent } from './post-login/landing/landing.component';
 import { PreferenceComponent } from './post-login/preference/preference.component';
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'login', component: LoginFormComponent},
   {path: 'register', component: RegisterComponent},
   {path:'pl', component: LandingComponent},
-  {path:'preference', component:PreferenceComponent}
+  {path:'preference', component:PreferenceComponent},
+  {path:'activity', component:ActivityComponent}
   ];
 
 @NgModule({

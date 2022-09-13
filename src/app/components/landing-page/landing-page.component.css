@@ -1,0 +1,40 @@
+.mainPage {
+  background-image: url('src\assets\images\BGimg1.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width:100%;
+  height:auto
+  
+}
+
+.card-text{
+    width:'100px';
+    height:'100px';
+    font-weight: bold;
+    font-family: "Fidelity Sans",Arial,sans-serif;
+  }
+.card{
+    box-shadow: 3px 3px lightslategrey;
+    position: relative;
+    top:50px;
+    left:30px;
+    background-image: url("src\assets\images\im.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+   
+}
+.btn-success{
+    background-color: yellowgreen !important;
+    box-shadow: 3px 3px lightslategrey;
+    font-weight: bold;
+    font-family: "Fidelity Sans",Arial,sans-serif;
+    margin: 10px;
+}
+ #aroundLogin{
+    display:flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    bottom:150px;
+    left:50px;
+} 

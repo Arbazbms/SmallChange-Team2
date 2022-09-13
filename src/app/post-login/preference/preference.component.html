@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 
 
+<div *ngIf="errorMessage">{{errorMessage}}</div>
+
 <div *ngIf="!preferenceExistingData">
     <!-- Button trigger modal -->
     <button type="button" (click)="clickAdd()" class="btn btn-primary" id="addPref" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -67,7 +69,7 @@
                     </div>
                 </div>
                 <input type="submit" *ngIf="showAdd" value="submit" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid"/>
-                <input type="submit" *ngIf="showUpdate" value="update" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid" (click)="updatePreference()"/>
+                <input *ngIf="showUpdate" value="update" class="submit-btn" [disabled]="preferanceForm.invalid" [class.diable-btn]="preferanceForm.invalid" (click)="updatePreference()"/>
             
             </form>
         </div>
@@ -78,3 +80,5 @@
     </div>
   </div>
   <app-preference-list [preferenceExistingData]="preferenceExistingData" (EditPreference)="editMyPreference($event)"></app-preference-list>
+
+  <p>{{preferenceExistingData}}</p>

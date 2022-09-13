@@ -17,6 +17,7 @@ export class PreferenceComponent implements OnInit {
   preferenceExistingData:any = {};
   showAdd:Boolean = false;
   showUpdate: Boolean = false;
+  errorMessage: string = "";
 
 
   constructor(private formBuilder: FormBuilder, private prefService: PreferenceService) { }
@@ -52,9 +53,10 @@ export class PreferenceComponent implements OnInit {
   }
 
   getPreferenceById(){
-    this.prefService.getPreferenceById('A685').subscribe((data) => {
-      this.preferenceExistingData = data
-      console.log("EXISTING PREFERENCE DATA LISTT: ", data)
+    console.log("iiiisssii")
+    this.prefService.getPreferenceById('A685').subscribe({
+      next : (data) => {this.preferenceExistingData = data; this.errorMessage = ''},
+      error : (err) => {this.errorMessage = err}
     })
   }
 
