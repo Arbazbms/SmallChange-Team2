@@ -127,7 +127,7 @@ const tradeHist:any[]=[
   providedIn: 'root'
 })
 
-export class TradeService {
+export class TradeHistory {
   
   //private url="http://localhost:3000/history";
   constructor() { }

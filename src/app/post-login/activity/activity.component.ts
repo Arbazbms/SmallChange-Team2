@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { TradeService } from '../services/trade.service';
 import { take } from 'rxjs';
 import { TradeHist } from '../models/trade-hist';
+import { TradeHistory } from '../services/tradeHistory.service';
 
 declare var $:any;
 @Component({
@@ -14,11 +15,12 @@ declare var $:any;
 
 export class ActivityComponent implements OnInit{
   
+  // private tradeService:TradeHistory
   @ViewChild('dataTable')table:any;
   dataTable:any;
   dtOptions:DataTables.Settings = {};
   tradeHist:any[]=[];
-  constructor(private tradeService:TradeService) { }
+  constructor(private tradeService:TradeHistory) { }
   
   
   ngOnInit(): void {

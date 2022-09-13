@@ -180,13 +180,13 @@ if(!this.alreadyExists){
 updateValueAndValidity(){
 
     if(String(this.registerForm.get('idtype')?.value)=='Adhaar') {
-      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern('^[0-9]{12}$')))
+      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern(/^[01]\d{3}[\s-]?\d{4}[\s-]?\d{4}$/)))
     }
     else if(String(this.registerForm.get('idtype')?.value)=='PAN') {
-      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern('^[0-9]{11}$')))
+      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')))
     }
     else if(String(this.registerForm.get('idtype')?.value)=='Passport') {
-      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern('^(?!0{3,20})[a-zA-Z0-9]{3,20}$')))
+      this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern(/[A-PR-WYa-pr-wy][1-9]\d\s?\ d{4}[1-9]$/)))
     }
     else if(String(this.registerForm.get('idtype')?.value)=='SSN') {
       this.registerForm.get('idval')?.setValidators(this.idValidators.concat(Validators.pattern(/.+@.+\..+/)))
