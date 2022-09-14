@@ -82,7 +82,7 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
     $('div div table tbody').on('click', 'tr', function () {
       console.log('helllo', this.getElementsByTagName('td')[0].innerHTML);
       this.instrumentSymbol = this.getElementsByTagName('td')[0].innerHTML;
-      self.displaySellTab(this.instrumentSymbol);
+      // self.displaySellTab(this.instrumentSymbol);
     });
   }
 
