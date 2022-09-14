@@ -15,29 +15,29 @@
     >
       <thead>
         <tr>
-          <!-- <th>Account</th>
-        <th>Qty</th>
-        <th>Cash Value</th>
-        <th>Date</th>
-        <th>Sell</th> -->
+          <th>Stock</th>
+          <th>CostPrice</th>
+          <th>MarketPrice</th>
+          <th>Gain/Loss</th>
         </tr>
       </thead>
+
       <tbody>
         <tr *ngFor="let item of portfolio">
-    
-
           <td>{{ item.instrument }}</td>
           <td>{{ item.costprice }}</td>
           <td>{{ item.marketprice }}</td>
-          
-        
-        <td [ngClass]="{'text-success': item.gain >= 0 , 'text-danger': item.gain < 0}">{{item.gain}}</td>
 
-  
-        <td class="mybutton" onclick="displaySellTab(item.instrumentid)"></td>
+          <td
+            [ngClass]="{
+              'text-success': item.gain >= 0,
+              'text-danger': item.gain < 0
+            }"
+          >
+            {{ item.gain }}
+          </td>
 
-
-        <td>{{item.date}}</td> -->
+          <td class="mybutton" onclick="displaySellTab(item.instrumentid)"></td>
         </tr>
       </tbody>
       <tfoot></tfoot>
@@ -47,6 +47,7 @@
 
 <div *ngIf="showModal">
   <app-trade-transaction
+    (soldAllStocks)="setSoldAllStocks($event)"
     (showModalEvent)="hideDialog($event)"
     [instrument]="instrument"
     [order]="order"
