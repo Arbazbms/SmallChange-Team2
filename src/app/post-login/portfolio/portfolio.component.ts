@@ -34,7 +34,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     console.log('HELOO');
 
     this.instrument = this.ps.getInstrument(ins);
-    this.order.quantity = this.instrument.instrument.minQuantity;
+    this.order.quantity = this.instrument.instrument.maxQuantity;
     this.order.direction = 'S';
     this.showModal = true;
     console.log('in display', this.instrument);
