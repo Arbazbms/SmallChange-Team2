@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DataTablesModule } from 'angular-datatables';
 
+
 import { of } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio.model';
 import { PortfolioService } from '../services/portfolio.service';
+
 
 import { PortfolioComponent } from './portfolio.component';
 // import "datatables.net";
@@ -77,9 +79,11 @@ describe('PortfolioComponent', () => {
     portfolioService.getInstrument.and.returnValue( (testinstruments[1]));
     // portfolioService.getInstrument.and.returnValue( of(testportfolio));
     await TestBed.configureTestingModule({
+
       declarations: [ PortfolioComponent,MockNavbarComponent ],
       imports:[DataTablesModule],
       providers: [{ provide: PortfolioService, useValue: portfolioService }]
+
 
     })
     .compileComponents();
