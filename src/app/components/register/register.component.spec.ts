@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Client } from 'src/app/models/client.model';
 import { Identification } from 'src/app/models/identification.model';
 import { ClientService } from 'src/app/services/client.service';
@@ -18,7 +20,7 @@ describe('RegisterComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ RegisterComponent ],
       providers: [{ provide: ClientService, useValue: mockclientService }],
-      imports:[ReactiveFormsModule,FormsModule]
+      imports:[ReactiveFormsModule,FormsModule,AppRoutingModule]
     })
     .compileComponents();
   });

@@ -1,0 +1,10 @@
+input{
+    /* border: none; */
+    text-align: right;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#targetPrice{
+    font-size: 30px
+}

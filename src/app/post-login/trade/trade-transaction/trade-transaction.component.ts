@@ -17,11 +17,13 @@ export class TradeTransactionComponent implements OnInit {
   @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
   @Input() order: Order = new Order('',-1,-1,'','','')
   @Output() showModalEvent = new EventEmitter()
+  @Output() soldAllStocks = new EventEmitter()
 
   hideDialog(){
     console.log("In page", this.showModal)
     this.showModalEvent.emit(this.showModal)
   }
+
 
   constructor(private messageService: MessageService) {}
 
@@ -29,23 +31,29 @@ export class TradeTransactionComponent implements OnInit {
   buttonContent : string = ''
   minQ: any
   maxQ: any
+  tradePrice: number= -1;
   ngOnInit() {
     console.log("Button",this.order.direction) 
     if( this.order.direction === 'B'){
       this.buttonContent = "Buy"
       this.minQ = this.instrument.instrument.minQuantity
       this.maxQ = this.instrument.instrument.maxQuantity
+      this.tradePrice = this.instrument.bidPrice
     }
     else{
       this.buttonContent = "Sell"
       this.minQ = 1
       // should chnage this
       this.maxQ = this.order.quantity
+      this.tradePrice = this.instrument.askPrice
     }
   }
 
 
   generateOrder() {
+    this.showModal = false;
+    this.showModalEvent.emit(this.showModal)
+    
     if (this.isCapable()) {
       //this.order.direction = 'B';
       this.order.targetPrice = this.instrument.bidPrice * this.order.quantity;
@@ -54,10 +62,11 @@ export class TradeTransactionComponent implements OnInit {
       this.order.orderId = uuid();
     }
     console.log(this.order);
-    this.showModal = false;
-
+    
     this.showToast();
-
+    let soldAll = ( this.order.quantity === this.maxQ)? true: false
+    this.soldAllStocks.emit(soldAll)
+    console.log("Sold All-", soldAll)
     // return this.tradeService.placeOrder(this.order) ? true : false;
   }
 
