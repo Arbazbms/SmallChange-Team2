@@ -17,6 +17,7 @@ export class PortfolioService {
       marketprice: 424,
       gain: 190,
       ifgain: true,
+      selected:false
     },
     {
       instrument: 'Ford',
@@ -26,6 +27,7 @@ export class PortfolioService {
       marketprice: 24,
       gain: -210,
       ifgain: false,
+      selected: false,
     },
     {
       instrument: 'Disney',
@@ -35,6 +37,8 @@ export class PortfolioService {
       marketprice: 24,
       gain: -210,
       ifgain: false,
+      selected: false,
+      
     },
     {
       instrument: 'Amazon',
@@ -44,6 +48,7 @@ export class PortfolioService {
       marketprice: 424,
       gain: 190,
       ifgain: true,
+      selected: false,
     },
   ];
 
