@@ -17,7 +17,7 @@ const routes: Routes = [
   // {path:'', component:LandingPageComponent},
   {path: 'login', component: LoginFormComponent},
 
-  {path:'report', component:ReportComponent}
+  {path:'report', component:ReportComponent},
 
 
   {path: 'register', component: RegisterComponent, canActivate:[AuthGuard]},

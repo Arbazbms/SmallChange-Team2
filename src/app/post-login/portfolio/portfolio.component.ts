@@ -41,11 +41,11 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
     this.ps.getInstrument('DIS')
 
 
-    this.instrument = this.ps.getInstrument(ins);
-    this.order.quantity = this.instrument.instrument.maxQuantity;
-    this.order.direction = 'S';
-    this.showModal = true;
-    console.log('in display', this.instrument);
+    // this.instrument = this.ps.getInstrument(ins);
+    // this.order.quantity = this.instrument.instrument.maxQuantity;
+    // this.order.direction = 'S';
+    // this.showModal = true;
+    // console.log('in display', this.instrument);
   }
 
   getallportfolio(){
