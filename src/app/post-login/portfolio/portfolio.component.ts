@@ -27,7 +27,7 @@ export class PortfolioComponent implements OnInit, AfterViewInit, OnDestroy {
 
   instrumentSymbol: string = '';
   order: Order = new Order('', -1, -1, '', '', '');
-
+  soldEntirely : boolean = false
   ngOnInit(): void {
     this.ps.getPortfolio().subscribe((data) => {
       this.portfolio = data;
@@ -109,5 +109,9 @@ export class PortfolioComponent implements OnInit, AfterViewInit, OnDestroy {
 
   hideDialog(show: boolean) {
     this.showModal = show;
+  }
+
+  setSoldAllStocks(sold : boolean){
+    this.soldEntirely = sold
   }
 }

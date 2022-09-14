@@ -47,6 +47,7 @@
 
 <div *ngIf="showModal">
   <app-trade-transaction
+    (soldAllStocks)="setSoldAllStocks($event)"
     (showModalEvent)="hideDialog($event)"
     [instrument]="instrument"
     [order]="order"

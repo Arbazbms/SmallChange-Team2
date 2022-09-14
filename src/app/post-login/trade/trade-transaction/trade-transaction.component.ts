@@ -17,11 +17,13 @@ export class TradeTransactionComponent implements OnInit {
   @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
   @Input() order: Order = new Order('',-1,-1,'','','')
   @Output() showModalEvent = new EventEmitter()
+  @Output() soldAllStocks = new EventEmitter()
 
   hideDialog(){
     console.log("In page", this.showModal)
     this.showModalEvent.emit(this.showModal)
   }
+
 
   constructor(private messageService: MessageService) {}
 
@@ -58,9 +60,11 @@ export class TradeTransactionComponent implements OnInit {
     }
     console.log(this.order);
     this.showModal = false;
-
+    
     this.showToast();
-
+    let soldAll = ( this.order.quantity === this.maxQ)? true: false
+    this.soldAllStocks.emit(soldAll)
+    console.log("Sold All-", soldAll)
     // return this.tradeService.placeOrder(this.order) ? true : false;
   }
 
