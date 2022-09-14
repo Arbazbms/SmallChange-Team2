@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DataTablesModule } from 'angular-datatables';
+import { of } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio.model';
+import { PortfolioService } from '../services/portfolio.service';
 import { PortfolioComponent } from './portfolio.component';
 // import "datatables.net";
 describe('PortfolioComponent', () => {
@@ -8,10 +10,10 @@ describe('PortfolioComponent', () => {
   let fixture: ComponentFixture<PortfolioComponent>;
 
   beforeEach(async () => {
-   let testportfolio:Portfolio=[
+   let testportfolio=[
     
       {
-        instrumentId: 'AMZN',
+        instrumentId: 'The Hobbit',
         bidPrice: 100,
         askPrice: 200,
         timeStamp: new Date('12/10/2006'),
@@ -26,7 +28,7 @@ describe('PortfolioComponent', () => {
         },
       },
       {
-        instrumentId: 'DIS',
+        instrumentId: 'A Wizard of Earthsea',
         bidPrice: 5,
         askPrice: 3,
         timeStamp: new Date('12/10/2006'),
@@ -40,11 +42,13 @@ describe('PortfolioComponent', () => {
           maxQuantity: 39,
         },
       }]
-    let portfolioService: any= jasmine.createSpyObj('PortfolioService',['getPortfolio']);
-    portfolioService.getportfolios.and.returnValue( of(testportfolios));
+    let portfolioService: any= jasmine.createSpyObj('PortfolioService',['getPortfolio','getInstrument']);
+    portfolioService.getPortfolio.and.returnValue( of(testportfolio));
+    portfolioService.getInstrument.and.returnValue( of(testportfolio));
     await TestBed.configureTestingModule({
       declarations: [ PortfolioComponent ],
-      imports:[DataTablesModule]
+      imports:[DataTablesModule],
+      providers: [{ provide: PortfolioService, useValue: portfolioService }]
     })
     .compileComponents();
   });
@@ -57,5 +61,10 @@ describe('PortfolioComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should retrieve portfolio items from the service', () =>{
+    expect(component.portfolio.length).toBe(2);
+    expect(component.portfolio[0].instrumentid).toBe('The Hobbit');
+    expect(component.portfolio[1].instrumentid).toBe('A Wizard of Earthsea');
   });
 });
