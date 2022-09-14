@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { data } from 'jquery';
 import { Subject } from 'rxjs';
 import { Instrument } from 'src/app/models/instrument';
@@ -12,27 +12,33 @@ import { PortfolioService } from '../services/portfolio.service';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent implements OnInit, OnDestroy{
+export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
 
   public portfolio:Portfolio[]=[]
-  @ViewChild('dataTable')table:any;
-  dataTable:any;
+  @ViewChild('dataTable')dataTable:any;
+  // dataTable:any;
   dtOptions:DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   constructor(public ps: PortfolioService) { }
   order: Order = new Order('',-1,-1,'','','')
   
   ngOnInit(): void {
+    this.ps.getPortfolio().subscribe(data=>{
+      this.portfolio=data
+      
+    })
 
+  }
+  ngAfterViewInit(): void {
     this.getallportfolio()
     console.log(this.portfolio)
     this.ps.getInstrument('DIS')
 
   }
   getallportfolio(){
-    this.ps.getPortfolio().subscribe(data=>{
-      this.portfolio=data
-      this.dtTrigger.next(this.table);
+    // this.ps.getPortfolio().subscribe(data=>{
+    //   this.portfolio=data
+      this.dtTrigger.next(this.dataTable);
       this.dtOptions = {
         data:this.portfolio,
         paging:true,
@@ -44,24 +50,23 @@ export class PortfolioComponent implements OnInit, OnDestroy{
         searching:true,
      
          columns:[
-                  {title:'Stock',data:'instrument'},
+                  {title:'Stock',data:'instrument',className:'gain'},
                   {title:'CostPrice',data:'costprice'},
                   {title:'MarketPrice',data:'marketprice'},
                   {title:'Gain/Loss',data:'gain'},
                   {
-                    defaultContent: "<button class='showIdButton myclass btn-success' style=padding:5px;margin-left:10%;>Sell </button>"
+                    defaultContent: "<button class='btn btn-success ' style=background-color: #568200 !imposrtant;padding-right:10px;padding-left:10px;margin-left:10%;>Sell </button>"
                   }
                   ]
   
       };
            
-     this.dataTable=$(this.table.nativeElement);
-     this.dataTable.DataTable(this.dtOptions);
+ 
   
   
 
-    }),
-    this.dtTrigger.next(1);
+    // }),
+  
   }
 
   showModal: boolean = false;
