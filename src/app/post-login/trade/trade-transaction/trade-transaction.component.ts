@@ -51,6 +51,9 @@ export class TradeTransactionComponent implements OnInit {
 
 
   generateOrder() {
+    this.showModal = false;
+    this.showModalEvent.emit(this.showModal)
+    
     if (this.isCapable()) {
       //this.order.direction = 'B';
       this.order.targetPrice = this.instrument.bidPrice * this.order.quantity;
@@ -59,7 +62,6 @@ export class TradeTransactionComponent implements OnInit {
       this.order.orderId = uuid();
     }
     console.log(this.order);
-    this.showModal = false;
     
     this.showToast();
     let soldAll = ( this.order.quantity === this.maxQ)? true: false

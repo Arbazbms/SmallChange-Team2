@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th>Symbol</th>
-        <th>Price</th>
-        <th>Min-Max</th>
+        <th>Current Price</th>
+        <th>Category</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
           {{instrument.instrument.description}}
         </td>
         <td>{{ instrument.bidPrice }}</td>
-        <td>{{ instrument.instrument.description }}</td>
+        <td>{{ instrument.instrument.categoryId }}</td>
       </tr>
     </tbody>
   </table>

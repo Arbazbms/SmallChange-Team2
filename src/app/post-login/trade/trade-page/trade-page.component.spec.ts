@@ -15,7 +15,7 @@ export class MockTradeTableComponent{}
 })
 export class MockNavBarComponent{}
 
-describe('TradePageComponent', () => {
+fdescribe('TradePageComponent', () => {
   let component: TradePageComponent;
   let fixture: ComponentFixture<TradePageComponent>;
 
