@@ -21,6 +21,7 @@ describe('PreferenceComponent', () => {
   let component: PreferenceComponent;
   let fixture: ComponentFixture<PreferenceComponent>;
   let addPreferenceSpy: any;
+  let updatePreferenceSpy: any;
 
   beforeEach(async () => {
 
@@ -34,7 +35,7 @@ describe('PreferenceComponent', () => {
       }
     
     let mockprefService: any= jasmine.createSpyObj('mockprefService',['savePreferences','getPreferenceById', 'updatePreference']);
-    mockprefService.getPreferenceById('A685a').and.returnValue(of(testPreference));
+    mockprefService.getPreferenceById.and.returnValue(of(testPreference));
     // mockprefService.savePreferences('test')
 
 
@@ -44,7 +45,8 @@ describe('PreferenceComponent', () => {
       imports:[ReactiveFormsModule,FormsModule]
     })
     .compileComponents();
-    addPreferenceSpy = mockprefService.savePreferences.and.callFake((param: any) => {return of(param);});
+    addPreferenceSpy = mockprefService.savePreferences.and.callFake((param: any) => {return of(testPreference);});
+    updatePreferenceSpy = mockprefService.updatePreference.and.callFake((param: any) => {return of(testPreference);});
 
   });
 
@@ -54,34 +56,41 @@ describe('PreferenceComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Should validate Forms Fields', ()=>{
+    const investmentPurposeContorl = component.preferanceForm.get('investmentPurpose')
+    const riskToleranceControl = component.preferanceForm.get('riskTolerance')
+    const incomeCategoryControl = component.preferanceForm.get('incomeCategory')
+    const lengthOfInvestmentControl = component.preferanceForm.get('lengthOfInvestment')
+
+    expect(component.preferanceForm.valid).toBeFalsy();
+
+    expect(investmentPurposeContorl?.hasError('required')).toBeTruthy();
+    expect(riskToleranceControl?.hasError('required')).toBeTruthy();
+    expect(incomeCategoryControl?.hasError('required')).toBeTruthy();
+    expect(lengthOfInvestmentControl?.hasError('required')).toBeTruthy();
 
 
+    investmentPurposeContorl?.setValue('my Purpose')
+    riskToleranceControl?.setValue('Aggressive')
+    incomeCategoryControl?.setValue('0-1000');
+    lengthOfInvestmentControl?.setValue('0-5 years')
 
-  // it('Should validate Forms Fields', ()=>{
-  //   const investmentPurposeContorl = component.preferanceForm.get('investmentPurpose')
-  //   const riskToleranceControl = component.preferanceForm.get('riskTolerance')
-  //   const incomeCategoryControl = component.preferanceForm.get('incomeCategory')
-  //   const lengthOfInvestmentControl = component.preferanceForm.get('lengthOfInvestment')
+    expect(component.preferanceForm.valid).toBeTruthy();
 
-  //   expect(component.preferanceForm.valid).toBeFalsy();
-
-  //   expect(investmentPurposeContorl?.hasError('required')).toBeTruthy();
-  //   expect(riskToleranceControl?.hasError('required')).toBeTruthy();
-  //   expect(incomeCategoryControl?.hasError('required')).toBeTruthy();
-  //   expect(lengthOfInvestmentControl?.hasError('required')).toBeTruthy();
-
-
-  //   investmentPurposeContorl?.setValue('my Purpose')
-  //   riskToleranceControl?.setValue('Aggressive')
-  //   incomeCategoryControl?.setValue('0-1000');
-  //   lengthOfInvestmentControl?.setValue('0-5 years')
-
-  //   expect(component.preferanceForm.valid).toBeTruthy();
-
-  // })
-
+  })
+  it('should call save service', () => {
+    component.onSubmit()
+    fixture.detectChanges()
+    expect(addPreferenceSpy).toHaveBeenCalled();
+  });
+  it('should call update service', () => {
+    component.updatePreference()
+    fixture.detectChanges()
+    expect(updatePreferenceSpy).toHaveBeenCalled();
+  });
   
 });

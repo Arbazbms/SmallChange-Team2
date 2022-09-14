@@ -99,7 +99,7 @@ describe('PortfolioComponent', () => {
     expect(component.portfolio[0].instrumentid).toBe('The Hobbit');
     expect(component.portfolio[1].instrumentid).toBe('A Wizard of Earthsea');
   });
-  it('should retrieve curent items to sho sell tab from the service', () =>{
+  it('should retrieve curent items to show sell tab from the service', () =>{
     component.displaySellTab('A Wizard of Earthsea',1)
     expect(component.instrument.instrumentId).toBe('A Wizard of Earthsea');
   });
