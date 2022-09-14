@@ -9,7 +9,10 @@ describe('ActivityComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ActivityComponent ],
+
       imports:[DataTablesModule]
+
+
     })
     .compileComponents();
   });

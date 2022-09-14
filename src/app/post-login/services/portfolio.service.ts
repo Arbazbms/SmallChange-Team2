@@ -30,7 +30,7 @@ export class PortfolioService {
       selected: false,
     },
     {
-      instrument: 'DISNEY',
+      instrument: 'Disney',
       instrumentid: 'DIS',
       orderid: '3',
       costprice: 234,
@@ -61,7 +61,7 @@ export class PortfolioService {
         timeStamp: new Date('12/10/2006'),
         instrument: {
           instrumentId: 'AMZN',
-          description: 'Amazon.com',
+          description: 'Amazon',
           externalIdType: 'ISIN',
           externalId: 'ISIN14577',
           categoryId: 'MainIndex',
@@ -111,12 +111,24 @@ export class PortfolioService {
 
   getInstrument (instrumentid : string) : Price {
     //let instrumentid = 'AMZN'
-    this.instruments.forEach( (data) =>{
-      if( data.instrumentId === instrumentid){
+    let data : Price;
+    for( data of this.instruments){
+  
+      if( data.instrument.description === instrumentid){
+        console.log("Checked",data)
         return data
       }
-      return 
-    })
+       
+    }
+    // this.instruments.forEach( (data) =>{
+    //   console.log(data,data.instrument.description, instrumentid);
+      
+    //   if( data.instrument.description.includes(instrumentid)){
+    //     console.log("Checked",data)
+    //     return data
+    //   }
+    //   return 
+    // })
     return this.instruments[0]
   }
 }

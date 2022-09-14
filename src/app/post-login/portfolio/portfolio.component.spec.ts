@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DataTablesModule } from 'angular-datatables';
+
 import { of } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio.model';
 import { PortfolioService } from '../services/portfolio.service';
+
 import { PortfolioComponent } from './portfolio.component';
 // import "datatables.net";
 describe('PortfolioComponent', () => {
@@ -49,6 +51,7 @@ describe('PortfolioComponent', () => {
       declarations: [ PortfolioComponent ],
       imports:[DataTablesModule],
       providers: [{ provide: PortfolioService, useValue: portfolioService }]
+
     })
     .compileComponents();
   });
