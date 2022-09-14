@@ -24,6 +24,8 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
 
   public portfolio:Portfolio[]=[]
   public selected=false
+  public index=-1
+
   public soldentirely=true
   @ViewChild('dataTable')dataTable:any;
   // dataTable:any;
@@ -74,7 +76,7 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
         ],
       };
 
-      this.dataTable = $(this.dataTable.nativeElement);
+      this.dataTable = $(self.dataTable.nativeElement);
       this.dataTable.DataTable(this.dtOptions);
     }),
       this.dtTrigger.next(1);
@@ -106,9 +108,9 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
     this.showModal = true;
 
     console.log('in display', this.instrument);
-    // var index = this.portfolio.map(e => e.instrumentid).indexOf(instrumentId);
-    if(this.soldentirely)
-       this.portfolio[index].selected=true
+    this.index =index
+    //  this.portfolio.map(e => e.instrumentid).indexOf(instrumentId);
+
     
     console.log('in sell display', this.instrument);
 
@@ -126,6 +128,10 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
 
   hideDialog(show: boolean) {
     this.showModal = show;
+    if(this.soldEntirely){
+      console.log(this.soldEntirely)
+      this.portfolio[this.index].selected=true
+    }
   }
 
   setSoldAllStocks(sold : boolean){
