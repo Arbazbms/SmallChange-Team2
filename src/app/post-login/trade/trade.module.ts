@@ -10,6 +10,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 import { TradeTransactionComponent } from './trade-transaction/trade-transaction.component';
+import { NavbarComponent } from 'src/app/basic/navbar/navbar.component';
+import { BasicModule } from 'src/app/basic/basic.module';
+//import {TableModule} from 'primeng/table';
 
 
 @NgModule({
@@ -26,10 +29,11 @@ import { TradeTransactionComponent } from './trade-transaction/trade-transaction
     ToastModule,
     BrowserModule,
     BrowserAnimationsModule,
-    //TableModule
+    BasicModule
   ],
   exports: [
-    TradePageComponent
+    TradePageComponent,
+    TradeTransactionComponent
   ]
 })
 export class TradeModule { }

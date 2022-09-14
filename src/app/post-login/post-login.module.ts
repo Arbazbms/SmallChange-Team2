@@ -25,7 +25,8 @@ import { PreferenceListComponent } from './preference-list/preference-list.compo
     PreferenceComponent,
     RoboAdvisorComponent,
     ReportComponent,
-    PreferenceListComponent
+    PreferenceListComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -36,7 +37,8 @@ import { PreferenceListComponent } from './preference-list/preference-list.compo
     DataTablesModule,
     PostLoginRoutingModule,
     RouterModule,
-    TradeModule
+    TradeModule,
+    BasicModule
   ],
 
   exports: [

@@ -17,7 +17,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let item of portfolio">
+
+      <tr *ngFor="let item of portfolio" (click)="display()">
         <!-- <td>{{item.instrumentId}}</td>
         <td>{{item.quantity}}</td>
         <td>{{item.executionPrice}}</td>
@@ -29,8 +30,12 @@
         <td>{{item.instrument}}</td>
         <td>{{item.costprice}}</td>
         <td>{{item.marketprice}}</td>
+
         <td [ngClass]="{'text-success': item.gain >= 0 , 'text-danger': item.gain < 0}">{{item.gain}}</td>
-        <td class="mybutton" ></td>
+
+  
+        <td class="mybutton" onclick="displaySellTab(item.instrumentid)"></td>
+
         <!-- <td><button>hello</button></td> -->
         <!-- <td>{{item.cash}}</td>
         <td>{{item.date}}</td> -->
@@ -39,4 +44,12 @@
       <tfoot></tfoot>
   </table>
   </div>
+  </div>
+
+  <div *ngIf="showModal">
+    <app-trade-transaction
+      (showModalEvent)="hideDialog($event)"
+      [instrument]="instrument"
+      [order]="order"
+    ></app-trade-transaction>
   </div>
