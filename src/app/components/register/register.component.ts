@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ActivatedRoute, Router } from '@angular/router'
 import { Client } from 'src/app/models/client.model';
 import { Identification } from 'src/app/models/identification.model';
 import { ClientService } from 'src/app/services/client.service';
@@ -25,7 +25,7 @@ private idValidators = [
   Validators.required
   
 ];
-constructor(private formBuilder: FormBuilder, private clientservice:ClientService) {
+constructor(private formBuilder: FormBuilder, private clientservice:ClientService, public route:ActivatedRoute,private router: Router  ) {
 
   this.registerForm = this.formBuilder.group({
     emailid:['',[
@@ -174,7 +174,10 @@ allClients.forEach((client:Client) => {
 console.log(this.alreadyExists)
 if(!this.alreadyExists){
   this.clientservice.addClient(this.client_to_be_added)
+  alert("registeration succesful!")
+
   this.registerForm.reset()  
+  this.router.navigate(['/login'])
 }
 }
 updateValueAndValidity(){

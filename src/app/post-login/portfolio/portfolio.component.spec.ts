@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DataTablesModule } from 'angular-datatables';
+import { Portfolio } from 'src/app/models/portfolio.model';
 import { PortfolioComponent } from './portfolio.component';
 // import "datatables.net";
 describe('PortfolioComponent', () => {
@@ -7,7 +8,7 @@ describe('PortfolioComponent', () => {
   let fixture: ComponentFixture<PortfolioComponent>;
 
   beforeEach(async () => {
-    [
+   let testportfolio:Portfolio=[
     
       {
         instrumentId: 'AMZN',
@@ -38,7 +39,7 @@ describe('PortfolioComponent', () => {
           minQuantity: 2,
           maxQuantity: 39,
         },
-      }
+      }]
     let portfolioService: any= jasmine.createSpyObj('PortfolioService',['getPortfolio']);
     portfolioService.getportfolios.and.returnValue( of(testportfolios));
     await TestBed.configureTestingModule({

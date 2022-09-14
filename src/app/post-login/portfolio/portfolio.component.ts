@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { data } from 'jquery';
+import { DataTablesModule } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Instrument } from 'src/app/models/instrument';
 import { Order } from 'src/app/models/order';
@@ -15,6 +16,8 @@ import { PortfolioService } from '../services/portfolio.service';
 export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
 
   public portfolio:Portfolio[]=[]
+  public selected=false
+  public soldentirely=true
   @ViewChild('dataTable')dataTable:any;
   // dataTable:any;
   dtOptions:DataTables.Settings = {};
@@ -73,7 +76,7 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
   instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
   
 
-  displaySellTab(instrumentId : string){
+  displaySellTab(instrumentId : string,index:number){
     console.log("HELOO");
     
     this.instrument = this.ps.getInstrument(instrumentId)
@@ -81,6 +84,10 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
     this.order.direction = 'S'
     this.showModal = true;
     console.log('in display', this.instrument);
+    // var index = this.portfolio.map(e => e.instrumentid).indexOf(instrumentId);
+    if(this.soldentirely)
+       this.portfolio[index].selected=true
+    
 
   }
 
