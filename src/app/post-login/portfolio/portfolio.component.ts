@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { data } from 'jquery';
 import { Subject } from 'rxjs';
 import { Instrument } from 'src/app/models/instrument';
@@ -12,11 +12,14 @@ import { PortfolioService } from '../services/portfolio.service';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css'],
 })
-export class PortfolioComponent implements OnInit, OnDestroy {
-  public portfolio: Portfolio[] = [];
-  @ViewChild('dataTable') table: any;
-  dataTable: any;
-  dtOptions: DataTables.Settings = {};
+
+export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
+
+  public portfolio:Portfolio[]=[]
+  @ViewChild('dataTable')dataTable:any;
+  // dataTable:any;
+  dtOptions:DataTables.Settings = {};
+
   dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(public ps: PortfolioService) {}
@@ -25,13 +28,18 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   order: Order = new Order('', -1, -1, '', '', '');
 
   ngOnInit(): void {
-    this.getallportfolio();
-    console.log(this.portfolio);
-    //this.ps.getInstrument('Disney');
-  }
 
-  displaySellTab(ins:string) {
-    console.log('HELOO');
+    this.ps.getPortfolio().subscribe(data=>{
+      this.portfolio=data
+      
+    })
+
+  }
+  ngAfterViewInit(): void {
+    this.getallportfolio()
+    console.log(this.portfolio)
+    this.ps.getInstrument('DIS')
+
 
     this.instrument = this.ps.getInstrument(ins);
     this.order.quantity = this.instrument.instrument.maxQuantity;
@@ -40,54 +48,40 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     console.log('in display', this.instrument);
   }
 
-  getallportfolio() {
-    this.ps.getPortfolio().subscribe((data) => {
-      this.portfolio = data;
-      this.dtTrigger.next(this.table);
+  getallportfolio(){
+    // this.ps.getPortfolio().subscribe(data=>{
+    //   this.portfolio=data
+      this.dtTrigger.next(this.dataTable);
+
       this.dtOptions = {
         data: this.portfolio,
         paging: true,
         ordering: true,
         responsive: true,
-        columnDefs: [
-          {
-            defaultContent: '-',
-            targets: [4] /* column index */,
-            orderable: false /* true or false */,
-          },
-          { targets: '_all', searchable: true },
-        ],
-        searching: true,
 
-        columns: [
-          { title: 'Stock', data: 'instrument' },
-          { title: 'CostPrice', data: 'costprice' },
-          { title: 'MarketPrice', data: 'marketprice' },
-          { title: 'Gain/Loss', data: 'gain' },
-          {
-            defaultContent:
-              "<button class='showIdButton myclass btn-success' style=padding:5px;margin-left:10%;>Sell </button>",
-          },
-        ],
+        columnDefs:[{"defaultContent": "-",'targets': [4], /* column index */
+        'orderable': false, /* true or false */},
+                     {"targets": "_all","searchable" :true}],
+        searching:true,
+     
+         columns:[
+                  {title:'Stock',data:'instrument',className:'gain'},
+                  {title:'CostPrice',data:'costprice'},
+                  {title:'MarketPrice',data:'marketprice'},
+                  {title:'Gain/Loss',data:'gain'},
+                  {
+                    defaultContent: "<button class='btn btn-success ' style=background-color: #568200 !imposrtant;padding-right:10px;padding-left:10px;margin-left:10%;>Sell </button>"
+                  }
+                  ]
+  
       };
+           
+ 
+  
+  
 
-      this.dataTable = $(this.table.nativeElement);
-      this.dataTable.DataTable(this.dtOptions);
-    }),
-      this.dtTrigger.next(1);
-    var self = this
-    $('div div table tbody').on('click', 'tr', function () {
-      console.log(
-        'helllo', this.getElementsByTagName('td')[0].innerHTML,
-      );
-      this.instrumentSymbol =this.getElementsByTagName('td')[0].innerHTML
-      // this.instrument = this.ps.getInstrument('Disney');
-      // this.order.quantity = this.instrument.instrument.minQuantity;
-      // this.order.direction = 'S';
-      // this.showModal = true;
-      //console.log('in display', this.showModal);
-      self.displaySellTab(this.instrumentSymbol)
-    });
+    // }),
+  
   }
 
   showModal: boolean = false;

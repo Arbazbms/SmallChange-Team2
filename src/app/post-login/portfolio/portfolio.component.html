@@ -24,25 +24,19 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of portfolio">
-          <!-- <td>{{item.instrumentId}}</td>
-        <td>{{item.quantity}}</td>
-        <td>{{item.executionPrice}}</td>
-        <td>{{item.direction}}</td>
-        <td>{{item.clientId}}</td>
-        <td>{{item.order}}</td>
-        <td>{{item.itemId}}</td>
-        <td>{{item.cashValue}}</td> -->
-          <!-- <td>
-          <a id="symbol" href="javascript:void(0);" (click)="display()"> {{ item.instrument }} </a>
-        
-        </td> -->
+    
+
           <td>{{ item.instrument }}</td>
           <td>{{ item.costprice }}</td>
           <td>{{ item.marketprice }}</td>
-          <td>{{ item.gain }}</td>
-          <td class="mybutton" onclick="displaySellTab(item.instrumentid)"></td>
-          <!-- <td><button>hello</button></td> -->
-          <!-- <td>{{item.cash}}</td>
+          
+        
+        <td [ngClass]="{'text-success': item.gain >= 0 , 'text-danger': item.gain < 0}">{{item.gain}}</td>
+
+  
+        <td class="mybutton" onclick="displaySellTab(item.instrumentid)"></td>
+
+
         <td>{{item.date}}</td> -->
         </tr>
       </tbody>
