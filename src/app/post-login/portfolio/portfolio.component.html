@@ -3,22 +3,21 @@
 
 
 <div  class="container">
-    <p class="h2">Your portfolio</p>
+    <p class="h2" >Your portfolio</p>
     <!-- <button (click)="submit()" >hello</button> -->
   <div  class="shadow p-3 mb-5 bg-body rounded" style="overflow-x:auto;padding:40px">
-  <table datatable 
-  [dtOptions]="dtOptions" class="row-border hover"   >
+  <table class="table display table-striped table-hover table-bordered row-border hover datatable" [dtOptions]="dtOptions" datatable=" #dataTable"   >
     <thead>
       <tr>
-        <!-- <th>Account</th>
+        <th>Account</th>
         <th>Qty</th>
         <th>Cash Value</th>
         <th>Date</th>
-        <th>Sell</th> -->
+        <th>Sell</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of portfolio">
+      <tr  *ngFor="let item of portfolio">
         <!-- <td>{{item.instrumentId}}</td>
         <td>{{item.quantity}}</td>
         <td>{{item.executionPrice}}</td>
@@ -30,7 +29,7 @@
         <td>{{item.instrument}}</td>
         <td>{{item.costprice}}</td>
         <td>{{item.marketprice}}</td>
-        <td>{{item.gain}}</td>
+        <td [ngClass]="{'text-success': item.gain >= 0 , 'text-danger': item.gain < 0}">{{item.gain}}</td>
         <td class="mybutton" ></td>
         <!-- <td><button>hello</button></td> -->
         <!-- <td>{{item.cash}}</td>
