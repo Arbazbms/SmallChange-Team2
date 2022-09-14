@@ -1,16 +1,25 @@
-import { TestBed } from '@angular/core/testing';
-
-import { TradeService } from './trade.service';
+import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { TradeHistory } from '../services/tradeHistory.service';
 
 describe('TradeHistory Service', () => {
-  let service: TradeService;
+  let service: TradeHistory;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TradeService);
+    service = TestBed.inject(TradeHistory);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should return tradeHist', inject([TradeHistory],
+    fakeAsync((service: TradeHistory) => {
+    let tradeHists: any[] = [];
+    service.getTradeHist()
+    .subscribe(data => tradeHists = data);
+    tick();
+    expect(tradeHists).toBeTruthy();
+    expect(tradeHists[0].asset).toBe('Equity');
+   })));
 });

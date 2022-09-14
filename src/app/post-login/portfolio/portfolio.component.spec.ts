@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { DataTablesModule } from 'angular-datatables';
 import { PortfolioComponent } from './portfolio.component';
 
 describe('PortfolioComponent', () => {
@@ -8,7 +8,8 @@ describe('PortfolioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PortfolioComponent ]
+      declarations: [ PortfolioComponent ],
+      imports:[DataTablesModule]
     })
     .compileComponents();
   });

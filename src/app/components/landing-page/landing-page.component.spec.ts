@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { LandingPageComponent } from './landing-page.component';
 
@@ -22,4 +23,19 @@ describe('LandingPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render title in h1 tag',()=>{
+    expect(fixture.debugElement.query(By.css('h1')).nativeElement.textContent).toContain("SmallChange");
+  })
+
+  it("Should contain buttons",()=>{
+   let x=fixture.debugElement.queryAll(By.css('a'));
+   expect(x[0].nativeElement.textContent).toContain("Login");
+   expect(x[1].nativeElement.textContent).toContain("Register");
+  })
+
+  it("Should render main div",()=>{
+    expect(fixture.debugElement.query(By.css('.jumbotron'))).toBeTruthy();
+  
+  })
 });

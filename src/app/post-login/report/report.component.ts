@@ -21,7 +21,7 @@ this.LineChart = new Chart('lineChart', {
 data: {
  labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sep","Oct","Nov","Dec"],
  datasets: [{
-     label: 'Number of Items Sold in Months',
+     label: 'invested amount in months',
      data: [9,7 , 3, 5, 2, 10,15,16,19,3,1,9],
      fill:false,
      
@@ -35,7 +35,7 @@ data: {
     plugins: {
         title: {
             display: true,
-            text: 'Custom Chart Title',
+            text: 'Net Portfolio Value',
             padding: {
                 top: 10,
                 bottom: 30,
@@ -55,7 +55,12 @@ data: {
               }
           }
       }
-    }
+      
+    },
+    scales: {x: { title: { display: true, text: 'months' }},
+             y: { title: { display: true, text: 'invested amount' }}}
+    
+   
   }
 });
 
@@ -63,9 +68,10 @@ data: {
 this.BarChart = new Chart('barChart', {
   type: 'bar',
 data: {
- labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+  labels: ["Jan", "Feb", "March", "April", "May", "June","July","Aug","Sep","Oct","Nov","Dec"],
+ 
  datasets: [{
-     label: '# of Votes',
+     label: 'total trades made',
      data: [9,7 , 3, 5, 2, 10],
      backgroundColor: [
          'rgba(255, 99, 132, 0.2)',
@@ -91,7 +97,7 @@ options: {
   plugins: {
       title: {
           display: true,
-          text: 'Custom Chart Title',
+          text: 'Trade Activity',
           padding: {
               top: 10,
               bottom: 30,
@@ -111,7 +117,9 @@ options: {
             }
         }
     }
-  }
+  },
+  scales: {x: { title: { display: true, text: 'months' }},
+  y: { title: { display: true, text: 'no. of trades' }}}
 }
 });
 
@@ -119,9 +127,9 @@ options: {
 this.PieChart = new Chart('pieChart', {
   type: 'pie',
 data: {
- labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+ labels: ["APPL", "TSLA", "AMZN", "NVDA", "GOOG", "MSFT"],
  datasets: [{
-     label: '# of Votes',
+     label: 'shares',
      data: [9,7 , 3, 5, 2, 10],
      backgroundColor: [
          'rgba(255, 99, 132, 0.2)',
@@ -147,7 +155,7 @@ options: {
   plugins: {
       title: {
           display: true,
-          text: 'Custom Chart Title',
+          text: 'Holdings',
           padding: {
               top: 10,
               bottom: 30,
@@ -174,6 +182,8 @@ options: {
 
 });
 
-
+console.log(this.BarChart);
+console.log(this.PieChart);
+console.log(this.LineChart);
   }
 }
