@@ -1,5 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { data } from 'jquery';
+import { DataTablesModule } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Instrument } from 'src/app/models/instrument';
 import { Order } from 'src/app/models/order';
@@ -16,41 +23,31 @@ import { PortfolioService } from '../services/portfolio.service';
 export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
 
   public portfolio:Portfolio[]=[]
+  public selected=false
+  public soldentirely=true
   @ViewChild('dataTable')dataTable:any;
   // dataTable:any;
   dtOptions:DataTables.Settings = {};
 
   dtTrigger: Subject<any> = new Subject<any>();
-
   constructor(public ps: PortfolioService) {}
 
-  instrumentSymbol: string = ''
+  instrumentSymbol: string = '';
   order: Order = new Order('', -1, -1, '', '', '');
-
+  soldEntirely : boolean = false
   ngOnInit(): void {
-
-    this.ps.getPortfolio().subscribe(data=>{
-      this.portfolio=data
-      
-    })
-
+    this.ps.getPortfolio().subscribe((data) => {
+      this.portfolio = data;
+    });
   }
   ngAfterViewInit(): void {
-    this.getallportfolio()
-    console.log(this.portfolio)
-    this.ps.getInstrument('DIS')
-
-
-    // this.instrument = this.ps.getInstrument(ins);
-    // this.order.quantity = this.instrument.instrument.maxQuantity;
-    // this.order.direction = 'S';
-    // this.showModal = true;
-    // console.log('in display', this.instrument);
+    this.getallportfolio();
+    console.log(this.portfolio);
   }
 
-  getallportfolio(){
-    // this.ps.getPortfolio().subscribe(data=>{
-    //   this.portfolio=data
+  getallportfolio() {
+    this.ps.getPortfolio().subscribe((data) => {
+      this.portfolio = data;
       this.dtTrigger.next(this.dataTable);
 
       this.dtOptions = {
@@ -59,29 +56,34 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
         ordering: true,
         responsive: true,
 
-        columnDefs:[{"defaultContent": "-",'targets': [4], /* column index */
-        'orderable': false, /* true or false */},
-                     {"targets": "_all","searchable" :true}],
-        searching:true,
-     
-         columns:[
-                  {title:'Stock',data:'instrument',className:'gain'},
-                  {title:'CostPrice',data:'costprice'},
-                  {title:'MarketPrice',data:'marketprice'},
-                  {title:'Gain/Loss',data:'gain'},
-                  {
-                    defaultContent: "<button class='btn btn-success ' style=background-color: #568200 !imposrtant;padding-right:10px;padding-left:10px;margin-left:10%;>Sell </button>"
-                  }
-                  ]
-  
-      };
-           
- 
-  
-  
+        columnDefs: [
+          {
+            defaultContent: '-',
+            targets: [4] /* column index */,
+            orderable: false /* true or false */,
+          },
+          { targets: '_all', searchable: true },
+        ],
+        searching: true,
 
-    // }),
-  
+        columns: [
+          { title: 'Stock', data: 'instrument' },
+          { title: 'CostPrice', data: 'costprice' },
+          { title: 'MarketPrice', data: 'marketprice' },
+          { title: 'Gain/Loss', data: 'gain' },
+        ],
+      };
+
+      this.dataTable = $(this.dataTable.nativeElement);
+      this.dataTable.DataTable(this.dtOptions);
+    }),
+      this.dtTrigger.next(1);
+    var self = this;
+    $('div div table tbody').on('click', 'tr', function () {
+      console.log('helllo', this.getElementsByTagName('td')[0].innerHTML);
+      this.instrumentSymbol = this.getElementsByTagName('td')[0].innerHTML;
+      // self.displaySellTab(this.instrumentSymbol);
+    });
   }
 
   showModal: boolean = false;
@@ -93,7 +95,24 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
     new Instrument('', '', '', '', '', -1, -1)
   );
 
-  
+  displaySellTab(instrumentId : string,index:number){
+    console.log("HELOO");
+    
+
+    this.instrument = this.ps.getInstrument(instrumentId);
+
+    this.order.quantity = this.instrument.instrument.minQuantity;
+    this.order.direction = 'S';
+    this.showModal = true;
+
+    console.log('in display', this.instrument);
+    // var index = this.portfolio.map(e => e.instrumentid).indexOf(instrumentId);
+    if(this.soldentirely)
+       this.portfolio[index].selected=true
+    
+    console.log('in sell display', this.instrument);
+
+  }
 
   display() {
     console.log('Hellp');
@@ -107,5 +126,9 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
 
   hideDialog(show: boolean) {
     this.showModal = show;
+  }
+
+  setSoldAllStocks(sold : boolean){
+    this.soldEntirely = sold
   }
 }
