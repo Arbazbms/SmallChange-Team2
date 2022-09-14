@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DataTablesModule } from 'angular-datatables';
 
 import { ActivityComponent } from './activity.component';
 
@@ -8,7 +9,8 @@ describe('ActivityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ActivityComponent ]
+      declarations: [ ActivityComponent ],
+      imports: [DataTablesModule]
     })
     .compileComponents();
   });

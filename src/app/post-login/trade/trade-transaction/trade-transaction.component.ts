@@ -29,18 +29,21 @@ export class TradeTransactionComponent implements OnInit {
   buttonContent : string = ''
   minQ: any
   maxQ: any
+  tradePrice: number= -1;
   ngOnInit() {
     console.log("Button",this.order.direction) 
     if( this.order.direction === 'B'){
       this.buttonContent = "Buy"
       this.minQ = this.instrument.instrument.minQuantity
       this.maxQ = this.instrument.instrument.maxQuantity
+      this.tradePrice = this.instrument.bidPrice
     }
     else{
       this.buttonContent = "Sell"
       this.minQ = 1
       // should chnage this
       this.maxQ = this.order.quantity
+      this.tradePrice = this.instrument.askPrice
     }
   }
 

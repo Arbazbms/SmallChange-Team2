@@ -10,19 +10,25 @@ import { PortfolioService } from '../services/portfolio.service';
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.css']
+  styleUrls: ['./portfolio.component.css'],
 })
+
 export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
 
   public portfolio:Portfolio[]=[]
   @ViewChild('dataTable')dataTable:any;
   // dataTable:any;
   dtOptions:DataTables.Settings = {};
+
   dtTrigger: Subject<any> = new Subject<any>();
-  constructor(public ps: PortfolioService) { }
-  order: Order = new Order('',-1,-1,'','','')
-  
+
+  constructor(public ps: PortfolioService) {}
+
+  instrumentSymbol: string = ''
+  order: Order = new Order('', -1, -1, '', '', '');
+
   ngOnInit(): void {
+
     this.ps.getPortfolio().subscribe(data=>{
       this.portfolio=data
       
@@ -34,16 +40,25 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
     console.log(this.portfolio)
     this.ps.getInstrument('DIS')
 
+
+    this.instrument = this.ps.getInstrument(ins);
+    this.order.quantity = this.instrument.instrument.maxQuantity;
+    this.order.direction = 'S';
+    this.showModal = true;
+    console.log('in display', this.instrument);
   }
+
   getallportfolio(){
     // this.ps.getPortfolio().subscribe(data=>{
     //   this.portfolio=data
       this.dtTrigger.next(this.dataTable);
+
       this.dtOptions = {
-        data:this.portfolio,
-        paging:true,
-        ordering:true,
+        data: this.portfolio,
+        paging: true,
+        ordering: true,
         responsive: true,
+
         columnDefs:[{"defaultContent": "-",'targets': [4], /* column index */
         'orderable': false, /* true or false */},
                      {"targets": "_all","searchable" :true}],
@@ -70,34 +85,27 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
   }
 
   showModal: boolean = false;
-  instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
+  instrument: Price = new Price(
+    '',
+    -1,
+    -1,
+    new Date(),
+    new Instrument('', '', '', '', '', -1, -1)
+  );
+
   
 
-  displaySellTab(instrumentId : string){
-    console.log("HELOO");
-    
-    this.instrument = this.ps.getInstrument(instrumentId)
-    this.order.quantity = this.instrument.instrument.minQuantity;
-    this.order.direction = 'S'
-    this.showModal = true;
-    console.log('in display', this.instrument);
-
-  }
-
-  display(){
-    console.log("Hellp");
-    
+  display() {
+    console.log('Hellp');
   }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
-  submit(){
-    this.getallportfolio
+  submit() {
+    this.getallportfolio;
   }
 
-  hideDialog(show : boolean){
-    this.showModal = show
+  hideDialog(show: boolean) {
+    this.showModal = show;
   }
-  
 }
-
