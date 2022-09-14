@@ -81,11 +81,11 @@ export class PortfolioComponent implements OnInit,AfterViewInit, OnDestroy{
     }),
       this.dtTrigger.next(1);
     var self = this;
-    $('div div table tbody').on('click', 'tr', function () {
-      console.log('helllo', this.getElementsByTagName('td')[0].innerHTML);
-      this.instrumentSymbol = this.getElementsByTagName('td')[0].innerHTML;
-      // self.displaySellTab(this.instrumentSymbol);
-    });
+    // $('div div table tbody').on('click', 'tr', function () {
+    //   console.log('helllo', this.getElementsByTagName('td')[0].innerHTML);
+    //   this.instrumentSymbol = this.getElementsByTagName('td')[0].innerHTML;
+    //   // self.displaySellTab(this.instrumentSymbol);
+    // });
   }
 
   showModal: boolean = false;
