@@ -1,9 +1,22 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { Instrument } from 'src/app/models/instrument';
+import { Order } from 'src/app/models/order';
 import { Price } from 'src/app/models/price';
 import { TradeService } from '../../services/trade.service';
 
 import { TradeTableComponent } from './trade-table.component';
+
+@Component({
+  selector: 'app-trade-transaction',
+  template: 'mock'
+})
+export class MockAppTradeTransaction{
+  @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
+  @Input() order: Order = new Order('',-1,-1,'','','')
+  @Output() showModalEvent = new EventEmitter()
+}
 
 const mockInstruments: Price[] = [
   {
@@ -23,21 +36,20 @@ const mockInstruments: Price[] = [
   },
 ];
 
-describe('TradeTableComponent', () => {
+fdescribe('TradeTableComponent', () => {
   let component: TradeTableComponent;
   let fixture: ComponentFixture<TradeTableComponent>;
 
   beforeEach(async () => {
-    const tradeService = jasmine.createSpyObj('TradeService', ['getAllInstruments']);
+    const tradeService = jasmine.createSpyObj('TradeService', [
+      'getAllInstruments',
+    ]);
     tradeService.getAllInstruments.and.returnValue(of(mockInstruments));
 
     await TestBed.configureTestingModule({
-      declarations: [ TradeTableComponent ],
-      providers: [
-        { provide: TradeService, useValue: tradeService }
-    ]
-    })
-    .compileComponents();
+      declarations: [TradeTableComponent, MockAppTradeTransaction],
+      providers: [{ provide: TradeService, useValue: tradeService }],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -59,6 +71,20 @@ describe('TradeTableComponent', () => {
     expect(table.rows.length).toBe(2);
     expect(table.rows[0].cells[0].textContent).toBe('Symbol');
     expect(table.rows[1].cells[1].textContent).toBe('100');
-});
+  });
 
+
+  it('should open dialog box', async () => {
+    await fixture.whenStable();
+    fixture.detectChanges();
+    component.getAllInstruments()
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const table = compiled.querySelector('table');
+    // console.log(table);
+    expect(table.rows.length).toBe(2);
+    expect(table.rows[0].cells[0].textContent).toBe('Symbol');
+    expect(table.rows[1].cells[1].textContent).toBe('100');
+  });
+  
 });

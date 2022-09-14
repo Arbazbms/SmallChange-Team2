@@ -18,7 +18,7 @@
       {{ instrument.bidPrice | currency: "USD" }}
     </div>
     <div id="slider-bar" class="col-sm-5">
-      <input type="text" pInputText [(ngModel)]="order.quantity" />
+      <input type="text" pInputText [(ngModel)]="order.quantity" readonly />
       <br />
       <p-slider
         [(ngModel)]="order.quantity"
