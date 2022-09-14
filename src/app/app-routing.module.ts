@@ -20,9 +20,11 @@ const routes: Routes = [
   {path:'report', component:ReportComponent},
 
 
+
   {path: 'register', component: RegisterComponent,
   //  canActivate:[AuthGuard]
   },
+
   // {path:'pl', component: LandingComponent},
   // {path:'preference', component:PreferenceComponent},
   // {path:'activity', component:ActivityComponent}

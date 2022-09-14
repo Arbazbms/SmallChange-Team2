@@ -132,7 +132,7 @@ export class TradeHistory {
   //private url="http://localhost:3000/history";
   constructor() { }
 
-  getTradeHist():Observable<TradeHist[]>{
+  getTradeHist():Observable<any[]>{
     return of(tradeHist);
   }
 }
