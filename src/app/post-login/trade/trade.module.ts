@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { TradeTransactionComponent } from './trade-transaction/trade-transaction.component';
 import { NavbarComponent } from 'src/app/basic/navbar/navbar.component';
 import { BasicModule } from 'src/app/basic/basic.module';
-//import {TableModule} from 'primeng/table';
+import { ScrollingModule} from "@angular/cdk/scrolling";
+import {TableModule} from 'primeng/table';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { BasicModule } from 'src/app/basic/basic.module';
     ToastModule,
     BrowserModule,
     BrowserAnimationsModule,
-    BasicModule
+    BasicModule,
+    ScrollingModule,
+    TableModule
   ],
   exports: [
     TradePageComponent,

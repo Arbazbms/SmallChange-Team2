@@ -1,27 +1,39 @@
-<div class="tradeTable" style="overflow-x: auto">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Symbol</th>
-        <th>Current Price</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let instrument of instruments"
-        
-      >
-        <td>
-          <a id="symbol" href="javascript:void(0);" (click)="displayModal(instrument)"> {{ instrument.instrumentId }} </a><br />
-          {{instrument.instrument.description}}
-        </td>
-        <td>{{ instrument.bidPrice }}</td>
-        <td>{{ instrument.instrument.categoryId }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<p-table [value]="instruments" [rowHover]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
+responsiveLayout="scroll" [paginator]="true"
+
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="symbol">
+        Symbol
+        <p-sortIcon field="symbol"></p-sortIcon>
+        <p-columnFilter type="text" field="symbol" display="menu" class="ml-auto"></p-columnFilter>
+               
+      </th>
+      <th>Current Price</th>
+      <th>Category</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-instrument>
+    <tr>
+      <td>
+        <a
+          id="symbol"
+          href="javascript:void(0);"
+          (click)="displayModal(instrument)"
+        >
+          {{ instrument.instrumentId }} </a
+        ><br />
+        {{ instrument.instrument.description }}
+      </td>
+      <td>{{ instrument.bidPrice }}</td>
+      <td>{{ instrument.instrument.categoryId }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
 
 <div *ngIf="showModal">
   <app-trade-transaction
