@@ -11,6 +11,7 @@ import { PreferenceComponent } from './post-login/preference/preference.componen
 import { ReportComponent } from './post-login/report/report.component';
 
 import { AuthGuard } from './post-login/services/auth.guard';
+import { TradePageComponent } from './post-login/trade/trade-page/trade-page.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,7 @@ const routes: Routes = [
 
   // {path:'pl', component: LandingComponent},
   // {path:'preference', component:PreferenceComponent},
-  // {path:'activity', component:ActivityComponent}
+  {path:'trade', component:TradePageComponent}
 
   ];
 
