@@ -5,11 +5,12 @@ div.container{
     padding:20px; 
 
 }
-.showIdButton{
-    margin: auto;
-    margin-left: 75%;
-    padding: 10px
+.gain{
+    background-color:green ;
 }
-.mybutton{
-    justify-content: center;
+/* .container .rounded table tbody tr .gain{
+    background-color : pink ;
+} */
+.selected{
+    display: none;
 }

@@ -1,32 +1,32 @@
-<div class="tradeTable" style="overflow-x:auto;">
+<div class="tradeTable" style="overflow-x: auto">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Symbol</th>
-        <th scope="col">Price</th>
-        <th scope="col">Min-Max</th>
+        <th>Symbol</th>
+        <th>Current Price</th>
+        <th>Category</th>
       </tr>
     </thead>
     <tbody>
       <tr
         *ngFor="let instrument of instruments"
-        (click)="displayModal(instrument)"
+        
       >
         <td>
-          <span id="symbol">
-            {{ instrument.instrumentId }} </span
-          ><br />{{ instrument.instrument.description }}
+          <a id="symbol" href="javascript:void(0);" (click)="displayModal(instrument)"> {{ instrument.instrumentId }} </a><br />
+          {{instrument.instrument.description}}
         </td>
         <td>{{ instrument.bidPrice }}</td>
-        <td>{{ instrument.instrument.description }}</td>
+        <td>{{ instrument.instrument.categoryId }}</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-
 <div *ngIf="showModal">
-  <app-trade-transaction (showModalEvent)="hideDialog($event)" [instrument]="instrument" [order]="order"></app-trade-transaction>
+  <app-trade-transaction
+    (showModalEvent)="hideDialog($event)"
+    [instrument]="instrument"
+    [order]="order"
+  ></app-trade-transaction>
 </div>
-
-

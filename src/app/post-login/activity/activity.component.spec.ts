@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { By } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { of } from 'rxjs';
 import { TradeHist } from '../models/trade-hist';
 import { TradeHistory } from '../services/tradeHistory.service';
+
 import { ActivityComponent } from './activity.component';
 
 @Component({
@@ -22,11 +24,16 @@ describe('ActivityComponent', () => {
  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+
       declarations: [ ActivityComponent,MockNavbarComponent ],
       imports:[DataTablesModule],
       providers: [
         { provide: TradeHistory, useValue: mockTradeService }
         ]
+
+
+
+
     })
     .compileComponents();
     tradeHist=[

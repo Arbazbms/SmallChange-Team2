@@ -1,24 +1,22 @@
-
 <app-navbar></app-navbar>
 
-
 <div  class="container">
-    <p class="h2">Your portfolio</p>
+    <p class="h2" >Your portfolio</p>
     <!-- <button (click)="submit()" >hello</button> -->
   <div  class="shadow p-3 mb-5 bg-body rounded" style="overflow-x:auto;padding:40px">
-  <table datatable 
-  [dtOptions]="dtOptions" class="row-border hover"   >
+  <table class="table display table-striped table-hover table-bordered  hover datatable" [dtOptions]="dtOptions" datatable=" #dataTable"   >
     <thead>
       <tr>
-        <!-- <th>Account</th>
-        <th>Qty</th>
-        <th>Cash Value</th>
-        <th>Date</th>
-        <th>Sell</th> -->
+        <th>Stock</th>
+        <th>cost</th>
+        <th>Market Value</th>
+        <th>Gain/Loss</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of portfolio">
+
+      <tr [ngClass]="{'selected':this.item.selected}" *ngFor="let item of portfolio;let index=index" (click)="displaySellTab('{item.instrumentId}',index)">
         <!-- <td>{{item.instrumentId}}</td>
         <td>{{item.quantity}}</td>
         <td>{{item.executionPrice}}</td>
@@ -30,14 +28,28 @@
         <td>{{item.instrument}}</td>
         <td>{{item.costprice}}</td>
         <td>{{item.marketprice}}</td>
-        <td>{{item.gain}}</td>
-        <td class="mybutton" ></td>
+
+        <td [ngClass]="{'text-success': item.gain >= 0 , 'text-danger': item.gain < 0}">{{item.gain}}</td>
+
+        <td class="mybutton" onclick="displaySellTab('{item.instrumentid}')">
+          <button>Sell</button>
+        </td>
+
         <!-- <td><button>hello</button></td> -->
         <!-- <td>{{item.cash}}</td>
         <td>{{item.date}}</td> -->
       </tr>
       </tbody> 
       <tfoot></tfoot>
-  </table>
+    </table>
   </div>
-  </div>
+</div>
+
+<div *ngIf="showModal">
+  <app-trade-transaction
+    (soldAllStocks)="setSoldAllStocks($event)"
+    (showModalEvent)="hideDialog($event)"
+    [instrument]="instrument"
+    [order]="order"
+  ></app-trade-transaction>
+</div>
