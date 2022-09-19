@@ -9,9 +9,9 @@ export default class LoginPage {
         cy.get('#password').type(pass1)
       }
     clickSubmit(){
-        cy.get('#submit_btn').click()
+
+        cy.get('button').contains('Submit').click()
     }
-    geterror(){
-      return cy.get('#myerrortext')
-    }
+   
+
 }

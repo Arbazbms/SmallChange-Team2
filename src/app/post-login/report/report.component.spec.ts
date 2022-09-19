@@ -7,6 +7,12 @@ import { ReportComponent } from './report.component';
   selector: 'app-navbar',
   template: `<div></div>`,
 
+
+@Component({
+  selector: 'app-navbar',
+  template: `<div></div>`,
+ 
+
 })
 class MockNavbarComponent  {};
 describe('ReportComponent', () => {
