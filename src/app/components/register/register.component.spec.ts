@@ -55,7 +55,7 @@ describe('RegisterComponent', () => {
 
     //  expect(console.log).toHaveBeenCalled();
   });
-  it('should call the service to add a book', () =>{
+  it('should call the service to add a client', () =>{
     const expected =  new Client(1,'h31','ashr@gmail.com','ashr','24/07/11','india','832110','hello',new Identification('Adhar','833396564956'));
     const form = fixture.debugElement.nativeElement.querySelector('form');
     component.registerForm.get('emailid')?.setValue(expected.email);
