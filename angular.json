@@ -27,13 +27,11 @@
               "src/assets"
             ],
             "styles": [
-              
               "node_modules/datatables.net-dt/css/jquery.dataTables.min.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "src/styles.css"
-              
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -106,6 +104,51 @@
               "src/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "SmallChange-Team2:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "SmallChange-Team2:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "SmallChange-Team2:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "SmallChange-Team2:serve:development"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "SmallChange-Team2:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "SmallChange-Team2:serve:production"
+            }
           }
         }
       }
