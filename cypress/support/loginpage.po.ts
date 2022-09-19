@@ -9,7 +9,9 @@ export default class LoginPage {
         cy.get('#password').type(pass1)
       }
     clickSubmit(){
+
         cy.get('button').contains('Submit').click()
     }
    
+
 }

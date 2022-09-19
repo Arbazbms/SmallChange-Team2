@@ -1,6 +1,8 @@
 <form [formGroup]="loginForm" class="form-container mt-8" (ngSubmit)="onSubmit()">
     <div *ngIf="loginErrorMsg" class="alert alert-danger" id="errtxt" role="alert">
-      {{loginErrorMsg}}
+      <p id="myerrortext">
+        {{loginErrorMsg}}
+      </p>
     </div>
 
   <div class="mb-3">
@@ -38,7 +40,7 @@
 
   </div>
 
-  <button type="submit" class="btn btn-light submit-btn">Submit</button>
+  <button id="submit_btn" type="submit" class="btn btn-light submit-btn">Submit</button>
 
   <a href="#">Forgot your password ?</a>
 </form>

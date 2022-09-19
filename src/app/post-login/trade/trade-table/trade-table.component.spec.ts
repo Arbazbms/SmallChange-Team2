@@ -36,7 +36,7 @@ const mockInstruments: Price[] = [
   },
 ];
 
-fdescribe('TradeTableComponent', () => {
+describe('TradeTableComponent', () => {
   let component: TradeTableComponent;
   let fixture: ComponentFixture<TradeTableComponent>;
 

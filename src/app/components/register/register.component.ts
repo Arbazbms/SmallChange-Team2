@@ -111,7 +111,7 @@ get password2(){
 
 onSubmit() {
 var formvalues=this.registerForm.value
-var id=Math.floor(Math.random() * 10);
+var id=Math.floor(Math.random() * 1000);
 var identity= new Identification(formvalues.idtype,formvalues.idval)
   this.client_to_be_added.id=id
   this.client_to_be_added.clientId="h31",
@@ -177,7 +177,7 @@ if(!this.alreadyExists){
   alert("registeration succesful!")
 
   this.registerForm.reset()  
-  this.router.navigate(['/login'])
+  // this.router.navigate(['/login'])
 }
 }
 updateValueAndValidity(){

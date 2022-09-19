@@ -3,11 +3,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ReportComponent } from './report.component';
+@Component({
+  selector: 'app-navbar',
+  template: `<div></div>`,
+
 
 @Component({
   selector: 'app-navbar',
   template: `<div></div>`,
  
+
 })
 class MockNavbarComponent  {};
 describe('ReportComponent', () => {
