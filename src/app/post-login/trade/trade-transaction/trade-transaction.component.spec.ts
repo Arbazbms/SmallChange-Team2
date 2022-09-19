@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TradeTransactionComponent } from './trade-transaction.component';
 
-fdescribe('TradeTransactionComponent', () => {
+describe('TradeTransactionComponent', () => {
   let component: TradeTransactionComponent;
   let fixture: ComponentFixture<TradeTransactionComponent>;
 

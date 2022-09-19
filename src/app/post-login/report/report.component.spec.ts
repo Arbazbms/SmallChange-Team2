@@ -1,15 +1,21 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ReportComponent } from './report.component';
+@Component({
+  selector: 'app-navbar',
+  template: `<div></div>`,
 
+})
+class MockNavbarComponent  {};
 describe('ReportComponent', () => {
   let component: ReportComponent;
   let fixture: ComponentFixture<ReportComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReportComponent ]
+      declarations: [ ReportComponent,MockNavbarComponent ]
     })
     .compileComponents();
   });
