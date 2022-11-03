@@ -6,11 +6,13 @@
 
 
 tr:hover {
-    background-color: #bbbdb7;
+    background-color: #234;
 }
 
-.table{
+th{
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-}
+    background-color: red;
+
+} 

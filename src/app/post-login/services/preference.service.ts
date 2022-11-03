@@ -8,7 +8,7 @@ import { Preference } from 'src/app/models/preference';
 })
 export class PreferenceService {
 
-  url:string = "http://localhost:3000/preferences"
+  url:string = "http://localhost:4000/preferences"
 
   constructor(private http: HttpClient) { }
 
