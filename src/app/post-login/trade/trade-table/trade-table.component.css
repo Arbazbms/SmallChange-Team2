@@ -9,10 +9,9 @@ tr:hover {
     background-color: #234;
 }
 
-th{
+
+.table_prime{
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    background-color: red;
-
-} 
+}
