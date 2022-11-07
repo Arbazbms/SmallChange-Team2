@@ -21,14 +21,10 @@ const routes: Routes = [
   {path:'report', component:ReportComponent},
 
 
-
-  {path: 'register', component: RegisterComponent,
-  //  canActivate:[AuthGuard]
-  },
-
+  {path: 'register', component: RegisterComponent, canActivate:[AuthGuard]},
   // {path:'pl', component: LandingComponent},
   // {path:'preference', component:PreferenceComponent},
-  {path:'trade', component:TradePageComponent}
+  // {path:'activity', component:ActivityComponent}
 
   ];
 
