@@ -54,7 +54,7 @@ export class PreferenceComponent implements OnInit {
 
   getPreferenceById(){
     console.log("iiiisssii")
-    this.prefService.getPreferenceById('C110').subscribe({
+    this.prefService.getPreferenceById('C101').subscribe({
       next : (data) => {this.preferenceExistingData = data; this.errorMessage = ''},
       error : (err) => {this.errorMessage = err}
 
@@ -68,9 +68,9 @@ export class PreferenceComponent implements OnInit {
     ref?.click();
   }
   updatePreference(){
-    let prefObj:Preference = new Preference('C110', this.preferanceForm.value.investmentPurpose, this.preferanceForm.value.riskTolerance, this.preferanceForm.value.incomeCategory, this.preferanceForm.value.lengthOfInvestment)
+    let prefObj:Preference = new Preference('C101', this.preferanceForm.value.investmentPurpose, this.preferanceForm.value.riskTolerance, this.preferanceForm.value.incomeCategory, this.preferanceForm.value.lengthOfInvestment)
     console.log("update button clicked clicked")
-    this.prefService.updatePreference('C110', prefObj).subscribe((data) => {
+    this.prefService.updatePreference('C101', prefObj).subscribe((data) => {
       console.log("UPDATE SUCCESS : ", data)
       this.getPreferenceById();
       this.closeModelWhenSucess()
@@ -104,7 +104,7 @@ export class PreferenceComponent implements OnInit {
   }
    onSubmit(){
     console.log("pref control value::-> ",this.preferanceForm.controls['investmentPurpose'].value)
-    let prefObj:Preference = new Preference('C110', this.preferanceForm.value.investmentPurpose, this.preferanceForm.value.riskTolerance, this.preferanceForm.value.incomeCategory, this.preferanceForm.value.lengthOfInvestment)
+    let prefObj:Preference = new Preference('C101', this.preferanceForm.value.investmentPurpose, this.preferanceForm.value.riskTolerance, this.preferanceForm.value.incomeCategory, this.preferanceForm.value.lengthOfInvestment)
     this.prefService.savePreferences(prefObj).subscribe(data => {
       console.log('Pref saved data:', data)
       this.closeModelWhenSucess()

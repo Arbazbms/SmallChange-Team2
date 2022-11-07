@@ -44,9 +44,9 @@ export class PreferenceService {
     return this.http.get(this.url+ '/' +id).pipe(catchError(this.handleError))
   } 
 
-  updatePreference(id:any, data:any):Observable<Preference>{
+  updatePreference(id:any, data:any):Observable<Preference[]>{
     console.log("update spring obj: ", data)
-    return this.http.put<Preference>(this.url+ '/' +id, data, {headers:this.headers})
+    return this.http.put<Preference[]>(this.url, data, {headers:this.headers})
   }
 }
 
