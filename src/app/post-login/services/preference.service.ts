@@ -8,7 +8,7 @@ import { Preference } from 'src/app/models/preference';
 })
 export class PreferenceService {
 
-  url:string = "http://localhost:4000/preferences"
+  url:string = "http://localhost:8080/api/preference"
 
   constructor(private http: HttpClient) { }
 
@@ -36,6 +36,7 @@ export class PreferenceService {
 
 
   savePreferences(prefObj:Preference):Observable<Preference[]>{
+    console.log("POST Spring: ",  prefObj);
    return this.http.post<Preference[]>(this.url, JSON.stringify(prefObj),  {headers: this.headers})
   }
 
@@ -43,8 +44,9 @@ export class PreferenceService {
     return this.http.get(this.url+ '/' +id).pipe(catchError(this.handleError))
   } 
 
-  updatePreference(id:any, data:any):Observable<Preference>{
-    return this.http.put<Preference>(this.url+ '/' +id, JSON.stringify(data), {headers:this.headers})
+  updatePreference(id:any, data:any):Observable<Preference[]>{
+    console.log("update spring obj: ", data)
+    return this.http.put<Preference[]>(this.url, data, {headers:this.headers})
   }
 }
 
