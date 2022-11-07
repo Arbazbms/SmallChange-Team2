@@ -61,16 +61,19 @@ export class LoginFormComponent implements OnInit {
     
     this.clientService.getClients().subscribe((res)=>{
        var user:Boolean = res.find((a:any)=>{
+        console.log(a)
          if(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password){
             clientId = a.clientId;
             console.log("ClientId: ", clientId)
             return(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password)
          }
       });
+      console.log(user)
       if(user){
-        alert("Login Success!!"+ user)
+        alert("Login Success!!")
         localStorage.setItem('client', clientId)
         this.loginForm.reset()
+      
         this.route.navigate(['portfolio'])
       }else{
         this.loginErrorMsg = 'Invalid Email and Password'

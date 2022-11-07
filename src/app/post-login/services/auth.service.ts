@@ -1,14 +1,25 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  public isLoggedIn: boolean;
 
-  IsLoggedIn(){
-    console.log("isLoggedin: ", !!localStorage.getItem('client'))
-    return !!localStorage.getItem('client');
+  constructor() { 
+    this.isLoggedIn = false;
+  }
+
+  public IsLoggedIn(){
+    console.log("isLoggedin: ", !!localStorage.getItem('client'), localStorage.getItem('client'))
+    this.isLoggedIn = !!localStorage.getItem('client')
+    return this.isLoggedIn;
+  }
+
+  public logout(){
+    localStorage.setItem('client',"")
+    this.isLoggedIn = !!localStorage.getItem('client')
   }
 }

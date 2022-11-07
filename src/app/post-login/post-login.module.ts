@@ -14,7 +14,8 @@ import { TradeModule } from './trade/trade.module';
 import { PostLoginRoutingModule } from './post-login-routing.module';
 import { RouterModule } from '@angular/router';
 import { PreferenceListComponent } from './preference-list/preference-list.component';
-
+import { ScrollingModule} from "@angular/cdk/scrolling";
+import {TableModule} from 'primeng/table';
 
 
 @NgModule({
@@ -38,7 +39,9 @@ import { PreferenceListComponent } from './preference-list/preference-list.compo
     PostLoginRoutingModule,
     RouterModule,
     TradeModule,
-    BasicModule
+    BasicModule,
+    ScrollingModule,
+    TableModule
   ],
 
   exports: [

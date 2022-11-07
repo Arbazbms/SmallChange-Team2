@@ -17,7 +17,7 @@ export class PortfolioService {
       marketprice: 424,
       gain: 190,
       ifgain: true,
-      selected:false
+      selected: false,
     },
     {
       instrument: 'Ford',
@@ -38,7 +38,6 @@ export class PortfolioService {
       gain: -210,
       ifgain: false,
       selected: false,
-      
     },
     {
       instrument: 'Amazon',
@@ -53,55 +52,52 @@ export class PortfolioService {
   ];
 
   public instruments: Price[] = [
-    
-      {
+    {
+      instrumentId: 'AMZN',
+      bidPrice: 100,
+      askPrice: 200,
+      timeStamp: new Date('12/10/2006'),
+      instrument: {
         instrumentId: 'AMZN',
-        bidPrice: 100,
-        askPrice: 200,
-        timeStamp: new Date('12/10/2006'),
-        instrument: {
-          instrumentId: 'AMZN',
-          description: 'Amazon',
-          externalIdType: 'ISIN',
-          externalId: 'ISIN14577',
-          categoryId: 'MainIndex',
-          minQuantity: 10,
-          maxQuantity: 130,
-        },
+        description: 'Amazon',
+        externalIdType: 'ISIN',
+        externalId: 'ISIN14577',
+        categoryId: 'MainIndex',
+        minQuantity: 10,
+        maxQuantity: 130,
       },
-      {
+    },
+    {
+      instrumentId: 'DIS',
+      bidPrice: 5,
+      askPrice: 3,
+      timeStamp: new Date('12/10/2006'),
+      instrument: {
         instrumentId: 'DIS',
-        bidPrice: 5,
-        askPrice: 3,
-        timeStamp: new Date('12/10/2006'),
-        instrument: {
-          instrumentId: 'DIS',
-          description: 'Disney',
-          externalIdType: 'ISIN',
-          externalId: 'ISIN01682',
-          categoryId: 'MainIndex',
-          minQuantity: 2,
-          maxQuantity: 39,
-        },
+        description: 'Disney',
+        externalIdType: 'ISIN',
+        externalId: 'ISIN01682',
+        categoryId: 'MainIndex',
+        minQuantity: 2,
+        maxQuantity: 39,
       },
-      {
+    },
+    {
+      instrumentId: 'F',
+      bidPrice: 2,
+      askPrice: 2,
+      timeStamp: new Date('12/10/2006'),
+      instrument: {
         instrumentId: 'F',
-        bidPrice: 2,
-        askPrice: 2,
-        timeStamp: new Date('12/10/2006'),
-        instrument: {
-          instrumentId: 'F',
-          description: 'Ford',
-          externalIdType: 'ISIN',
-          externalId: 'ISIN86356',
-          categoryId: 'InternationalMarket',
-          minQuantity: 1,
-          maxQuantity: 24,
-        },
-      },  
+        description: 'Ford',
+        externalIdType: 'ISIN',
+        externalId: 'ISIN86356',
+        categoryId: 'InternationalMarket',
+        minQuantity: 1,
+        maxQuantity: 24,
+      },
+    },
   ];
-
-  //quantity : number = 100
 
   constructor() {}
 
@@ -109,26 +105,13 @@ export class PortfolioService {
     return of(this.portfolios);
   }
 
-  getInstrument (instrumentid : string) : Price {
-    //let instrumentid = 'AMZN'
-    let data : Price;
-    for( data of this.instruments){
-  
-      if( data.instrument.description === instrumentid){
-        console.log("Checked",data)
-        return data
+  getInstrument(instrumentid: string): Price {
+    let data: Price;
+    for (data of this.instruments) {
+      if (data.instrument.instrumentId === instrumentid) {
+        return data;
       }
-       
     }
-    // this.instruments.forEach( (data) =>{
-    //   console.log(data,data.instrument.description, instrumentid);
-      
-    //   if( data.instrument.description.includes(instrumentid)){
-    //     console.log("Checked",data)
-    //     return data
-    //   }
-    //   return 
-    // })
-    return this.instruments[0]
+    return this.instruments[0];
   }
 }

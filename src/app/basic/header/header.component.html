@@ -1,3 +1,8 @@
-<div id="header_bar">
-    <p id="logo">SmallChange&trade;</p>
+<div id="header_bar" style="display: flex; flex-grow: grow">
+  <p id="logo">SmallChange&trade;</p>
+
+  <span *ngIf="authService.isLoggedIn"><app-navbar></app-navbar> </span>
+
+  <a href='#' *ngIf="authService.isLoggedIn" (click)='authService.logout()'>Log Out</a>
+
 </div>

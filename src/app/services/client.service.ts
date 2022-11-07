@@ -20,11 +20,11 @@ export class ClientService {
     const headers = new HttpHeaders({
       'Content-type' : 'application/json'
     })
-     this.http.post('http://localhost:3000/clients', JSON.stringify(client), {headers: headers})
+     this.http.post('http://localhost:4000/clients', JSON.stringify(client), {headers: headers})
      .subscribe(res => console.log("POST SUCESS", res))
     }
     getClients():Observable<any>{
-      return (this.http.get('http://localhost:3000/clients'))
+      return (this.http.get('http://localhost:4000/clients'))
     }
   }
   //demo

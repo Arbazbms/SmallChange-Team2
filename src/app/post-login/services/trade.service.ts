@@ -11,7 +11,7 @@ import { TradeModel } from 'src/app/models/trade-model';
 })
 export class TradeService {
   cashBalance: number = 1000000;
-  baseUrl: string = 'http://localhost:3000/';
+  baseUrl: string = 'http://localhost:4000/';
   tradeRef = 3463256445;
   intrumentDetails: TradeModel[] = [];
   price: Price = new Price('',-1, -1,new Date(),new Instrument('', '', '', '', '', -1, -1));
