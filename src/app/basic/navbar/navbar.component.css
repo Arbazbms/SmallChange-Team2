@@ -1,14 +1,14 @@
-.navbar{
+/* .navbar{
     box-sizing: content-box;
     display: block;
     background-color: #f2f2f2;
     margin:auto;
-    /* max-width: 62.5em; */
+    /* max-width: 62.5em; 
     display: block;
     padding: 0.5rem 1rem;
     margin-bottom: 4em;
     
-  }
+  } */
   .navbar ul{
     list-style-type: none;
     margin: 0em -1.0em;

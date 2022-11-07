@@ -1,10 +1,9 @@
-<app-navbar></app-navbar>
-
 <div class="container">
   <p class="h2">Your portfolio</p>
 
-  <div class="table_prime" >
+  <div class="table_prime">
     <p-table
+      #dt
       [value]="portfolio"
       [rowHover]="true"
       [rows]="10"
@@ -12,17 +11,27 @@
       responsiveLayout="scroll"
       [paginator]="true"
     >
+      
+
       <ng-template pTemplate="header">
         <tr>
-          <th>Stock</th>
-          <th>Cost</th>
+          <th pSortableColumn="stock">
+            Stock
+            <p-sortIcon field="stock"></p-sortIcon>
+          </th>
+
+          <th pSortableColumn="cost">
+            Cost
+            <p-sortIcon field="cost"></p-sortIcon>
+          </th>
+        
           <th>Market Value</th>
           <th>Gain/Loss</th>
         </tr>
       </ng-template>
 
-      <ng-template pTemplate="body" let-item >
-        <tr  (click)=displaySellTab(item.instrumentid)>
+      <ng-template pTemplate="body" let-item>
+        <tr (click)="displaySellTab(item.instrumentid)">
           <td>{{ item.instrument }}</td>
           <td>{{ item.costprice }}</td>
           <td>{{ item.marketprice }}</td>
@@ -39,8 +48,6 @@
       </ng-template>
     </p-table>
   </div>
-
-  
 </div>
 
 <div *ngIf="showModal">

@@ -6,7 +6,7 @@ a{
     font-size: 18px;
     line-height: 1.5em;
     text-decoration: none;
-    color: #356F95;
+    color: #eef0f1;
   }
 
 
@@ -26,7 +26,7 @@ a{
   .activelink{
 
     /* background-color: #568200; */
-    color:rgba(104, 104, 231, 0.849);
+    color:rgba(20, 71, 27, 0.849);
 
 
   }
