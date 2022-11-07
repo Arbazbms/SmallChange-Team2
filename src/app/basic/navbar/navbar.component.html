@@ -1,11 +1,18 @@
-<span class="navbar" id=idofnav [ngClass]="{'responsive':hamburger_clicked}">
-    <ul>
-        <li><app-links navlinks="portfolio"></app-links></li>
-        <li><app-links navlinks="activity"></app-links></li>
-        <li><app-links navlinks="trade"></app-links></li>
-        <li><app-links navlinks="preference"></app-links></li>
-        <li><app-links navlinks="report"></app-links></li>
-        <button id="hamburger_button" (click)="hamburger_click()" class="icon" id="hamburger-icon">&#9776;</button>
-    </ul>
-      
+<span class="navbar" id="idofnav" [ngClass]="{ responsive: hamburger_clicked }">
+  <ul>
+    <li><app-links navlinks="portfolio"></app-links></li>
+    <li><app-links navlinks="activity"></app-links></li>
+    <li><app-links navlinks="trade"></app-links></li>
+    <li><app-links navlinks="preference"></app-links></li>
+    <li><app-links navlinks="report"></app-links></li>
+    <li><app-links navlinks="logout" (click)="authService.logout()"></app-links></li>
+    <button
+      id="hamburger_button"
+      (click)="hamburger_click()"
+      class="icon"
+      id="hamburger-icon"
+    >
+      &#9776;
+    </button>
+  </ul>
 </span>

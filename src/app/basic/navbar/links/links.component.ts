@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { AuthService } from 'src/app/post-login/services/auth.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ export class LinksComponent implements OnInit {
 
   @Input() navlinks:String | undefined ;
   mystring:string='';
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
       if(this.navlinks)

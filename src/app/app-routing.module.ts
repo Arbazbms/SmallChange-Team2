@@ -18,17 +18,12 @@ const routes: Routes = [
   // {path:'', component:LandingPageComponent},
   {path: 'login', component: LoginFormComponent},
 
-  {path:'report', component:ReportComponent},
 
 
-
-  {path: 'register', component: RegisterComponent,
-  //  canActivate:[AuthGuard]
-  },
-
+  {path: 'register', component: RegisterComponent},
   // {path:'pl', component: LandingComponent},
   // {path:'preference', component:PreferenceComponent},
-  {path:'trade', component:TradePageComponent}
+  // {path:'activity', component:ActivityComponent}
 
   ];
 

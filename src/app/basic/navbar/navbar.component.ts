@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { AuthService } from 'src/app/post-login/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import { NgClass } from '@angular/common';
 export class NavbarComponent  {
 
   hamburger_clicked=false
-  constructor() { }
+  constructor(public authService: AuthService) { }
   hamburger_click(){
     this.hamburger_clicked=!(this.hamburger_clicked)
   }
