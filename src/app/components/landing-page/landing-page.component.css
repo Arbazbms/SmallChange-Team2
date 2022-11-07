@@ -1,15 +1,35 @@
-.jumbotron{
-  background-image: url('../../../assets/images/BGimg1.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 100%;
-  height: 50%;
 
-
-
+body {
+  padding: 0%;
+  margin: 0%;
+}
+.text {
+  padding: 200px;
+  text-align: center;
 }
 
+section {
+  width: 100%;
+  min-height: 500px;
+}
 
+.pattern {
+  position: relative;
+  background-color:  #568200;
+}
+
+.pattern:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 215px;
+  background: url(
+    https://media.geeksforgeeks.org/wp-content/uploads/20200326181026/wave3.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 .text-bold{
   font-weight: bold;
