@@ -1,1 +1,5 @@
-<a id="mylink" [routerLink]= "['/',navlinks]" [routerLinkActive]='["activelink"]'>{{mystring}}</a> 
+
+<a *ngIf="navlinks != 'logout'" id="mylink" [routerLink]= "['/',navlinks]" [routerLinkActive]='["activelink"]'>{{mystring}}</a> 
+
+<a *ngIf="navlinks === 'logout'" href="#" (click)="authService.logout()">Log Out</a>
+

@@ -9,12 +9,7 @@ import { TradeHistory } from '../services/tradeHistory.service';
 
 import { ActivityComponent } from './activity.component';
 
-@Component({
-  selector: 'app-navbar',
-  template: `<div></div>`,
- 
-})
-class MockNavbarComponent  {};
+
 describe('ActivityComponent', () => {
   let component: ActivityComponent;
   let fixture: ComponentFixture<ActivityComponent>;
@@ -25,7 +20,7 @@ describe('ActivityComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
 
-      declarations: [ ActivityComponent,MockNavbarComponent ],
+      declarations: [ ActivityComponent ],
       imports:[DataTablesModule],
       providers: [
         { provide: TradeHistory, useValue: mockTradeService }

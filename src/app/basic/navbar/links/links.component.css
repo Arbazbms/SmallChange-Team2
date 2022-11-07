@@ -1,32 +1,28 @@
-a{
-    font-family: "Fidelity Sans", arial, sans-serif;
-    box-sizing: content-box;
-    margin: 0em;
-    padding: 0.5em 1.0em;
-    font-size: 18px;
-    line-height: 1.5em;
-    text-decoration: none;
-    color: #356F95;
-  }
+a {
+  font-family: "Fidelity Sans", arial, sans-serif;
+  box-sizing: content-box;
+  margin: 0em;
+  padding: 0.5em 1.0em;
+  font-size: 18px;
+  line-height: 1.5em;
+  text-decoration: none;
+  color: #eef0f1;
+}
 
 
+a:focus {
+  border-style: dotted;
+  border-width: 1px;
+}
 
-  /* a:visited{
-    color: purple;
-  } */
-  a:focus{
-    border: #cccccc;
-    border-style: dotted;
-    border-width: 1px;
-  }
-  a:hover{
-    color: #000000;
-  }
+a:hover {
+  color: #000000;
+}
 
-  .activelink{
+.activelink {
 
-    /* background-color: #568200; */
-    color:rgba(104, 104, 231, 0.849);
+  background-color: white;
+  color: rgba(20, 71, 27, 0.849);
 
 
-  }
+}

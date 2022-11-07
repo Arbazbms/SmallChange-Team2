@@ -1,68 +1,63 @@
-.navbar{
-    box-sizing: content-box;
-    display: block;
-    background-color: #f2f2f2;
-    margin:auto;
-    /* max-width: 62.5em; */
-    display: block;
-    padding: 0.5rem 1rem;
-    margin-bottom: 4em;
-    
-  }
-  .navbar ul{
-    list-style-type: none;
-    margin: 0em -1.0em;
+.navbar ul {
+  list-style-type: none;
+  margin: 0em -1.0em;
+  padding: 0em;
+  position: relative;
+
+
+}
+
+.navbar li {
+  padding: 0.5rem 1rem;
+  margin: 0 -1em;
+  display: inline-block;
+}
+
+/* Code for hamburger starts below */
+.navbar .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar {
     padding: 0em;
+  }
+
+  .navbar li {
+    display: none;
+  }
+
+  .navbar ul>button.icon {
+    display: block;
+    margin-top: -2.4em;
+    margin-right: 1.2em;
     position: relative;
-    
-  
-  }
-  .navbar li{
-    padding: 0.5rem 1rem;
-    margin: 0 -1em;
-    display: inline-block;
-  }
-   
-  /* Code for hamburger starts below */
-  .navbar .icon{
-   display: none;
-  }
-  @media screen and (max-width: 600px) {
-      .navbar{
-        padding: 0em;
-      }
-      .navbar li{
-        display: none;
-      }
-      .navbar ul > button.icon{
-        display: block;
-        margin-top: -2.4em;
-        margin-right: 1.2em;
-        position: relative;
-        float: right;
-  
-      }
-  }
-  @media screen and (max-width: 600px) {
-      .navbar.responsive{
-        position: relative;
-      }
-   
-      .navbar.responsive ul > button.icon{
-        position: absolute;
-        right: 0;
-        top:0;
-      }
-      .navbar.responsive li{
-        float: none;
-        display: block;
-        text-align: left;
-      }
-  }
-  
-  .icon{
-    color: white ;
-    background-color: #568200 ;
-    border: none;
+    float: right;
 
   }
+}
+
+@media screen and (max-width: 600px) {
+  .navbar.responsive {
+    position: relative;
+  }
+
+  .navbar.responsive ul>button.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .navbar.responsive li {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+.icon {
+  color: white;
+  background-color: #568200;
+  border: none;
+
+}
