@@ -6,7 +6,7 @@ import { ReportComponent } from './report.component';
 @Component({
   selector: 'app-navbar',
   template: `<div></div>`,
-
+})
 
 @Component({
   selector: 'app-navbar',

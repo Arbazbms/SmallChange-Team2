@@ -1,6 +1,6 @@
 export class Preference {
     constructor(
-        public id:string,
+        public clientId:string,
         public investmentPurpose:string,
         public riskTolerance:string,
         public incomeCategory:string,
