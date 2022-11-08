@@ -14,8 +14,8 @@ import { passwordMustMatch } from './confirmed.validator';
 })
 export class RegisterComponent implements OnInit {
   passworderror=false
-  alreadyExists=false
-  public client_to_be_added:Client=new Client(-1,'','','','','','','',new Identification('',''))
+  alreadyExists:Boolean=false
+  public client_to_be_added:Client=new Client('','','','','','',[new Identification('','')],'');
 passwordErrorTextmsg: string =
   'Invalid Password- Must contain between 6 and 24 letters, numbers, underscores or hyphens ';
 registerForm: FormGroup;
@@ -112,74 +112,37 @@ get password2(){
 onSubmit() {
 var formvalues=this.registerForm.value
 var id=Math.floor(Math.random() * 1000);
-var identity= new Identification(formvalues.idtype,formvalues.idval)
-  this.client_to_be_added.id=id
-  this.client_to_be_added.clientId="h31",
+var identity= [new Identification(formvalues.idtype,formvalues.idval)]
+  this.client_to_be_added.clientId="",
   this.client_to_be_added.email=formvalues.emailid,
-  this.client_to_be_added.username=formvalues.username,
-  this.client_to_be_added.DOB=formvalues.dob,
+  this.client_to_be_added.date_of_birth=formvalues.dob,
   this.client_to_be_added.country=formvalues.country,
-  this.client_to_be_added.postalCode=formvalues.postal,
+  this.client_to_be_added.postal=formvalues.postal,
   this.client_to_be_added.password=formvalues.password1,
-  this.client_to_be_added.identity=identity
-console.log(this.client_to_be_added)
-var allClients:Client[]=[
-  {
-    "id": -1,
-    "clientId": "h31",
-    "email": "q@gmail.in",
-    "username": "hello",
-    "DOB": "2022-09-27",
-    "country": "India",
-    "postalCode": "832110",
-    "password": "ashr",
-    "identity": {
-      "type": "Adhaar",
-      "value": "576565467567"
+  this.client_to_be_added.id=identity
+  this.client_to_be_added.token=""
+  console.log(this.client_to_be_added)
+
+
+ this.clientservice.addClient(this.client_to_be_added).subscribe({
+    next : (data) => { 
+
+      this.alreadyExists = false
+      alert("SUCCESS")
+    },
+    error: (e) => {
+      this.alreadyExists = true;
+      alert("UN-SUCCESS!!!!")
     }
-  },
-  {
-    "id": 3,
-    "clientId": "h31",
-    "email": "ashharmohammad2@gmail.com",
-    "username": "ashhar",
-    "DOB": "2022-09-21",
-    "country": "India",
-    "postalCode": "832110",
-    "password": "ashr",
-    "identity": {
-      "type": "Adhaar",
-      "value": "733389459760"
-    }
-  },
-  {
-    "id": 1,
-    "clientId": "h31",
-    "email": "ashharmohammad2@gmail.com",
-    "username": "ashhar",
-    "DOB": "2022-09-27",
-    "country": "India",
-    "postalCode": "832110",
-    "password": "ashr",
-    "identity": {
-      "type": "Adhaar",
-      "value": "733389459760"
-    }
-  }
-]
-allClients.forEach((client:Client) => {
-  if(client.email===this.client_to_be_added.email || client.identity.value===this.client_to_be_added.identity.value)
-    this.alreadyExists=true
-});
-console.log(this.alreadyExists)
-if(!this.alreadyExists){
-  this.clientservice.addClient(this.client_to_be_added)
-  alert("registeration succesful!")
+  })
+
+
 
   this.registerForm.reset()  
   // this.router.navigate(['/login'])
+
 }
-}
+
 updateValueAndValidity(){
 
     if(String(this.registerForm.get('idtype')?.value)=='Adhaar') {
