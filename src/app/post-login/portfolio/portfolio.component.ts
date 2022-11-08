@@ -20,57 +20,77 @@ import { Table } from 'primeng/table';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css'],
 })
-export class PortfolioComponent implements OnInit, AfterViewInit {
-  public portfolio: Portfolio[] = [];
+export class PortfolioComponent implements OnInit {
+  public portfolios: Portfolio[] = [];
   public selected = false;
   public index = -1;
 
   public soldentirely = true;
-
+  private clientId : any = localStorage.getItem('client');
   constructor(public ps: PortfolioService) {}
 
   instrumentSymbol: string = '';
   order: Order = new Order('', -1, -1, '', '', '', new Date());
   soldEntirely: boolean = false;
   ngOnInit(): void {
-    this.ps.getPortfolio().subscribe((data) => {
-      this.portfolio = data;
-    });
-  }
-  ngAfterViewInit(): void {
-    this.getallportfolio();
-    console.log(this.portfolio);
+    
+    this.getAllInstruments()
+    this.getallportfolio()
   }
 
+
   getallportfolio() {
-    this.ps.getPortfolio().subscribe((data) => {
-      this.portfolio = data;
+    this.ps.getPortfolio(this.clientId).subscribe((data) => {
+      this.portfolios = data;
+      this.portfolios.forEach( (portfolio) => {
+        portfolio.market_value = this.getMarketPrice(portfolio.instrument_id)
+        portfolio.gain=portfolio.cost_price-portfolio.market_value
+        portfolio.ifgain=portfolio.cost_price>portfolio.market_value
+      })
+      
     });
   }
 
   showModal: boolean = false;
-  instrument: Price = new Price(
-    '',
-    -1,
-    -1,
-    new Date(),
-    new Instrument('', '', '', '', '', -1, -1)
-  );
+  instrument: Price = new Price('',-1,-1,new Date(),new Instrument('', '', '', '', '', -1, -1)  );
+  instruments : Price[] = []
 
   displaySellTab(instrumentId: string) {
     console.log('HELOO hi', instrumentId);
 
-    this.instrument = this.ps.getInstrument(instrumentId);
+    this.instrument = this.getInstrument(instrumentId);
+
+    console.log('in display', this.instrument);
 
     this.order.quantity = this.instrument.instrument.minQuantity;
     this.order.direction = 'S';
     this.showModal = true;
 
-    console.log('in display', this.instrument);
    
-    console.log('in sell display', this.instrument);
   }
 
+  getAllInstruments(){
+    this.ps.getAllInstruments().subscribe((element) => {
+      this.instruments = <Price[]>element;
+      console.log("ALL:",this.instruments);
+    });
+  }
+
+  getInstrument(instrumentid: string): Price{
+      let data: Price;
+      for (data of this.instruments) {
+        if (data.instrument.instrumentId === instrumentid) {
+          return data;
+        }
+      }
+  
+    return this.instruments[0];
+  }
+
+  getMarketPrice(instrumentid: string): number{
+    return this.getInstrument(instrumentid).askPrice
+
+  }
  
   submit() {
     this.getallportfolio;

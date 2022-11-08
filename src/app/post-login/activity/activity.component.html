@@ -3,7 +3,7 @@
 
   <div class="table_prime">
     <p-table
-      [value]="tradeHist"
+      [value]="trade"
       [rowHover]="true"
       [rows]="10"
       [rowsPerPageOptions]="[10, 25, 50]"
@@ -12,14 +12,10 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="asset">
-            Asset Class
-            <p-sortIcon field="asset"></p-sortIcon>
-          </th>
-          <th>Side</th>
-          <th>Security</th>
-          <th>Account</th>
-          <th>Qty</th>
+          <th>Instrument ID</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th>Direction</th>
           <th>Cash Value</th>
           <th>Date</th>
         </tr>
@@ -28,14 +24,13 @@
       <ng-template pTemplate="body" let-trade>
         <tr>
           <td>
-            {{ trade.asset }}
+            {{ trade.instrumentId }}
           </td>
-          <td>{{ trade.side }}</td>
-          <td>{{ trade.security }}</td>
-          <td>{{ trade.account }}</td>
-          <td>{{ trade.qty }}</td>
-          <td>{{ trade.cash }}</td>
-          <td>{{ trade.date }}</td>
+          <td>{{ trade.quantity }}</td>
+          <td>{{ trade.executionPrice }}</td>
+          <td>{{ trade.direction }}</td>
+          <td>{{ trade.cashValue }}</td>
+          <td>{{ trade.order.dateTime }}</td>
         </tr>
       </ng-template>
     </p-table>

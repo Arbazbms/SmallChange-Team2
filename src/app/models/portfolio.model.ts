@@ -4,11 +4,19 @@ export class Portfolio {
     public ifgain:boolean 
     public selected:boolean
     constructor(
-        public instrument: string,
-        public instrumentid: string,
-        public orderid: string,
-        public costprice: number, 
-        public marketprice:number,
+        public portfolio_item_id: string,
+        public client_id: string,
+        public instrument_id: string,
+        public trade_id: string,
+        public cost_price: number, 
+        public quantity:number,
+        public market_value: number
+        // public portfolioItemId: string,
+        // public clientId: string,
+        // public instrumentId: string,
+        // public tradeId: string,
+        // public costPrice: number, 
+        // public quantity:number,
         // public selected:boolean
 
 
@@ -18,8 +26,8 @@ export class Portfolio {
         // this.orderid=''
         // this.costprice=0
         // this.marketprice=0
-        this.gain=this.marketprice-this.costprice
-        this.ifgain=this.marketprice>this.costprice
+        this.gain=this.cost_price-this.market_value
+        this.ifgain=this.cost_price>this.market_value
         this.selected=false
     }
 
