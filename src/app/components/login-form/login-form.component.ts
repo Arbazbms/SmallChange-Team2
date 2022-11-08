@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { Login } from 'src/app/models/login.model';
 import { ClientService } from 'src/app/services/client.service';
 
 @Component({
@@ -59,28 +60,37 @@ export class LoginFormComponent implements OnInit {
       return
     }
     
-    this.clientService.getClients().subscribe((res)=>{
-       var user:Boolean = res.find((a:any)=>{
-        console.log(a)
-         if(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password){
-            clientId = a.clientId;
-            console.log("ClientId: ", clientId)
-            return(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password)
-         }
-      });
-      console.log(user)
-      if(user){
-        alert("Login Success!!")
-        localStorage.setItem('client', clientId)
-        this.loginForm.reset()
+    this.clientService.postClientToAuthenticateCredentialsl(new Login(this.loginForm.value.email,this.loginForm.value.password)).subscribe((res1)=>{
+      console.log("res form postClientToAuth***", res1);
+      let clientId = res1.clientId;
+      console.log("fetched clientID:: ", clientId);
+      alert("Login Success!!")
+      localStorage.setItem('client', clientId)
+      this.loginForm.reset()
+      this.route.navigate(['portfolio'])
+      //  var user:Boolean = res.find((a:any)=>{
+      //   console.log(a)
+      //    if(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password){
+      //       clientId = a.clientId;
+      //       console.log("ClientId: ", clientId)
+      //       return(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password)
+      //    }
+      // });
+      // console.log(user)
+      // if(user){
+      //   alert("Login Success!!")
+      //   localStorage.setItem('client', clientId)
+      //   this.loginForm.reset()
       
-        this.route.navigate(['portfolio'])
-      }else{
+      //   this.route.navigate(['portfolio'])
+      // }else{
+      //   this.loginErrorMsg = 'Invalid Email and Password'
+      //   this.route.navigate(['login'])
+      // }
+    }, err=>{
+      // alert("something went wrong")
         this.loginErrorMsg = 'Invalid Email and Password'
         this.route.navigate(['login'])
-      }
-    }, err=>{
-      alert("something went wrong")
     })
   }
 }
