@@ -12,6 +12,7 @@ import { TradeModel } from 'src/app/models/trade-model';
 export class TradeService {
   cashBalance: number = 1000000;
   baseUrl: string = 'http://localhost:4000/';
+  fmtsUrl: string = 'http://localhost:3000/fmts/trades/'
   tradeRef = 3463256445;
   intrumentDetails: TradeModel[] = [];
   price: Price = new Price('',-1, -1,new Date(),new Instrument('', '', '', '', '', -1, -1));
@@ -20,7 +21,7 @@ export class TradeService {
   constructor(private http: HttpClient) {}
 
   getAllInstruments() : Observable<Price[]>{
-    return this.http.get<Price[]>(this.baseUrl+'price')
+    return this.http.get<Price[]>(this.fmtsUrl+'prices')
   }
 
 

@@ -14,7 +14,8 @@ import { NavbarComponent } from 'src/app/basic/navbar/navbar.component';
 import { BasicModule } from 'src/app/basic/basic.module';
 import { ScrollingModule} from "@angular/cdk/scrolling";
 import {TableModule} from 'primeng/table';
-
+import { DropdownModule } from "primeng/dropdown";
+ 
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {TableModule} from 'primeng/table';
     BrowserAnimationsModule,
     BasicModule,
     ScrollingModule,
-    TableModule
+    TableModule,
+    DropdownModule
   ],
   exports: [
     TradePageComponent,

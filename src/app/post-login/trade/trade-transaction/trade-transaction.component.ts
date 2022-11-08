@@ -5,6 +5,7 @@ import { Order } from 'src/app/models/order';
 import { Price } from 'src/app/models/price';
 import { TradeService } from '../../services/trade.service';
 import { v4 as uuid } from 'uuid';
+import { Trade } from 'src/app/models/trade';
 
 @Component({
   selector: 'app-trade-transaction',
@@ -19,6 +20,7 @@ export class TradeTransactionComponent implements OnInit {
   @Output() showModalEvent = new EventEmitter()
   @Output() soldAllStocks = new EventEmitter()
 
+  trade: Trade  = new Trade('',-1,-1,'','',new Order('',-1,-1,'','',''),'',-1)
   hideDialog(){
     console.log("In page", this.showModal)
     this.showModalEvent.emit(this.showModal)
@@ -49,7 +51,7 @@ export class TradeTransactionComponent implements OnInit {
     }
   }
 
-
+  private clientId : any = localStorage.getItem('client');
   generateOrder() {
     this.showModal = false;
     this.showModalEvent.emit(this.showModal)
@@ -57,8 +59,8 @@ export class TradeTransactionComponent implements OnInit {
     if (this.isCapable()) {
       //this.order.direction = 'B';
       this.order.targetPrice = this.instrument.bidPrice * this.order.quantity;
-      this.order.instrumentId = this.instrument.instrumentId;
-      this.order.clientId = 'SGAK';
+      this.order.instrumentId = this.instrument.instrument.instrumentId;
+      this.order.clientId = this.clientId
       this.order.orderId = uuid();
     }
     console.log(this.order);
@@ -69,6 +71,18 @@ export class TradeTransactionComponent implements OnInit {
     console.log("Sold All-", soldAll)
     // return this.tradeService.placeOrder(this.order) ? true : false;
   }
+
+
+  // generateTrade(newOrder: Order){
+  //   this.trade.tradeId= uuid()
+  //   this.trade.quantity = newOrder.quantity
+  //   this.trade.executionPrice
+  //   this.trade.direction
+  //   this.trade.order
+  //   this.trade.cashValue
+  //   this.trade.clientId
+  //   this.trade.instrumentId
+  // }
 
   showToast() {
     this.messageService.add({

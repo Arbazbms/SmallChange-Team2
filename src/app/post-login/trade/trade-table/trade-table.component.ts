@@ -23,6 +23,7 @@ export class TradeTableComponent implements OnInit {
   priceDetails: Price[] = [];
   instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
   showModal: boolean = false;
+  categories : any;
 
   ngOnInit() {
     this.getAllInstruments();
@@ -32,6 +33,11 @@ export class TradeTableComponent implements OnInit {
     this.tradeService.getAllInstruments().subscribe((data) => {
       this.instruments = <Price[]>data;
       console.log(this.instruments);
+      this.categories = [
+        {label: "Stock", value:"STOCK"},
+        {label: "Govt", value:"GOVT"},
+        {label: "CD", value:"CD"}
+      ]
     });
   }
 
@@ -62,6 +68,7 @@ export class TradeTableComponent implements OnInit {
   hideDialog(show : boolean){
     this.showModal = show
   }
+
 
   showToast() {
     this.messageService.add({

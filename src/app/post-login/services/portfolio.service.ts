@@ -59,7 +59,7 @@ export class PortfolioService {
       timeStamp: new Date('12/10/2006'),
       instrument: {
         instrumentId: 'AMZN',
-        description: 'Amazon',
+        instrumentDescription: 'Amazon',
         externalIdType: 'ISIN',
         externalId: 'ISIN14577',
         categoryId: 'MainIndex',
@@ -74,7 +74,7 @@ export class PortfolioService {
       timeStamp: new Date('12/10/2006'),
       instrument: {
         instrumentId: 'DIS',
-        description: 'Disney',
+        instrumentDescription: 'Disney',
         externalIdType: 'ISIN',
         externalId: 'ISIN01682',
         categoryId: 'MainIndex',
@@ -89,7 +89,7 @@ export class PortfolioService {
       timeStamp: new Date('12/10/2006'),
       instrument: {
         instrumentId: 'F',
-        description: 'Ford',
+        instrumentDescription: 'Ford',
         externalIdType: 'ISIN',
         externalId: 'ISIN86356',
         categoryId: 'InternationalMarket',

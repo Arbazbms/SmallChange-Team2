@@ -1,3 +1,5 @@
+import { Order } from "./order";
+
 export class Trade {
   constructor(
     public instrumentId: string,
@@ -5,7 +7,7 @@ export class Trade {
     public executionPrice: number,
     public direction: string,
     public clientId: string,
-    public order: string,
+    public order: Order,
     public tradeId: string,
     public cashValue: number
   ) {}
