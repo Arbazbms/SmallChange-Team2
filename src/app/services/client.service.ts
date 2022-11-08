@@ -24,7 +24,7 @@ export class ClientService {
      .subscribe(res => console.log("POST SUCESS", res))
     }
     getClients():Observable<any>{
-      return (this.http.get('http://localhost:3000/clients'))
+      return (this.http.get('http://localhost:4000/clients'))
     }
   }
   //demo
