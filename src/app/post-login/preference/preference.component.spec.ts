@@ -26,7 +26,7 @@ describe('PreferenceComponent', () => {
 
     let testPreference: Preference = 
       {
-        "id": "A685a",
+        "clientId": "A685a",
         "investmentPurpose": "Edu",
         "riskTolerance": "CONSERVATIVE",
         "incomeCategory": "40,001 - 60,000",

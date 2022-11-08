@@ -41,7 +41,7 @@ describe('PreferenceService', () => {
   // Testing getPreferenceById
   it('should return one preference By Id', inject([PreferenceService], fakeAsync((service: PreferenceService) => { 
     let pref: any = {
-      id: '',
+      clientId: '',
       investmentPurpose: '',
       riskTolerance: '',
       incomeCategory: '',
@@ -49,15 +49,15 @@ describe('PreferenceService', () => {
     }; 
     let testPref:Preference=
       {
-      "id": "A685",
+      "clientId": "C101",
       "investmentPurpose": "Education",
       "riskTolerance": "AGGRESSIVE",
       "incomeCategory": "20001-40000",
       "lengthOfInvestment": "0-5"
       }
   
-      service.getPreferenceById("A685").subscribe(data => pref = data); 
-      const req = httpTestingController.expectOne('http://localhost:3000/preferences/A685'); 
+      service.getPreferenceById("C101").subscribe(data => pref = data); 
+      const req = httpTestingController.expectOne('http://localhost:8080/api/preference/C101'); 
       // Assert that the request is a GET.
       expect(req.request.method).toEqual('GET');
       // Respond with mock data, causing Observable to resolve. 
@@ -76,8 +76,8 @@ describe('PreferenceService', () => {
         let errorResp: HttpErrorResponse;
         let errorReply: string = ''; 
         const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-        service.getPreferenceById("A685").subscribe({next: () => fail('Should not succeed'), error: (e) => errorReply = e});
-        const req = httpTestingController.expectOne(service.url+"/A685"); 
+        service.getPreferenceById("C101").subscribe({next: () => fail('Should not succeed'), error: (e) => errorReply = e});
+        const req = httpTestingController.expectOne(service.url+"/C101"); 
         // Assert that the request is a GET.
          expect(req.request.method).toEqual('GET');
         // Respond with error
