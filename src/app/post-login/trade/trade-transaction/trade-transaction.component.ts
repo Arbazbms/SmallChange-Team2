@@ -16,18 +16,19 @@ import { Trade } from 'src/app/models/trade';
 export class TradeTransactionComponent implements OnInit {
 
   @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
-  @Input() order: Order = new Order('',-1,-1,'','','')
+  @Input() order: Order = new Order('',-1,-1,'','','', new Date())
   @Output() showModalEvent = new EventEmitter()
   @Output() soldAllStocks = new EventEmitter()
 
-  trade: Trade  = new Trade('',-1,-1,'','',new Order('',-1,-1,'','',''),'',-1)
+  trade: Trade  = new Trade('',-1,-1,'','',new Order('',-1,-1,'','','', new Date()),'',-1,'')
+  newTrade :any = {}
   hideDialog(){
     console.log("In page", this.showModal)
     this.showModalEvent.emit(this.showModal)
   }
 
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService, private tradeService: TradeService) {}
 
   showModal : boolean = true;
   buttonContent : string = ''
@@ -64,25 +65,31 @@ export class TradeTransactionComponent implements OnInit {
       this.order.orderId = uuid();
     }
     console.log(this.order);
-    
+    this.generateTrade(this.order)
     this.showToast();
     let soldAll = ( this.order.quantity === this.maxQ)? true: false
     this.soldAllStocks.emit(soldAll)
     console.log("Sold All-", soldAll)
+
+    
+    //console.log("SUCCESS:",this.tradeService.saveOrder(this.order))
     // return this.tradeService.placeOrder(this.order) ? true : false;
   }
 
 
-  // generateTrade(newOrder: Order){
-  //   this.trade.tradeId= uuid()
-  //   this.trade.quantity = newOrder.quantity
-  //   this.trade.executionPrice
-  //   this.trade.direction
-  //   this.trade.order
-  //   this.trade.cashValue
-  //   this.trade.clientId
-  //   this.trade.instrumentId
-  // }
+  generateTrade(newOrder: Order){
+    this.trade.tradeId= uuid()
+    this.trade.quantity = newOrder.quantity
+    this.trade.executionPrice = newOrder.targetPrice
+    this.trade.direction = newOrder.direction
+    this.trade.cashValue = newOrder.targetPrice + 100 // fees
+    this.trade.clientId = newOrder.clientId
+    this.trade.instrumentId = newOrder.instrumentId
+    this.trade.orderId = newOrder.orderId
+    this.trade.order = newOrder
+    console.log(JSON.stringify(this.trade))
+    this.tradeService.saveTrade(this.trade)
+  }
 
   showToast() {
     this.messageService.add({

@@ -5,6 +5,7 @@ export class Order {
     public targetPrice: number,
     public direction: string,
     public clientId: string,
-    public orderId: string
+    public orderId: string,
+    public dateTime : Date
   ) {}
 }

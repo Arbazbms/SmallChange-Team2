@@ -30,7 +30,7 @@ export class PortfolioComponent implements OnInit, AfterViewInit {
   constructor(public ps: PortfolioService) {}
 
   instrumentSymbol: string = '';
-  order: Order = new Order('', -1, -1, '', '', '');
+  order: Order = new Order('', -1, -1, '', '', '', new Date());
   soldEntirely: boolean = false;
   ngOnInit(): void {
     this.ps.getPortfolio().subscribe((data) => {
