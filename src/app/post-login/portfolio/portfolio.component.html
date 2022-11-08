@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="h2">Your portfolio</p>
+  <p class="h2">Current Holdings</p>
 
   <div class="table_prime">
     <p-table
@@ -11,23 +11,36 @@
       responsiveLayout="scroll"
       [paginator]="true"
     >
-      
+    <ng-template pTemplate="caption">
+      <div class="flex">
+          <span class="search-right">
+            <!-- <i class="pi pi-search"></i> -->
+              <!-- <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" /> -->
+              <p-columnFilter type="text" field="instrument"></p-columnFilter>
+              
+            </span>
+      </div>
+  </ng-template>
 
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="stock">
-            Stock
-            <p-sortIcon field="stock"></p-sortIcon>
-          </th>
-
-          <th pSortableColumn="cost">
-            Cost
-            <p-sortIcon field="cost"></p-sortIcon>
-          </th>
-        
-          <th>Market Value</th>
-          <th>Gain/Loss</th>
+          <th pSortableColumn="instrument">Stock <p-sortIcon field="instrument"></p-sortIcon> </th>
+          <th pSortableColumn="costprice"> Cost<p-sortIcon field="costprice"></p-sortIcon> </th>
+          <th pSortableColumn="marketprice">Market Value <p-sortIcon field="marketprice"></p-sortIcon></th>
+          <th pSortableColumn="gain">Gain/Loss<p-sortIcon field="gain"></p-sortIcon></th>
         </tr>
+
+        <!-- <tr>
+          <th>
+            <p-columnFilter type="text" field="instrument"></p-columnFilter>
+          </th>
+          <th<p-columnFilter type="text" field="instrument"></p-columnFilter>
+          </th>
+          <th><p-columnFilter type="text" field="instrument"></p-columnFilter>
+          </th>
+          <th>
+          </th>
+        </tr> -->
       </ng-template>
 
       <ng-template pTemplate="body" let-item>

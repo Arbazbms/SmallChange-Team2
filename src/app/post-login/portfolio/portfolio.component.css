@@ -14,3 +14,8 @@ div.container{
 .selected{
     display: none;
 }
+
+.search-right{
+    /* float:right; */
+    display:flex
+}

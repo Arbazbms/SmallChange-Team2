@@ -13,6 +13,7 @@ import { Order } from 'src/app/models/order';
 import { Portfolio } from 'src/app/models/portfolio.model';
 import { Price } from 'src/app/models/price';
 import { PortfolioService } from '../services/portfolio.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-portfolio',
@@ -85,6 +86,10 @@ export class PortfolioComponent implements OnInit, AfterViewInit {
   setSoldAllStocks(sold: boolean) {
     this.soldEntirely = sold;
   }
+
+  clear(table: Table) {
+    table.clear();
+}
 
  
 }
