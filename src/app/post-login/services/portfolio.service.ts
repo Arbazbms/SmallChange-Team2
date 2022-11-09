@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Instrument } from 'src/app/models/instrument';
 import { Portfolio } from 'src/app/models/portfolio.model';
 import { Price } from 'src/app/models/price';
@@ -100,25 +100,42 @@ export class PortfolioService {
   //   },
   // ];
 
-  restUrl: string = 'http://localhost:8080/api'
-  fmtsUrl: string = 'http://localhost:3000/fmts/trades/'
+  restUrl: string = 'http://localhost:8080/api';
+  fmtsUrl: string = 'http://localhost:3000/fmts/trades/';
 
+  url: string = 'http://localhost:8080/api/portfolio';
   constructor(private http: HttpClient) {}
 
-  getAllInstruments() : Observable<Price[]>{
-    return this.http.get<Price[]>(this.fmtsUrl+'prices')
+  getPortfolio(clientId: string): Observable<Portfolio[]> {
+    return this.http.get<Portfolio[]>(`${this.restUrl}/portfolio/${clientId}`);
   }
 
-  getPortfolio(clientId: string): Observable<Portfolio[]> {
-    return this.http.get<Portfolio[]>(`${this.restUrl}/portfolio/${clientId}`)
+  public headers = new HttpHeaders({
+    'Content-type' : 'application/json'
+  })
+  
+  savePortfolio(portfolio :Portfolio): Observable<any>{
+    return this.http.post(this.url, JSON.stringify(portfolio), {headers: this.headers}).pipe(catchError(this.handleError));
+  };
+
+  updatePortfolio(portfolio :Portfolio): Observable<any>{
+    return this.http.put<any>(this.url, JSON.stringify(portfolio), {headers: this.headers}).pipe(catchError(this.handleError));
+  };
+
+  deletePortfolio(clientId: string): Observable<any> {
+    console.log("try deleting");
+    return this.http.delete<any>(`${this.restUrl}/portfolio/${clientId}`);
   }
 
   instruments: Price[] = [];
 
-  getInstrument(instrumentid: string): Price{
+  getAllInstruments(): Observable<Price[]> {
+    return this.http.get<Price[]>(this.fmtsUrl + 'prices');
+  }
+
+  getInstrument(instrumentid: string): Price {
     this.getAllInstruments().subscribe((element) => {
       this.instruments = <Price[]>element;
-      console.log("ALL:",this.instruments);
       let data: Price;
       for (data of this.instruments) {
         if (data.instrument.instrumentId === instrumentid) {
@@ -128,14 +145,17 @@ export class PortfolioService {
     });
     return this.instruments[0];
   }
-  getInstrumentsData(instrumentid: string): Price {
-    let data: Price;
-    //this.getInstrumentsData()
-    for (data of this.instruments) {
-      if (data.instrument.instrumentId === instrumentid) {
-        return data;
-      }
+
+  handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
     }
-    return this.instruments[0];
+    return throwError(
+      () => 'Unable to contact service; please try again later.'
+    );
   }
 }

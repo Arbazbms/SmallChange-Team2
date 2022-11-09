@@ -18,9 +18,6 @@ export class TradeService {
   price: Price = new Price('',-1, -1,new Date(),new Instrument('', '', '', '', '', -1, -1));
   instruments: Price[] = [];
 
-  tradeOrderMap : any = {
-    order: {}, trade: {}
-  }
   constructor(private http: HttpClient) {
   }
 
@@ -31,7 +28,7 @@ export class TradeService {
   }
 
   getAllTradeByClientId(clientId : string) : Observable<Trade[]>{
-    console.log(`${this.dbUrl}/tradeClient/${clientId}`)
+    //console.log(`${this.dbUrl}/tradeClient/${clientId}`)
     return this.http.get<Trade[]>(`${this.dbUrl}/tradeClient/${clientId}`)
   }
 
@@ -39,7 +36,7 @@ export class TradeService {
     let name = ""
     Object.entries(this.instruments).forEach(([key, element], index) => {
       if( element.instrumentId === instrumentId){
-        console.log(element.instrument.instrumentDescription);
+        //console.log(element.instrument.instrumentDescription);
         name = element.instrument.instrumentDescription
       }
     });
@@ -51,12 +48,10 @@ export class TradeService {
   })
 
   saveOrder(orderObj:Order) :Observable<Trade[]>{
-    console.log(`${this.dbUrl}/order}`)
     return this.http.post<Trade[]>( `${this.dbUrl}/order`, orderObj,  { headers: this.headers })
   }
 
   saveTrade(trade: Trade):Observable<Trade[]>{
-    console.log("inside trade service**"+ JSON.stringify(trade))
     return this.http.post<Trade[]>( 'http://localhost:8080/trades/trade',trade, { headers: this.headers } )
     
   }

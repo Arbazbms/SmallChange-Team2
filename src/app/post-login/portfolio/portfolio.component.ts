@@ -25,6 +25,7 @@ export class PortfolioComponent implements OnInit {
   public selected = false;
   public index = -1;
 
+  public portfolio_id :string = ""
   public soldentirely = true;
   private clientId : any = localStorage.getItem('client');
   constructor(public ps: PortfolioService) {}
@@ -53,9 +54,10 @@ export class PortfolioComponent implements OnInit {
 
   showModal: boolean = false;
   instrument: Price = new Price('',-1,-1,new Date(),new Instrument('', '', '', '', '', -1, -1)  );
+  portfolio : Portfolio = new Portfolio('','','','',-1,-1,-1)
   instruments : Price[] = []
 
-  displaySellTab(instrumentId: string) {
+  displaySellTab(instrumentId: string, portfolio_item_id:string) {
     console.log('HELOO hi', instrumentId);
 
     this.instrument = this.getInstrument(instrumentId);
@@ -64,9 +66,21 @@ export class PortfolioComponent implements OnInit {
 
     this.order.quantity = this.instrument.instrument.minQuantity;
     this.order.direction = 'S';
+    this.portfolio = this.getPortfolio(portfolio_item_id)
     this.showModal = true;
 
    
+  }
+
+  getPortfolio(id : string): Portfolio{
+    let data: Portfolio;
+    for (data of this.portfolios) {
+      if (data.portfolio_item_id === id) {
+        return data;
+      }
+    }
+
+  return this.portfolios[0];
   }
 
   getAllInstruments(){
@@ -98,9 +112,9 @@ export class PortfolioComponent implements OnInit {
 
   hideDialog(show: boolean) {
     this.showModal = show;
-    if (this.soldEntirely) {
-      console.log(this.soldEntirely);
-    }
+    // if (this.soldEntirely) {
+    //   this.ps.deletePortfolio()
+    // }
   }
 
   setSoldAllStocks(sold: boolean) {

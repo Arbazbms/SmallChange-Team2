@@ -6,6 +6,8 @@ import { Price } from 'src/app/models/price';
 import { TradeService } from '../../services/trade.service';
 import { v4 as uuid } from 'uuid';
 import { Trade } from 'src/app/models/trade';
+import { PortfolioService } from '../../services/portfolio.service';
+import { Portfolio } from 'src/app/models/portfolio.model';
 
 @Component({
   selector: 'app-trade-transaction',
@@ -17,19 +19,21 @@ export class TradeTransactionComponent implements OnInit {
 
   @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
   @Input() order: Order = new Order('',-1,-1,'','','',  new Date())
+  @Input() portfolio : Portfolio = new Portfolio('','','','',-1,-1,-1)
   @Output() showModalEvent = new EventEmitter()
   @Output() soldAllStocks = new EventEmitter()
 
+  portfolios : Portfolio[] = []
   trade: Trade  = new Trade('',-1,-1,'','',new Order('',-1,-1,'','','',  new Date()),'',-1,'')
   newTrade :any = {}
   hideDialog(){
     console.log("In page", this.showModal)
     this.showModalEvent.emit(this.showModal)
   }
+  constructor(private messageService: MessageService, private tradeService: TradeService, private portfolioService: PortfolioService) {}
 
-
-  constructor(private messageService: MessageService, private tradeService: TradeService) {}
-
+  
+  private clientId : any = localStorage.getItem('client');
   showModal : boolean = true;
   buttonContent : string = ''
   minQ: any
@@ -39,6 +43,7 @@ export class TradeTransactionComponent implements OnInit {
     console.log("Button",this.order.direction) 
     if( this.order.direction === 'B'){
       this.buttonContent = "Buy"
+      this.portfolio.quantity =  this.instrument.instrument.minQuantity
       this.minQ = this.instrument.instrument.minQuantity
       this.maxQ = this.instrument.instrument.maxQuantity
       this.tradePrice = this.instrument.bidPrice
@@ -47,39 +52,48 @@ export class TradeTransactionComponent implements OnInit {
       this.buttonContent = "Sell"
       this.minQ = 1
       // should chnage this
-      this.maxQ = this.order.quantity
+      this.maxQ = this.portfolio.quantity
       this.tradePrice = this.instrument.askPrice
+      console.log(this.order);
+      
     }
+    this.getAllPortfolio();
+    console.log("PORTFOLIO:",this.portfolio);
+    
   }
 
-  private clientId : any = localStorage.getItem('client');
+  getAllPortfolio(){
+    this.portfolioService.getPortfolio(this.clientId).subscribe( data => this.portfolios = data)
+  }
   generateOrder() {
     this.showModal = false;
     this.showModalEvent.emit(this.showModal)
     
-    if (this.isCapable()) {
-      //this.order.direction = 'B';
-      this.order.targetPrice = this.instrument.bidPrice * this.order.quantity;
-      this.order.instrumentId = this.instrument.instrument.instrumentId;
-      this.order.clientId = this.clientId
-      this.order.orderId = uuid();
-      //this.order.dateTime = new Date().form
-    }
-    console.log(this.order);
+    this.order.targetPrice = this.instrument.bidPrice * this.order.quantity;
+    this.order.instrumentId = this.instrument.instrument.instrumentId;
+    this.order.clientId = this.clientId
+    this.order.orderId = uuid();
+    this.order.quantity = this.portfolio.quantity
+    
     this.generateTrade(this.order)
     this.showToast();
-    let soldAll = ( this.order.quantity === this.maxQ)? true: false
-    this.soldAllStocks.emit(soldAll)
-    console.log("Sold All-", soldAll)
-
+    
 
 
     this.tradeService.saveOrder(this.order).subscribe(data => {
       console.log("Order inserted ",data)
     })
-    // return this.tradeService.placeOrder(this.order) ? true : false;
+
+    
+
+    
+    
+
+
+   
   }
 
+  
 
   generateTrade(newOrder: Order){
     this.trade.tradeId= uuid()
@@ -91,10 +105,85 @@ export class TradeTransactionComponent implements OnInit {
     this.trade.instrumentId = newOrder.instrumentId
     this.trade.orderId = newOrder.orderId
     this.trade.order = newOrder
-    console.log(JSON.stringify(this.trade))
+    // if( this.order.direction === 'B')
+    // {
+    //   this.generatePortfolio(this.trade)
+    // }
+
     this.tradeService.saveTrade(this.trade).subscribe( data => {
-      console.log("***",data)
+        console.log("Inserting trade",data)
     })
+
+    let soldAll = ( this.portfolio.quantity === this.maxQ)? true: false
+    this.soldAllStocks.emit(soldAll)
+    console.log("Sold All-", soldAll)
+
+    if( this.order.direction === 'S'){
+      if(soldAll){
+        console.log("Sold delete-", this.portfolio.portfolio_item_id)
+        this.portfolioService.deletePortfolio(this.portfolio.portfolio_item_id).subscribe( data =>{
+          console.log("Deleting portfolio", data)
+        })
+        location.reload()
+      }
+      else{
+        console.log("Sold update-", this.portfolio.portfolio_item_id)
+        this.portfolioService.updatePortfolio(this.portfolio).subscribe( data =>{
+          console.log("Updating portfolio", data)
+        })
+      }
+    }
+    else{
+      this.generatePortfolio(this.trade)
+    }
+
+  }
+
+  
+
+  generatePortfolio(newOrder :Trade){
+    console.log("Inside portfolio G");
+    
+    
+    this.portfolio.quantity = newOrder.quantity
+    this.portfolio.trade_id = newOrder.tradeId
+    //console.log(JSON.stringify(this.portfolio))
+
+    
+
+      if( this.isPortfolioAvailable()){
+        console.log("Portfolio available", this.portfolio.portfolio_item_id)
+        this.portfolio.quantity = newOrder.quantity
+        this.portfolio.trade_id = newOrder.tradeId
+        this.portfolioService.updatePortfolio(this.portfolio).subscribe( data =>{
+          console.log("Portfolio update:", data)
+        })
+      }else{
+        this.portfolio.portfolio_item_id = uuid()
+        this.portfolio.client_id = this.clientId
+        this.portfolio.instrument_id = newOrder.instrumentId
+        this.portfolio.cost_price = this.instrument.bidPrice
+        this.portfolio.quantity = newOrder.quantity
+        this.portfolio.trade_id = newOrder.tradeId
+        this.portfolioService.savePortfolio(this.portfolio).subscribe( data => {
+          console.log("Portfolio insert:",data)
+        })
+      }
+    
+
+    
+  }
+
+  isPortfolioAvailable() : boolean{
+    let data: Portfolio;
+      for (data of this.portfolios) {
+        if (data.instrument_id === this.instrument.instrument.instrumentId) {
+          this.portfolio = data
+          return true;
+        }
+    
+  }
+  return false;
   }
 
   showToast() {
@@ -106,9 +195,7 @@ export class TradeTransactionComponent implements OnInit {
     });
   }
 
-  isCapable(): boolean {
-    return true;
-  }
+  
   
 
 }
