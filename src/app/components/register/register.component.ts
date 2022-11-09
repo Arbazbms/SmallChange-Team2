@@ -120,7 +120,7 @@ var identity= [new Identification(formvalues.idtype,formvalues.idval)]
   this.client_to_be_added.date_of_birth=formvalues.dob,
   this.client_to_be_added.country=formvalues.country,
   this.client_to_be_added.postal=formvalues.postal,
-  this.ciphertext = CryptoJS.AES.encrypt(formvalues.password1, 'secret key 123').toString();
+  this.ciphertext = CryptoJS.HmacMD5(formvalues.password1, 'secret key 123').toString();
   console.log("ENCRYPTED PASSWORD",this.ciphertext)
   this.client_to_be_added.password=this.ciphertext,
   this.client_to_be_added.id=identity

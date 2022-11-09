@@ -61,7 +61,7 @@ export class LoginFormComponent implements OnInit {
       return
     }
     
-    var ciphertext = CryptoJS.AES.encrypt(this.loginForm.value.password, 'secret key 123').toString();
+    var ciphertext = CryptoJS.HmacMD5(this.loginForm.value.password, 'secret key 123').toString();
     console.log("ENCRYPTED PASSWORD",ciphertext)
     this.clientService.postClientToAuthenticateCredentialsl(new Login(this.loginForm.value.email,ciphertext)).subscribe((res1)=>{
       if(res1 === null){
