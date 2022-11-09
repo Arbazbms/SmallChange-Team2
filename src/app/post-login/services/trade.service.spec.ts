@@ -17,7 +17,7 @@ const mockInstruments: Price[] = [
     timeStamp: new Date('12/10/2006'),
     instrument: {
       instrumentId: 'AMZN',
-      description: 'Amazon.com',
+      instrumentDescription: 'Amazon.com',
       externalIdType: 'ISIN',
       externalId: 'ISIN14577',
       categoryId: 'MainIndex',
