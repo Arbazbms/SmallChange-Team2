@@ -3,8 +3,8 @@
 
   <div class="navbar-right" *ngIf="!authService.isLoggedIn">
     <ul>
-      <li><app-links navlinks="login"></app-links></li>
-      <li><app-links navlinks="register"></app-links></li>
+      <li id="login"><app-links navlinks="login"></app-links></li>
+      <li id="reg"><app-links navlinks="register"></app-links></li>
     </ul>
     
   </div>

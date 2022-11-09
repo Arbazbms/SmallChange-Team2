@@ -4,26 +4,23 @@ export default class fronpag{
         cy.visit('/')
     }
     getTitle(){
-        cy.get('h1').contains('SmallChange')
+        cy.get('h1').contains('SMALL CHANGE')
     }
 
    clickLogin() {
         cy.get('#login').contains('Login').click();
     }
-    // checkLoginpage(){
-    //     cy.get('.headline').contains('Login')
-    // }
+    checkLoginpage(){
+        cy.get('.headline').contains('Login')
+    }
    clickRegister(){
         cy.get('#reg').contains('Register').click();
     }
     checkRegisterPage(){
         cy.get('.headline').contains('SIGN UP!!')
     }
-    // clickOnBacktoLoginPage(){
-    //     cy.get('a').contains("Already a User?  login").click();
-    // }
-    // checkLoginpage(){
-    //     cy.get('.headline').contains('Login')
-    // }
+    clickOnBacktoLoginPage(){
+        cy.get('a').contains("Already a User?  login").click();
+    }
 
 }
