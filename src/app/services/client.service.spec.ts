@@ -24,7 +24,7 @@ describe('ClientService', () => {
     expect(service).toBeTruthy();
   });
   it('should POST to add a client', inject([ClientService],fakeAsync((service: ClientService) =>{
-    const expected = new Client(12,'test1','testuser','test1','testbla','test1blbla','','',new Identification('',''));
+    const expected = new Client('test1','test1','testbla','test1blbla','','',[new Identification('','')],'');
     service.addClient(expected);
     const req = httpTestingController.expectOne('http://localhost:3000/clients');
     // Assert that the request is a POST.
