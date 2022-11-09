@@ -29,7 +29,7 @@ const mockInstruments: Price[] = [
 describe('TradeService', () => {
   let service: TradeService;
   let httpTestingController: HttpTestingController;
-  let serviceUrl = 'http://localhost:3000/price';
+  let serviceUrl = 'http://localhost:3000/fmts/trades/prices';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -63,58 +63,4 @@ it('should return instrument details', inject([TradeService], fakeAsync((service
     expect(price[0].instrumentId).toBe('AMZN');
 })));
 
-// it('should handle a 404 error', inject([CarService], fakeAsync((service: CarService) => {
-//     let errorResp: HttpErrorResponse;
-//     let errorReply: string = "";
-//     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-//     service.getCars()
-//         .subscribe({
-//             next: () => fail('Should not succeed'),
-//             error: (e) => errorReply = e
-//         });
-//     const req = httpTestingController.expectOne(serviceUrl);
-//     // Assert that the request is a GET.
-//     expect(req.request.method).toEqual('GET');
-//     // Respond with error
-//     req.flush('Forced 404', {
-//         status: 404,
-//         statusText: 'Not Found'
-//     });
-//     // Assert that there are no outstanding requests.
-//     httpTestingController.verify();
-//     // Cause all Observables to complete and check the results
-//     tick();
-//     expect(errorReply).toBe('Unable to contact service; please try again later.');
-//     expect(errorHandlerSpy).toHaveBeenCalled();
-//     errorResp = errorHandlerSpy.calls.argsFor(0)[0];
-//     expect(errorResp.status).toBe(404);
-// })));
-
-// it('should handle network error', inject([CarService], fakeAsync((service: CarService) => {
-//     let errorResp: HttpErrorResponse;
-//     let errorReply: string = "";
-//     const errorHandlerSpy = spyOn(service, 'handleError').and.callThrough();
-//     service.getCars()
-//         .subscribe({
-//             next: () => fail('Should not succeed'),
-//             error: (e) => errorReply = e
-//         });
-//     const req = httpTestingController.expectOne(serviceUrl);
-//     // Assert that the request is a GET.
-//     expect(req.request.method).toEqual('GET');
-//     // Create mock ErrorEvent, raised when something goes wrong at the network level.
-//     // Connection timeout, DNS error, offline, etc
-//     const mockError = new ProgressEvent('simulated network error');
-//     // Respond with mock error
-//     req.error(mockError);
-//     // Respond with error
-//     // Assert that there are no outstanding requests.
-//     httpTestingController.verify();
-//     // Cause all Observables to complete and check the results
-//     tick();
-//     expect(errorReply).toBe('Unable to contact service; please try again later.');
-//     expect(errorHandlerSpy).toHaveBeenCalled();
-//     errorResp = errorHandlerSpy.calls.argsFor(0)[0];
-//     expect(errorResp.error.type).toBe('simulated network error');
-// })));
 });

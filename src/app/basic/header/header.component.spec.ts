@@ -26,6 +26,6 @@ describe('HeaderComponent', () => {
     const fixture = TestBed.createComponent(HeaderComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#header_bar p')?.textContent).toContain('SmallChange');
+    expect(compiled.querySelector('#header-bar a')?.textContent).toContain('SmallChange');
   });
 });

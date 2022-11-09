@@ -25,7 +25,7 @@ describe('PreferenceService', () => {
   it('should POST PREFERENCE', inject([PreferenceService], fakeAsync((service: PreferenceService) => { 
       const expected = new Preference("166","Education","Average","40001-60000","0-5 years");
       service.savePreferences(expected).subscribe(); 
-      const req = httpTestingController.expectOne('http://localhost:3000/preferences'); 
+      const req = httpTestingController.expectOne('http://localhost:8080/api/preference'); 
       // Assert that the request is a POST.
       expect(req.request.method).toEqual('POST'); 
       // Assert that it was called with the right data 
