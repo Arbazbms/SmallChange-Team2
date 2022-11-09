@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login.model';
 import { ClientService } from 'src/app/services/client.service';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login-form',
@@ -60,7 +61,9 @@ export class LoginFormComponent implements OnInit {
       return
     }
     
-    this.clientService.postClientToAuthenticateCredentialsl(new Login(this.loginForm.value.email,this.loginForm.value.password)).subscribe((res1)=>{
+    var ciphertext = CryptoJS.AES.encrypt(this.loginForm.value.password, 'secret key 123').toString();
+    console.log("ENCRYPTED PASSWORD",ciphertext)
+    this.clientService.postClientToAuthenticateCredentialsl(new Login(this.loginForm.value.email,ciphertext)).subscribe((res1)=>{
       if(res1 === null){
         this.loginErrorMsg = 'Invalid Email and Password'
         this.route.navigate(['login'])

@@ -5,7 +5,7 @@ import { Client } from 'src/app/models/client.model';
 import { Identification } from 'src/app/models/identification.model';
 import { ClientService } from 'src/app/services/client.service';
 import { passwordMustMatch } from './confirmed.validator';
-
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +15,8 @@ import { passwordMustMatch } from './confirmed.validator';
 export class RegisterComponent implements OnInit {
   passworderror=false
   alreadyExists:Boolean=false
+  ciphertext:string=""
+
   public client_to_be_added:Client=new Client('','','','','','',[new Identification('','')],'');
 passwordErrorTextmsg: string =
   'Invalid Password- Must contain between 6 and 24 letters, numbers, underscores or hyphens ';
@@ -118,7 +120,9 @@ var identity= [new Identification(formvalues.idtype,formvalues.idval)]
   this.client_to_be_added.date_of_birth=formvalues.dob,
   this.client_to_be_added.country=formvalues.country,
   this.client_to_be_added.postal=formvalues.postal,
-  this.client_to_be_added.password=formvalues.password1,
+  this.ciphertext = CryptoJS.AES.encrypt(formvalues.password1, 'secret key 123').toString();
+  console.log("ENCRYPTED PASSWORD",this.ciphertext)
+  this.client_to_be_added.password=this.ciphertext,
   this.client_to_be_added.id=identity
   this.client_to_be_added.token=""
   console.log(this.client_to_be_added)
