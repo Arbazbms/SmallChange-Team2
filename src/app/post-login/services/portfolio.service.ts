@@ -124,7 +124,6 @@ export class PortfolioService {
 
   deletePortfolio(clientId: string): Observable<any> {
     console.log("try deleting");
-    
     return this.http.delete<any>(`${this.restUrl}/portfolio/${clientId}`);
   }
 
