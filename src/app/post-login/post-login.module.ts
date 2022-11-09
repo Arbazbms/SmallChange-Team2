@@ -17,6 +17,7 @@ import { PreferenceListComponent } from './preference-list/preference-list.compo
 import { ScrollingModule} from "@angular/cdk/scrolling";
 import {TableModule} from 'primeng/table';
 
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {TableModule} from 'primeng/table';
     TradeModule,
     BasicModule,
     ScrollingModule,
-    TableModule
+    TableModule,
+    DropdownModule
   ],
 
   exports: [

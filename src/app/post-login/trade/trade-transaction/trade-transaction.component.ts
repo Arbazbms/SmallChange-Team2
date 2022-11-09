@@ -41,10 +41,15 @@ export class TradeTransactionComponent implements OnInit {
   tradePrice: number= -1;
   ngOnInit() {
     console.log("Button",this.order.direction) 
+    this.getAllPortfolio();
+    
+   //let  flag : boolean  = this.isPortfolioAvailable()
     if( this.order.direction === 'B'){
       this.buttonContent = "Buy"
-      this.portfolio.quantity =  this.instrument.instrument.minQuantity
+      //this.portfolio.quantity =  this.instrument.instrument.minQuantity
       this.minQ = this.instrument.instrument.minQuantity
+      //console.log(this.portfolio.quantity);
+       
       this.maxQ = this.instrument.instrument.maxQuantity
       this.tradePrice = this.instrument.bidPrice
     }
@@ -57,13 +62,24 @@ export class TradeTransactionComponent implements OnInit {
       console.log(this.order);
       
     }
-    this.getAllPortfolio();
     console.log("PORTFOLIO:",this.portfolio);
+    
+   
     
   }
 
   getAllPortfolio(){
-    this.portfolioService.getPortfolio(this.clientId).subscribe( data => this.portfolios = data)
+    this.portfolioService.getPortfolio(this.clientId).subscribe( data =>{
+      this.portfolios = data
+      let p: Portfolio;
+      for (p of this.portfolios) {
+        if (p.instrument_id === this.instrument.instrument.instrumentId) {
+          this.portfolio = p
+          console.log("inside is:",this.portfolio);
+          
+        }
+    
+    } })
   }
   generateOrder() {
     this.showModal = false;
@@ -176,9 +192,13 @@ export class TradeTransactionComponent implements OnInit {
 
   isPortfolioAvailable() : boolean{
     let data: Portfolio;
+    console.log("inside is:",this.portfolio);
+          
       for (data of this.portfolios) {
         if (data.instrument_id === this.instrument.instrument.instrumentId) {
           this.portfolio = data
+          console.log("inside is:",this.portfolio);
+          
           return true;
         }
     
