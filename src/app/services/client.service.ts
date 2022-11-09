@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Client } from '../models/client.model';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Login } from '../models/login.model';
 
 
 @Injectable({
@@ -43,7 +44,13 @@ export class ClientService {
    
     }
 
-
+    postClientToAuthenticateCredentialsl(credentials:any):Observable<any>{
+      const headers = new HttpHeaders({
+        'Content-type' : 'application/json'
+      })
+      console.log("Cred in service *****", credentials);
+      return this.http.post<any>(this.url + '/login', JSON.stringify(credentials), {headers: headers}).pipe(catchError(this.handleError)); 
+    }
 
     getClients():Observable<any>{
       return (this.http.get('http://localhost:4000/clients'))
