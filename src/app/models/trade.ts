@@ -9,6 +9,7 @@ export class Trade {
     public clientId: string,
     public order: Order,
     public tradeId: string,
-    public cashValue: number
+    public cashValue: number,
+    public orderId: string
   ) {}
 }

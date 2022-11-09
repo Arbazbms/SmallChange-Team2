@@ -15,7 +15,7 @@ import { TradeTableComponent } from './trade-table.component';
 })
 export class MockAppTradeTransaction{
   @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
-  @Input() order: Order = new Order('',-1,-1,'','','')
+  @Input() order: Order = new Order('',-1,-1,'','','',new Date())
   @Output() showModalEvent = new EventEmitter()
 }
 
@@ -27,7 +27,7 @@ const mockInstruments: Price[] = [
     timeStamp: new Date('12/10/2006'),
     instrument: {
       instrumentId: 'AMZN',
-      description: 'Amazon.com',
+      instrumentDescription: 'Amazon.com',
       externalIdType: 'ISIN',
       externalId: 'ISIN14577',
       categoryId: 'MainIndex',

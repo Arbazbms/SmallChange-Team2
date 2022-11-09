@@ -2,6 +2,6 @@ import { Order } from './order';
 
 describe('Order', () => {
   it('should create an instance', () => {
-    expect(new Order('',0,0,'','','')).toBeTruthy();
+    expect(new Order('',0,0,'','','', new Date())).toBeTruthy();
   });
 });
