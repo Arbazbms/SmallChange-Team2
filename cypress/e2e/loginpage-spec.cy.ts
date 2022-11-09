@@ -15,8 +15,8 @@ describe("it should enter login form and validate page",()=>{
 
     it('Visits the initial project page then to home page', () => {
         lp.navigate();
-        lp.addUserName('ashharmohhamd1@gmail.com')
-        lp.addPassword('ashr786')
+        lp.addUserName('Arbazcs@gmail.com')
+        lp.addPassword('1111111')
         lp.clickSubmit()
 
         
