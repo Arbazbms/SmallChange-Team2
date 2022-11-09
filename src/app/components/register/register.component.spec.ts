@@ -37,17 +37,16 @@ describe('RegisterComponent', () => {
   it('should emit an event on click', () =>{
     spyOn(component, 'onSubmit');
     spyOn(console,'log')
-    const expected =  new Client(1,'h31','ashr@gmail.com','ashr',"24/1/1198",'india','832110','hello',new Identification('Adhaar','833396564956'));
+    const expected =  new Client('h31','ashr@gmail.com',"24/1/1198",'india','832110','hello',[new Identification('Adhaar','833396564956')], '');
     const form = fixture.debugElement.nativeElement.querySelector('form');
     component.registerForm.get('emailid')?.setValue(expected.email);
-    component.registerForm.get('username')?.setValue(expected.username);
-    component.registerForm.get('dob')?.setValue(expected.DOB);
+    component.registerForm.get('dob')?.setValue(expected.date_of_birth);
     component.registerForm.get('country')?.setValue(expected.country);
-    component.registerForm.get('postal')?.setValue(expected.postalCode);
+    component.registerForm.get('postal')?.setValue(expected.postal);
     component.registerForm.get('password1')?.setValue(expected.password);
     component.registerForm.get('password2')?.setValue(expected.password);
-    component.registerForm.get('idtype')?.setValue(expected.identity.type);
-    component.registerForm.get('idval')?.setValue(expected.identity.value);
+    component.registerForm.get('idtype')?.setValue(expected.id[0].type);
+    component.registerForm.get('idval')?.setValue(expected.id[0].value);
     form.dispatchEvent(new Event('ngSubmit'));
     expect(component.onSubmit).toHaveBeenCalled();
     fixture.detectChanges()
@@ -56,17 +55,16 @@ describe('RegisterComponent', () => {
     //  expect(console.log).toHaveBeenCalled();
   });
   it('should call the service to add a client', () =>{
-    const expected =  new Client(1,'h31','ashr@gmail.com','ashr','24/07/11','india','832110','hello',new Identification('Adhar','833396564956'));
+    const expected =  new Client('h31','ashr@gmail.com','24/07/11','india','832110','hello',[new Identification('Adhar','833396564956')],'');
     const form = fixture.debugElement.nativeElement.querySelector('form');
     component.registerForm.get('emailid')?.setValue(expected.email);
-    component.registerForm.get('username')?.setValue(expected.username);
-    component.registerForm.get('dob')?.setValue(expected.DOB);
+    component.registerForm.get('dob')?.setValue(expected.date_of_birth);
     component.registerForm.get('country')?.setValue(expected.country);
-    component.registerForm.get('postal')?.setValue(expected.postalCode);
+    component.registerForm.get('postal')?.setValue(expected.postal);
     component.registerForm.get('password1')?.setValue(expected.password);
     component.registerForm.get('password2')?.setValue(expected.password);
-    component.registerForm.get('idtype')?.setValue(expected.identity.type);
-    component.registerForm.get('idval')?.setValue(expected.identity.value);
+    component.registerForm.get('idtype')?.setValue(expected.id[0].type);
+    component.registerForm.get('idval')?.setValue(expected.id[0].value);
     form.dispatchEvent(new Event('ngSubmit'));
     // component.onSubmit();
     component.client_to_be_added=expected

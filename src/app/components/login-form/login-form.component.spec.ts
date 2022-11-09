@@ -17,8 +17,8 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
     let testClients:Client[] = [
-      new Client(0,'h31','Arbazcs@gmail.com','Arbaz','22-09-9090','india','111111','11111111',new Identification('','')),
-      new Client(0,'','','','','','','',new Identification('',''))
+      new Client('h31','Arbazcs@gmail.com','Arbaz','22-09-9090','india','111111',[new Identification('','')],''),
+      new Client('','','','','','',[new Identification('','')], '')
     ]
     let clientService:any = jasmine.createSpyObj('ClientService', ['addClient', 'getClients'])
     clientService.getClients.and.returnValue(of(testClients))

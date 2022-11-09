@@ -61,6 +61,11 @@ export class LoginFormComponent implements OnInit {
     }
     
     this.clientService.postClientToAuthenticateCredentialsl(new Login(this.loginForm.value.email,this.loginForm.value.password)).subscribe((res1)=>{
+      if(res1 === null){
+        this.loginErrorMsg = 'Invalid Email and Password'
+        this.route.navigate(['login'])
+      }else{
+
       console.log("res form postClientToAuth***", res1);
       let clientId = res1.clientId;
       console.log("fetched clientID:: ", clientId);
@@ -68,6 +73,8 @@ export class LoginFormComponent implements OnInit {
       localStorage.setItem('client', clientId)
       this.loginForm.reset()
       this.route.navigate(['portfolio'])
+    }
+    
       //  var user:Boolean = res.find((a:any)=>{
       //   console.log(a)
       //    if(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password){
@@ -89,8 +96,7 @@ export class LoginFormComponent implements OnInit {
       // }
     }, err=>{
       // alert("something went wrong")
-        this.loginErrorMsg = 'Invalid Email and Password'
-        this.route.navigate(['login'])
+      console.log("something went wrong***")
     })
   }
 }
