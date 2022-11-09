@@ -31,6 +31,10 @@ section {
   background-repeat: no-repeat;
 }
 
+h1{
+  content: "SMALL CHANGE";
+}
+
 .text-bold{
   font-weight: bold;
 }

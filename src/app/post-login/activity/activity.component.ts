@@ -27,9 +27,16 @@ export class ActivityComponent implements OnInit {
   instruments: Price[] = [];
   constructor(private tradeHistoryService: TradeHistory, private tradeService: TradeService) {}
 
+  categories: any = {}
   ngOnInit(): void {
     this.getAllTradeHistory();
     this.getInstruments();
+    this.categories = [
+      {label: "Buy", value:"B"},
+      {label: "Sell", value:"S"}
+    ]
+
+    
   }
 
   getInstruments() {
@@ -54,7 +61,12 @@ export class ActivityComponent implements OnInit {
   getAllTradeHistory(){
     this.tradeService.getAllTradeByClientId(this.clientId).subscribe( (data) => {
       this.trade = data
-      console.log(this.trade)
+      console.log(this.trade[0])
+      data.sort((a, b) => new Date(b.order.dateTime).getTime() - new Date(a.order.dateTime).getTime());
+      this.trade = data
+      console.log(this.trade[0])
+
+      //data.sort((val1, val2)=> {return  Date.parse(val2.order.dateTime) - Date.parse(val1.order.dateTime)})
     })
   }
 

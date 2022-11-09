@@ -26,6 +26,6 @@ describe('FooterComponent', () => {
     const fixture = TestBed.createComponent(FooterComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#footer_text')?.textContent).toContain('Copyright 1998-2022 FMR LLC. All Rights Reserved');
+    expect(compiled.querySelector('#footer_text')?.textContent).toContain('1998-2022 FMR LLC. All Rights Reserved');
   });
 });

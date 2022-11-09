@@ -5,24 +5,19 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { of } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio.model';
+import { Price } from 'src/app/models/price';
 import { PortfolioService } from '../services/portfolio.service';
 
 
 import { PortfolioComponent } from './portfolio.component';
-// import "datatables.net";
-@Component({
-  selector: 'app-navbar',
-  template: `<div></div>`,
 
-})
-class MockNavbarComponent  {};
 describe('PortfolioComponent', () => {
   let component: PortfolioComponent;
   let fixture: ComponentFixture<PortfolioComponent>;
   let testportfolio:any[]
   let testinstruments:any[]
   beforeEach(async () => {
-    testportfolio=[{
+    let testportfolio: Portfolio[] = [{
       portfolio_item_id: 'p1',
       client_id: 'h31',
       instrument_id: 'The Hobbit',
@@ -46,7 +41,7 @@ describe('PortfolioComponent', () => {
       ifgain: true,
       selected:false
     }]
-    testinstruments=[
+    let testinstruments: Price[] =[
     
       {
         instrumentId: 'The Hobbit',
@@ -55,7 +50,7 @@ describe('PortfolioComponent', () => {
         timeStamp: new Date('12/10/2006'),
         instrument: {
           instrumentId: 'AMZN',
-          description: 'Amazon.com',
+          instrumentDescription: 'Amazon.com',
           externalIdType: 'ISIN',
           externalId: 'ISIN14577',
           categoryId: 'MainIndex',
@@ -70,7 +65,7 @@ describe('PortfolioComponent', () => {
         timeStamp: new Date('12/10/2006'),
         instrument: {
           instrumentId: 'DIS',
-          description: 'Disney',
+          instrumentDescription: 'Disney',
           externalIdType: 'ISIN',
           externalId: 'ISIN01682',
           categoryId: 'MainIndex',
@@ -78,13 +73,14 @@ describe('PortfolioComponent', () => {
           maxQuantity: 39,
         },
       }]
-    let portfolioService: any= jasmine.createSpyObj('PortfolioService',['getPortfolio','getInstrument']);
+    let portfolioService: any= jasmine.createSpyObj('PortfolioService',['getPortfolio','getInstrument','getAllInstruments']);
     portfolioService.getPortfolio.and.returnValue( of(testportfolio));
     portfolioService.getInstrument.and.returnValue( (testinstruments[1]));
+    portfolioService.getAllInstruments.and.returnValue( of(testinstruments));
     // portfolioService.getInstrument.and.returnValue( of(testportfolio));
     await TestBed.configureTestingModule({
 
-      declarations: [ PortfolioComponent,MockNavbarComponent ],
+      declarations: [ PortfolioComponent ],
       imports:[DataTablesModule],
       providers: [{ provide: PortfolioService, useValue: portfolioService }]
 
@@ -103,12 +99,12 @@ describe('PortfolioComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should retrieve portfolio items from the service', () =>{
-    //expect().toBe(2);
-    expect(component.portfolio.instrument_id).toBe('The Hobbit');
-    //expect(component.portfolio[1].instrumentid).toBe('A Wizard of Earthsea');
+    expect(component.portfolios.length).toBe(2);
+    expect(component.portfolios[0].portfolio_item_id).toBe('p1');
+    expect(component.portfolios[1].portfolio_item_id).toBe('p2');
   });
   it('should retrieve curent items to sho sell tab from the service', () =>{
     component.displaySellTab('A Wizard of Earthsea',"2")
-    expect(component.instrument.instrumentId).toBe('A Wizard of Earthsea');
+    expect(component.instrument.instrumentId).toBe('The Hobbit');
   });
 });
