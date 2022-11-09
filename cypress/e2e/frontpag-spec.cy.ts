@@ -12,10 +12,11 @@ describe('front page', ()=>{
    it('should get title of front page', ()=>{
     fp.navigate();
     fp.getTitle();
+    fp.clickLogin();
+
     fp.clickRegister();
     fp.checkRegisterPage();
     //fp.clickOnBacktoLoginPage();
-    //fp.clickLogin();
    })  
 
 
