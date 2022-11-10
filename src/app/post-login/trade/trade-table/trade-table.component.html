@@ -1,57 +1,86 @@
-<div class="table_prime">
-
-<p-table  [value]="instruments" [rowHover]="true" [rows]="10" [rowsPerPageOptions]="[10,25,50]"
-responsiveLayout="scroll" [paginator]="true"
->
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="instrument.instrumentDescription">Symbol<p-sortIcon field="instrument.instrumentDescription"></p-sortIcon></th>
-      <th pSortableColumn="bidPrice">Current Price <p-sortIcon field="bidPrice"></p-sortIcon></th>
-      <th>Category</th>
-    </tr>
-    <tr>
-      <th>
-        <p-columnFilter type="text" field="instrument.instrumentDescription"></p-columnFilter>
-    </th>
-    <th>
-        
-    </th>
-    <th>
-      <p-columnFilter field="instrument.categoryId" matchMode="equals" [showMenu]="false">
-          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-dropdown [ngModel]="value" [options]="categories" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                  <ng-template let-option pTemplate="item">
-                      <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
-                  </ng-template>
+<div class="container">
+  <!-- <p class="h2">All Available Stocks</p> -->
+  <p-table
+    [value]="instruments"
+    [rowHover]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    responsiveLayout="scroll"
+    [paginator]="true"
+  >
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+        STOCKS
+    </div>
+</ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="instrument.instrumentDescription">
+          Symbol<p-sortIcon
+            field="instrument.instrumentDescription"
+          ></p-sortIcon>
+        </th>
+        <th pSortableColumn="bidPrice">
+          Current Price <p-sortIcon field="bidPrice"></p-sortIcon>
+        </th>
+        <th>Category</th>
+      </tr>
+      <tr>
+        <th>
+          <p-columnFilter
+            type="text"
+            field="instrument.instrumentDescription"
+          ></p-columnFilter>
+        </th>
+        <th></th>
+        <th>
+          <p-columnFilter
+            field="instrument.categoryId"
+            matchMode="equals"
+            [showMenu]="false"
+          >
+            <ng-template
+              pTemplate="filter"
+              let-value
+              let-filter="filterCallback"
+            >
+              <p-dropdown
+                [ngModel]="value"
+                [options]="categories"
+                (onChange)="filter($event.value)"
+                placeholder="Any"
+                [showClear]="true"
+              >
+                <ng-template let-option pTemplate="item">
+                  <span [class]="'customer-badge status-' + option.value">{{
+                    option.label
+                  }}</span>
+                </ng-template>
               </p-dropdown>
-          </ng-template>
-      </p-columnFilter>
-  </th>
-    </tr>
-  </ng-template>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+      </tr>
+    </ng-template>
 
-  <ng-template pTemplate="body" let-instrument>
-    <tr>
-      <td>
-        <a
-          id="symbol"
-          href="javascript:void(0);"
-          (click)="displayModal(instrument)"
-        >
-          {{ instrument.instrument.instrumentId }} </a
-        ><br />
-        {{ instrument.instrument.instrumentDescription }}
-      </td>
-      <td>{{ instrument.bidPrice | currency: 'USD' }}</td>
-      <td>{{ instrument.instrument.categoryId }}</td>
-    </tr>
-  </ng-template>
-</p-table>
-
-
+    <ng-template pTemplate="body" let-instrument>
+      <tr>
+        <td>
+          <a
+            id="symbol"
+            href="javascript:void(0);"
+            (click)="displayModal(instrument)"
+          >
+            {{ instrument.instrument.instrumentId }} </a
+          ><br />
+          {{ instrument.instrument.instrumentDescription }}
+        </td>
+        <td>{{ instrument.bidPrice | currency: "USD" }}</td>
+        <td>{{ instrument.instrument.categoryId }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
-
-
 
 <div *ngIf="showModal">
   <app-trade-transaction

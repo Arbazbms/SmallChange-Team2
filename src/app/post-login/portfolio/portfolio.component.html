@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="h2">Current Holdings</p>
+  <p class="h4">Current Holdings</p>
 
   <div class="table_prime">
     <p-table
@@ -7,29 +7,36 @@
       [value]="portfolios"
       [rowHover]="true"
       [rows]="10"
-      [rowsPerPageOptions]="[10, 25, 50]"
+      [rowsPerPageOptions]="[5, 10, 50]"
       responsiveLayout="scroll"
       [paginator]="true"
     >
-    <ng-template pTemplate="caption">
-      <div class="flex">
-          <span class="search-right">
-            <!-- <i class="pi pi-search"></i> -->
-              <!-- <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" /> -->
-              <p-columnFilter type="text" field="instrument_id"></p-columnFilter>
-              
-            </span>
-      </div>
-  </ng-template>
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <div class="search-right">
+            <p-columnFilter type="text" field="instrument_id"></p-columnFilter>
+          </div>
+        </div>
+      </ng-template>
 
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="instrument_id">Stock <p-sortIcon field="instrument_id"></p-sortIcon> </th>
-          <th pSortableColumn="cost_price"> Cost<p-sortIcon field="cost_price"></p-sortIcon> </th>
-          <th pSortableColumn="market_value">Market Value <p-sortIcon field="market_value"></p-sortIcon></th>
-          <th pSortableColumn="quantity">Quantity<p-sortIcon field="quantity"></p-sortIcon></th>
-       
-          <th pSortableColumn="gain">Gain/Loss<p-sortIcon field="gain"></p-sortIcon></th>
+          <th pSortableColumn="instrument_id">
+            Stock <p-sortIcon field="instrument_id"></p-sortIcon>
+          </th>
+          <th pSortableColumn="cost_price">
+            Cost<p-sortIcon field="cost_price"></p-sortIcon>
+          </th>
+          <th pSortableColumn="market_value">
+            Market Value <p-sortIcon field="market_value"></p-sortIcon>
+          </th>
+          <th pSortableColumn="quantity">
+            Quantity<p-sortIcon field="quantity"></p-sortIcon>
+          </th>
+
+          <th pSortableColumn="gain">
+            Gain/Loss<p-sortIcon field="gain"></p-sortIcon>
+          </th>
         </tr>
 
         <!-- <tr>
@@ -46,7 +53,9 @@
       </ng-template>
 
       <ng-template pTemplate="body" let-item>
-        <tr (click)="displaySellTab(item.instrument_id,item.portfolio_item_id)">
+        <tr
+          (click)="displaySellTab(item.instrument_id, item.portfolio_item_id)"
+        >
           <td>{{ item.instrument_id }}</td>
           <td>{{ item.cost_price }}</td>
           <td>{{ item.market_value }}</td>

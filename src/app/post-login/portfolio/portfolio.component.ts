@@ -45,7 +45,7 @@ export class PortfolioComponent implements OnInit {
       this.portfolios = data;
       this.portfolios.forEach( (portfolio) => {
         portfolio.market_value = this.getMarketPrice(portfolio.instrument_id)
-        portfolio.gain=portfolio.cost_price-portfolio.market_value
+        portfolio.gain=(portfolio.cost_price-portfolio.market_value)*portfolio.quantity
         portfolio.ifgain=portfolio.cost_price>portfolio.market_value
       })
       

@@ -38,3 +38,14 @@
     background-color:#ccc
 }
 
+#addPref{
+    display: flex;
+    margin: auto auto;
+}
+
+.center_text{
+    margin: auto auto;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}

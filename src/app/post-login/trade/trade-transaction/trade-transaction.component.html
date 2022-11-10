@@ -19,10 +19,10 @@
       {{ tradePrice | currency: "USD" }}
     </div>
     <div id="slider-bar" class="col-sm-5">
-      <input type="text" pInputText [(ngModel)]="portfolio.quantity" readonly />
+      <input type="text" pInputText [(ngModel)]="quantity" readonly />
       <br />
       <p-slider
-        [(ngModel)]="portfolio.quantity"
+        [(ngModel)]="quantity"
         [min] ="minQ"
         [max] = "maxQ"
       ></p-slider>

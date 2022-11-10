@@ -2,9 +2,13 @@
 
 <div *ngIf="!preferenceExistingData">
     <!-- Button trigger modal -->
+    <br>
+    <p class="center_text">Preference has not been set for this customer. Click below to add your preference</p>
+    <br>
     <button type="button" (click)="clickAdd()" class="btn btn-primary" id="addPref" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Add Preference
     </button>
+    <br>
 </div>
 
   <!-- Modal -->

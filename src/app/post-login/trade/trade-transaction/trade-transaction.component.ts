@@ -17,12 +17,13 @@ import { Portfolio } from 'src/app/models/portfolio.model';
 })
 export class TradeTransactionComponent implements OnInit {
 
-  @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',-1,-1))
+  @Input() instrument: Price = new Price('',-1,-1,new Date(), new Instrument('','','','','',1,1))
   @Input() order: Order = new Order('',-1,-1,'','','',  new Date())
-  @Input() portfolio : Portfolio = new Portfolio('','','','',-1,-1,-1)
+  @Input() portfolio : Portfolio = new Portfolio('','','','',-1,1,-1)
   @Output() showModalEvent = new EventEmitter()
   @Output() soldAllStocks = new EventEmitter()
 
+  quantity: number = this.portfolio.quantity
   portfolios : Portfolio[] = []
   trade: Trade  = new Trade('',-1,-1,'','',new Order('',-1,-1,'','','',  new Date()),'',-1,'')
   newTrade :any = {}
@@ -48,8 +49,6 @@ export class TradeTransactionComponent implements OnInit {
       this.buttonContent = "Buy"
       //this.portfolio.quantity =  this.instrument.instrument.minQuantity
       this.minQ = this.instrument.instrument.minQuantity
-      //console.log(this.portfolio.quantity);
-       
       this.maxQ = this.instrument.instrument.maxQuantity
       this.tradePrice = this.instrument.bidPrice
     }
@@ -85,12 +84,12 @@ export class TradeTransactionComponent implements OnInit {
     this.showModal = false;
     this.showModalEvent.emit(this.showModal)
     
-    this.order.targetPrice = this.instrument.bidPrice * this.order.quantity;
+    this.order.targetPrice = this.instrument.bidPrice * this.quantity;
     this.order.instrumentId = this.instrument.instrument.instrumentId;
     this.order.clientId = this.clientId
     this.order.orderId = uuid();
-    this.order.quantity = this.portfolio.quantity
-    
+    this.order.quantity = this.quantity
+
     this.generateTrade(this.order)
     this.showToast();
     
@@ -130,7 +129,7 @@ export class TradeTransactionComponent implements OnInit {
         console.log("Inserting trade",data)
     })
 
-    let soldAll = ( this.portfolio.quantity === this.maxQ)? true: false
+    let soldAll = ( newOrder.quantity === this.maxQ)? true: false
     this.soldAllStocks.emit(soldAll)
     console.log("Sold All-", soldAll)
 
@@ -143,15 +142,18 @@ export class TradeTransactionComponent implements OnInit {
         location.reload()
       }
       else{
+        this.portfolio.quantity = this.portfolio.quantity - this.quantity
         console.log("Sold update-", this.portfolio.portfolio_item_id)
         this.portfolioService.updatePortfolio(this.portfolio).subscribe( data =>{
           console.log("Updating portfolio", data)
         })
       }
+      location.reload()
     }
     else{
       this.generatePortfolio(this.trade)
     }
+    alert("Trade Successfull !")
 
   }
 
@@ -160,16 +162,12 @@ export class TradeTransactionComponent implements OnInit {
   generatePortfolio(newOrder :Trade){
     console.log("Inside portfolio G");
     
-    
-    this.portfolio.quantity = newOrder.quantity
-    this.portfolio.trade_id = newOrder.tradeId
-    //console.log(JSON.stringify(this.portfolio))
 
-    
 
       if( this.isPortfolioAvailable()){
         console.log("Portfolio available", this.portfolio.portfolio_item_id)
-        this.portfolio.quantity = newOrder.quantity
+        this.portfolio.quantity = this.portfolio.quantity + newOrder.quantity
+        console.log("Portfolio update quantity:", this.portfolio.quantity)
         this.portfolio.trade_id = newOrder.tradeId
         this.portfolioService.updatePortfolio(this.portfolio).subscribe( data =>{
           console.log("Portfolio update:", data)
@@ -186,7 +184,7 @@ export class TradeTransactionComponent implements OnInit {
         })
       }
     
-
+      
     
   }
 

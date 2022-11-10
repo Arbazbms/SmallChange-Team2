@@ -26,7 +26,7 @@ export class Portfolio {
         // this.orderid=''
         // this.costprice=0
         // this.marketprice=0
-        this.gain=this.cost_price-this.market_value
+        this.gain=(this.cost_price-this.market_value)* this.quantity
         this.ifgain=this.cost_price>this.market_value
         this.selected=false
     }

@@ -13,4 +13,20 @@ tr:hover {
 .table_prime{
     margin-left: auto;
     margin-right: auto;
+    padding: auto;
+}
+
+p-table{
+    margin: 0 auto;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+div.container{
+    font-family: 'Fidelity Sans', Arial, sans-serif;
+    top:0;
+    padding:20px; 
+    margin-left: 100px;
+
 }

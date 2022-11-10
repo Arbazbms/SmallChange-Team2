@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="h2">Trade History</p>
+  <!-- <p class="h2">Trade History</p> -->
 
   <div class="table_prime">
     <p-table
@@ -10,6 +10,12 @@
       responsiveLayout="scroll"
       [paginator]="true"
     >
+
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+          TRADE HISTORY
+      </div>
+  </ng-template>
       <ng-template pTemplate="header">
         <tr>
           <th  pSortableColumn="instrumentId">Instrument ID<p-sortIcon field="instrumentId"></p-sortIcon></th>
